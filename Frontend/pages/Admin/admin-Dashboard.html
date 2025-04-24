@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InternGojo - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="./admin-Style.css" />
+  </head>
+  <body class="bg-gray-100 font-sans antialiased">
+    <!-- Admin Dashboard Layout -->
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <div
+        id="sidebar"
+        class="sidebar sidebar-expanded bg-indigo-800 text-white fixed h-full"
+      >
+        <div
+          class="p-4 flex items-center justify-between border-b border-indigo-700"
+        >
+          <div class="flex items-center">
+            <i class="fas fa-briefcase text-2xl mr-3"></i>
+            <span class="text-xl font-bold">InternGojo Admin</span>
+          </div>
+          <button id="toggleSidebar" class="text-white hover:text-indigo-200">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="p-4">
+          <div class="flex items-center mb-6">
+            <img
+              src="https://randomuser.me/api/portraits/women/44.jpg"
+              alt="Admin"
+              class="h-10 w-10 rounded-full mr-3"
+            />
+            <div>
+              <p class="font-medium">Admin User</p>
+              <p class="text-xs text-indigo-300">Super Admin</p>
+            </div>
+          </div>
+
+          <nav class="mt-8">
+            <div class="mb-2">
+              <a
+                href="#"
+                class="flex items-center py-2 px-3 bg-indigo-700 rounded-lg"
+              >
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                <span>Dashboard</span>
+              </a>
+            </div>
+
+            <div class="mb-2">
+              <button
+                id="internshipDropdown"
+                class="w-full flex items-center justify-between py-2 px-3 hover:bg-indigo-700 rounded-lg"
+              >
+                <div class="flex items-center">
+                  <i class="fas fa-file-alt mr-3"></i>
+                  <span>Internships</span>
+                </div>
+                <i class="fas fa-chevron-down text-xs"></i>
+              </button>
+              <div id="internshipMenu" class="dropdown-menu ml-8 mt-1">
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
+                  >All Internships</a
+                >
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
+                  >Add New</a
+                >
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
+                  >Pending Approval</a
+                >
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <button
+                id="companiesDropdown"
+                class="w-full flex items-center justify-between py-2 px-3 hover:bg-indigo-700 rounded-lg"
+              >
+                <div class="flex items-center">
+                  <i class="fas fa-building mr-3"></i>
+                  <span>Companies</span>
+                </div>
+                <i class="fas fa-chevron-down text-xs"></i>
+              </button>
+              <div id="companiesMenu" class="dropdown-menu ml-8 mt-1">
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
+                  >All Companies</a
+                >
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
+                  >Add New</a
+                >
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
+                  >Verified</a
+                >
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
+                  >Pending</a
+                >
+              </div>
+            </div>
+          </nav>
+        </div>
+
+        <div class="absolute bottom-0 w-full p-4 border-t border-indigo-700">
+          <a
+            href="#"
+            class="flex items-center py-2 px-3 hover:bg-indigo-700 rounded-lg"
+          >
+            <i class="fas fa-sign-out-alt mr-3"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div
+        id="mainContent"
+        class="main-content content-expanded flex-1 overflow-auto"
+      >
+        <!-- Top Navigation -->
+        <header class="bg-white shadow-sm sticky top-0 z-10">
+          <div class="flex justify-between items-center p-4">
+            <h1 class="text-2xl font-bold text-gray-800">
+              Post New Internship
+            </h1>
+
+            <div class="flex items-center space-x-4">
+              <div class="relative">
+                <button class="p-2 rounded-full hover:bg-gray-100">
+                  <i class="fas fa-bell text-gray-600"></i>
+                  <span
+                    class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"
+                  ></span>
+                </button>
+              </div>
+
+              <div class="relative">
+                <button class="p-2 rounded-full hover:bg-gray-100">
+                  <i class="fas fa-envelope text-gray-600"></i>
+                  <span
+                    class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"
+                  ></span>
+                </button>
+              </div>
+
+              <div class="flex items-center">
+                <img
+                  src="https://randomuser.me/api/portraits/women/44.jpg"
+                  alt="Admin"
+                  class="h-8 w-8 rounded-full mr-2"
+                />
+                <span class="font-medium">Admin User</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-gray-200 py-4">
+          <div class="px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <p class="text-sm text-gray-500">
+                © 2025 InternGojo. All rights reserved.
+              </p>
+              <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="text-sm text-gray-500 hover:text-gray-700"
+                  >Privacy Policy</a
+                >
+                <a href="#" class="text-sm text-gray-500 hover:text-gray-700"
+                  >Terms of Service</a
+                >
+                <a href="#" class="text-sm text-gray-500 hover:text-gray-700"
+                  >Contact Us</a
+                >
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
