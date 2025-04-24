@@ -7,3 +7,24 @@
 .sidebar-expanded {
   width: 250px;
 }
+
+.main-content {
+  transition: all 0.3s ease;
+}
+.content-collapsed {
+  margin-left: 80px;
+}
+.content-expanded {
+  margin-left: 250px;
+}
+.dropdown-menu {
+  transition: all 0.3s ease;
+  max-height: 0;
+  overflow: hidden;
+}
+.dropdown-menu.show {
+  max-height: 500px;
+}
+.ck-editor__editable {
+  min-height: 200px;
+}
