@@ -10,7 +10,6 @@ toggleSidebar.addEventListener("click", function () {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Enhanced Mock Data Store
   let mockData = {
     stats: {
       totalInternships: 1000,
@@ -69,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     form: document.getElementById("internshipForm"),
   };
 
-  // Initialize application
   init();
 
   function init() {
