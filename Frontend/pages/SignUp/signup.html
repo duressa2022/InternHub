@@ -9,32 +9,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <style>
-      .signup-gradient {
-        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      }
-      .input-focus:focus {
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-      }
-      .floating {
-        animation: floating 6s ease-in-out infinite;
-      }
-      @keyframes floating {
-        0% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-15px);
-        }
-        100% {
-          transform: translateY(0px);
-        }
-      }
-      .checkbox:checked {
-        background-color: #4f46e5;
-        border-color: #4f46e5;
-      }
-    </style>
+    <link rel="stylesheet" href="signUp-Script.css" />
   </head>
   <body class="font-sans antialiased bg-gray-50">
     <!-- Navigation -->
@@ -306,55 +281,6 @@
       </div>
     </footer>
 
-    <script>
-      // Form validation
-      const form = document.querySelector("form");
-      const passwordInput = document.getElementById("password");
-      const termsCheckbox = document.getElementById("terms");
-      const submitButton = form.querySelector('button[type="submit"]');
-
-      // Password strength indicator
-      passwordInput.addEventListener("input", function () {
-        const password = this.value;
-        let strength = 0;
-
-        // Check for length
-        if (password.length >= 8) strength++;
-        // Check for uppercase letters
-        if (/[A-Z]/.test(password)) strength++;
-        // Check for numbers
-        if (/[0-9]/.test(password)) strength++;
-        // Check for special characters
-        if (/[^A-Za-z0-9]/.test(password)) strength++;
-
-        // Visual feedback could be added here
-      });
-
-      // Form submission
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        if (!termsCheckbox.checked) {
-          alert("Please agree to the Terms of Service and Privacy Policy");
-          return;
-        }
-
-        // Simulate form submission
-        submitButton.disabled = true;
-        submitButton.innerHTML =
-          '<i class="fas fa-spinner fa-spin mr-2"></i> Creating account...';
-
-        // In a real app, you would send the data to your backend here
-        setTimeout(() => {
-          alert("Account created successfully! Redirecting to dashboard...");
-          // window.location.href = '/dashboard';
-        }, 1500);
-      });
-
-      // function togglePasswordVisibility() {
-      //     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      //     passwordInput.setAttribute('type', type);
-      // }
-    </script>
+    <script src="signUp-Script.js"></script>
   </body>
 </html>
