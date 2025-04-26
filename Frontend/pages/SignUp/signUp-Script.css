@@ -1,0 +1,24 @@
+.signup-gradient {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+.input-focus:focus {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+.floating {
+  animation: floating 6s ease-in-out infinite;
+}
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+.checkbox:checked {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+}
