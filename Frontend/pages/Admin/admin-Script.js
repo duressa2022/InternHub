@@ -1,3 +1,6 @@
+import { DashboardApiService } from "../../apiRoutes/Api-Services/Dashboard-Service.js";
+
+// Sidebar Toggle
 const toggleSidebar = document.getElementById("toggleSidebar");
 const sidebar = document.getElementById("sidebar");
 const mainContent = document.getElementById("mainContent");
@@ -9,46 +12,8 @@ toggleSidebar.addEventListener("click", function () {
   mainContent.classList.toggle("content-expanded");
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  let mockData = {
-    stats: {
-      totalInternships: 1000,
-      activeCompanies: 324,
-      registeredStudents: 8742,
-      pendingApprovals: 18,
-    },
-    companies: [
-      { id: 1, name: "ETechStar IT Solutions PLC" },
-      { id: 2, name: "IE Networks" },
-      { id: 3, name: "INSA" },
-      { id: 4, name: "Backos P.L.C" },
-      { id: 5, name: "ASTU ICT Center" },
-      { id: 6, name: "CNET" },
-      { id: 7, name: "Ashewa Technology Solutions" },
-    ],
-    internships: [
-      {
-        id: 1,
-        title: "Software Engineer Intern",
-        companyId: 2,
-        type: "full-time",
-        location: "Addis Ababa, Ethiopia",
-        status: "published",
-        logo: "../../assets/Logos/IE.png",
-      },
-      {
-        id: 2,
-        title: "Frontend Intern",
-        companyId: 3,
-        type: "part-time",
-        location: "Remote",
-        status: "pending",
-        logo: "../../assets/Logos/INSA.png",
-      },
-    ],
-  };
-
-  // DOM Elements with null checks
+document.addEventListener("DOMContentLoaded", async () => {
+  // DOM Elements
   const dom = {
     stats: {
       totalInternships: document.getElementById("totalInternships"),
@@ -58,59 +23,71 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     companySelect: document.getElementById("company"),
     internshipsBody: document.getElementById("internshipsBody"),
-    sidebar: document.getElementById("sidebar"),
-    mainContent: document.getElementById("mainContent"),
-    notificationContainer: document.getElementById("notificationContainer") || {
-      classList: { add: () => {}, remove: () => {} },
-      appendChild: () => {},
-      innerHTML: "",
-    },
     form: document.getElementById("internshipForm"),
+    notificationContainer: document.getElementById("notificationContainer"),
   };
 
-  init();
+  await init();
 
-  function init() {
-    loadStats();
-    loadCompanies();
-    loadInternships();
-    setupEventListeners();
+  async function init() {
+    try {
+      await loadStats();
+      await loadCompanies();
+      await loadInternships();
+      setupEventListeners();
+    } catch (error) {
+      showNotification(`Initialization failed: ${error.message}`, "error");
+    }
   }
 
-  function loadStats() {
-    dom.stats.totalInternships.textContent =
-      mockData.stats.totalInternships.toLocaleString();
-    dom.stats.activeCompanies.textContent =
-      mockData.stats.activeCompanies.toLocaleString();
-    dom.stats.registeredStudents.textContent =
-      mockData.stats.registeredStudents.toLocaleString();
-    dom.stats.pendingApprovals.textContent =
-      mockData.stats.pendingApprovals.toLocaleString();
+  async function loadStats() {
+    try {
+      const result = await DashboardApiService.getStats();
+      if (result.success) {
+        dom.stats.totalInternships.textContent = result.data.totalInternships;
+        dom.stats.activeCompanies.textContent = result.data.activeCompanies;
+        dom.stats.registeredStudents.textContent =
+          result.data.registeredStudents;
+        dom.stats.pendingApprovals.textContent = result.data.pendingApprovals;
+      }
+    } catch (error) {
+      showNotification("Failed to load statistics", "error");
+    }
   }
 
-  function loadCompanies() {
-    dom.companySelect.innerHTML =
-      '<option value="">Select Company</option>' +
-      mockData.companies
-        .map(
-          (company) => `<option value="${company.id}">${company.name}</option>`
-        )
-        .join("");
+  async function loadCompanies() {
+    try {
+      const result = await DashboardApiService.getCompanies();
+      if (result.success) {
+        dom.companySelect.innerHTML =
+          '<option value="">Select Company</option>' +
+          result.data
+            .map(
+              (company) =>
+                `<option value="${company.id}">${company.name}</option>`
+            )
+            .join("");
+      }
+    } catch (error) {
+      showNotification("Failed to load companies", "error");
+    }
   }
 
-  function loadInternships() {
-    dom.internshipsBody.innerHTML = mockData.internships
-      .map((internship) => {
-        const company = mockData.companies.find(
-          (c) => c.id === internship.companyId
-        );
-        return `
+  async function loadInternships() {
+    try {
+      const result = await DashboardApiService.getInternships();
+      if (result.success) {
+        dom.internshipsBody.innerHTML = result.data
+          .map(
+            (internship) => `
           <tr>
             <td class="px-6 py-4 whitespace-nowrap">${internship.title}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="flex items-center">
-                <img src="${internship.logo}" class="h-10 w-10 rounded-full">
-                <div class="ml-4">${company?.name || "Unknown Company"}</div>
+                <img src="${
+                  internship.company.logo
+                }" class="h-10 w-10 rounded-full">
+                <div class="ml-4">${internship.company.name}</div>
               </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
@@ -130,12 +107,18 @@ document.addEventListener("DOMContentLoaded", () => {
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <button class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</button>
-              <button class="text-red-600 hover:text-red-900">Delete</button>
+              <button class="text-red-600 hover:text-red-900" onclick="deleteInternship(${
+                internship.id
+              })">Delete</button>
             </td>
           </tr>
-        `;
-      })
-      .join("");
+        `
+          )
+          .join("");
+      }
+    } catch (error) {
+      showNotification("Failed to load internships", "error");
+    }
   }
 
   function setupEventListeners() {
@@ -155,33 +138,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Form Submission
-    dom.form.addEventListener("submit", (e) => {
+    dom.form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(dom.form);
 
-      const newInternship = {
-        id: mockData.internships.length + 1,
+      const internshipData = {
         title: formData.get("title"),
-        companyId: parseInt(formData.get("company")),
+        companyId: formData.get("company"),
         type: formData.get("type"),
         location: formData.get("location"),
         status: formData.get("status"),
-        logo: "https://via.placeholder.com/40",
+        description: formData.get("description"),
+        requirements: formData.get("requirements"),
+        benefits: formData.get("benefits"),
+        start_date: formData.get("start_date"),
+        end_date: formData.get("end_date"),
+        salary: formData.get("salary"),
+        application_deadline: formData.get("application_deadline"),
+        application_link: formData.get("application_link"),
       };
 
-      mockData.internships.unshift(newInternship);
-      mockData.stats.totalInternships++;
-
-      if (newInternship.status === "pending") {
-        mockData.stats.pendingApprovals++;
+      try {
+        const result = await DashboardApiService.createInternship(
+          internshipData
+        );
+        if (result.success) {
+          showNotification("Internship created successfully!", "success");
+          await loadStats();
+          await loadInternships();
+          dom.form.reset();
+        }
+      } catch (error) {
+        showNotification("Failed to create internship", "error");
       }
-
-      loadStats();
-      loadInternships();
-      showNotification("Internship published successfully!", "success");
-      dom.form.reset();
     });
   }
+
+  // Delete internship function
+  window.deleteInternship = async (id) => {
+    try {
+      const result = await DashboardApiService.deleteInternship(id);
+      if (result.success) {
+        showNotification("Internship deleted successfully!", "success");
+        await loadStats();
+        await loadInternships();
+      }
+    } catch (error) {
+      showNotification("Failed to delete internship", "error");
+    }
+  };
 
   function getStatusClass(type) {
     const statusClasses = {
