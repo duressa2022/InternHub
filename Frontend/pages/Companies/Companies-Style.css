@@ -1,0 +1,44 @@
+.gradient-bg {
+    background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
+}
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.tag-hover:hover {
+    background-color: #4F46E5;
+    color: white;
+}
+.company-card:hover .company-name {
+    color: #4F46E5;
+}
+.filter-dropdown {
+    transition: all 0.3s ease;
+}
+.filter-dropdown:hover {
+    background-color: #E5E7EB;
+}
+.dropdown-content {
+    display: none;
+    transition: all 0.3s ease;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.footer-links li {
+    margin-bottom: 12px;
+}
+.footer-links li:hover {
+    color: #4F46E5;
+    cursor: pointer;
+}
+.alphabet-filter li.active {
+    background-color: #4F46E5;
+    color: white;
+}
+.company-logo-container {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
