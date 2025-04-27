@@ -8,11 +8,16 @@ const userTypeSelect = document.getElementById("user-type");
 const termsCheckbox = document.getElementById("terms");
 const submitButton = form.querySelector('button[type="submit"]');
 
+
+
+
+
 // Password strength indicator
 passwordInput.addEventListener("input", function () {
     const password = this.value;
     let strength = 0;
 
+    console.log("password Recieved > ", password);
     // Check for length
     if (password.length >= 8) strength++;
     // Check for uppercase letters
@@ -143,6 +148,9 @@ function collectFormData() {
     };
 }
 
+
+
+
 // Toggle password visibility function
 function togglePasswordVisibility() {
     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -162,6 +170,8 @@ passwordContainer.appendChild(toggleButton);
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+
+
     // Validate form
     if (!validateForm()) {
         return;
@@ -170,12 +180,14 @@ form.addEventListener("submit", function (e) {
     // Collect form data
     const userData = collectFormData();
 
+    console.log("User Information is that :", userData);
+
     // Disable submit button and show loading state
     submitButton.disabled = true;
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Creating account...';
 
     // Send data to backend via services
-    import('./signup-services.js')
+    import('../../apiRoutes/Api-Services/SignUp-Service')
         .then(module => {
             return module.registerUser(userData);
         })
