@@ -3,6 +3,7 @@ const form = document.querySelector("form");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const togglePassword = document.getElementById("togglePassword");
+const rememberMeCheckbox = document.getElementById("remember-me");
 const submitButton = form.querySelector('button[type="submit"]');
 
 // Toggle password visibility
@@ -16,45 +17,140 @@ togglePassword.addEventListener("click", function () {
     this.querySelector("i").classList.toggle("fa-eye-slash");
 });
 
-// Form submission
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
+// Validate email format
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
-    // Basic validation
-    if (!emailInput.value || !passwordInput.value) {
-        alert("Please fill in all fields");
-        return;
+// Form validation function
+function validateForm() {
+    let isValid = true;
+
+    // Validate email
+    if (!emailInput.value.trim()) {
+        highlightError(emailInput, "Email is required");
+        isValid = false;
+    } else if (!isValidEmail(emailInput.value.trim())) {
+        highlightError(emailInput, "Please enter a valid email address");
+        isValid = false;
+    } else {
+        removeError(emailInput);
     }
 
-    // Simulate form submission
-    submitButton.disabled = true;
-    submitButton.innerHTML =
-        '<i class="fas fa-spinner fa-spin mr-2"></i> Logging in...';
+    // Validate password
+    if (!passwordInput.value) {
+        highlightError(passwordInput, "Password is required");
+        isValid = false;
+    } else {
+        removeError(passwordInput);
+    }
 
-    // In a real app, you would send the data to your backend here
-    setTimeout(() => {
-        alert("Login successful! Redirecting to dashboard...");
-        // window.location.href = '/dashboard';
-    }, 1500);
-});
+    return isValid;
+}
+
+// Helper function to highlight error
+function highlightError(inputElement, errorMessage) {
+    inputElement.classList.add("border-red-500");
+    inputElement.classList.remove("border-gray-300");
+
+    // Check if error message element already exists
+    let errorElement = inputElement.parentElement.nextElementSibling;
+    if (!errorElement || !errorElement.classList.contains("error-message")) {
+        errorElement = document.createElement("p");
+        errorElement.className = "error-message text-xs text-red-500 mt-1";
+        inputElement.parentElement.parentElement.insertBefore(errorElement, inputElement.parentElement.nextElementSibling);
+    }
+
+    errorElement.textContent = errorMessage;
+}
+
+// Helper function to remove error
+function removeError(inputElement) {
+    inputElement.classList.remove("border-red-500");
+    inputElement.classList.add("border-gray-300");
+
+    // Remove error message if it exists
+    const errorElement = inputElement.parentElement.nextElementSibling;
+    if (errorElement && errorElement.classList.contains("error-message")) {
+        errorElement.remove();
+    }
+}
+
+// Function to collect form data
+function collectLoginData() {
+    return {
+        email: emailInput.value.trim(),
+        password: passwordInput.value,
+        rememberMe: rememberMeCheckbox.checked
+    };
+}
 
 // Add input validation styling
 emailInput.addEventListener("input", function () {
-    if (this.validity.valid) {
-        this.classList.remove("border-red-300");
+    if (this.value.trim() && isValidEmail(this.value.trim())) {
+        this.classList.remove("border-red-500");
         this.classList.add("border-gray-300");
-    } else {
-        this.classList.remove("border-gray-300");
-        this.classList.add("border-red-300");
+        removeError(this);
     }
 });
 
 passwordInput.addEventListener("input", function () {
-    if (this.value.length >= 8) {
-        this.classList.remove("border-red-300");
+    if (this.value) {
+        this.classList.remove("border-red-500");
         this.classList.add("border-gray-300");
-    } else {
-        this.classList.remove("border-gray-300");
-        this.classList.add("border-red-300");
+        removeError(this);
+    }
+});
+
+// Form submission
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Validate form
+    if (!validateForm()) {
+        return;
+    }
+
+    // Collect login data
+    const loginData = collectLoginData();
+
+    // Disable submit button and show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Logging in...';
+
+    // Send data to backend via services
+    import('./login-services.js')
+        .then(module => {
+            return module.loginUser(loginData);
+        })
+        .then(response => {
+            if (response.success) {
+                // Handle successful login
+                if (response.redirectUrl) {
+                    window.location.href = response.redirectUrl;
+                } else {
+                    window.location.href = '/dashboard'; // Default redirect
+                }
+            } else {
+                // Handle login failure
+                alert(response.message || "Login failed. Please check your credentials.");
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Log In';
+            }
+        })
+        .catch(error => {
+            console.error("Login error:", error);
+            alert("An error occurred during login. Please try again.");
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Log In';
+        });
+});
+
+// Handle "Enter" key press
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !submitButton.disabled) {
+        // Trigger form submission when Enter key is pressed
+        form.dispatchEvent(new Event('submit'));
     }
 });
