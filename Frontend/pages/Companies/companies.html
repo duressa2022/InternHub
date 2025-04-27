@@ -6,7 +6,8 @@
     <title>Top Companies - InternHub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="Companies-Style.css">
+    <script type="module" src="browse.js"></script>
+   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-50 font-sans">
     <!-- Navigation -->
@@ -60,7 +61,7 @@
                 </p>
                 <div class="mt-10 relative max-w-md mx-auto">
                     <div class="relative">
-                        <input type="text" id="search" class="block w-full rounded-md border-0 py-4 px-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Search companies by name or industry">
+                        <input type="text" id="companySearch" class="block w-full rounded-md border-0 py-4 px-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Search companies by name or industry">
                         <button class="absolute right-2.5 bottom-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md px-4 py-2 text-sm font-medium">
                             <i class="fas fa-search mr-2"></i> Search
                         </button>
@@ -75,7 +76,7 @@
         <!-- Alphabet Filter -->
         <div class="mb-8">
             <div class="flex flex-wrap justify-center gap-1">
-                <ul class="flex flex-wrap justify-center gap-1">
+                <ul id="alphabetFilter" class="flex flex-wrap justify-center gap-1">
                     <li class="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white font-medium cursor-pointer active">All</li>
                     <li class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">A</li>
                     <li class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">B</li>
@@ -168,11 +169,11 @@
                 </button>
             </div>
         </div>
-
+ 
         <!-- Companies Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div id="companiesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <!-- Company Card 1 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover">
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="Google">
                 <div class="p-6">
                     <div class="company-logo-container mb-4">
                         <img class="h-full max-w-full object-contain" src="https://logo.clearbit.com/google.com" alt="Google logo">
@@ -205,7 +206,7 @@
             </div>
 
             <!-- Company Card 2 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover">
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="Microsoft">
                 <div class="p-6">
                     <div class="company-logo-container mb-4">
                         <img class="h-full max-w-full object-contain" src="https://logo.clearbit.com/microsoft.com" alt="Microsoft logo">
@@ -238,7 +239,7 @@
             </div>
 
             <!-- Company Card 3 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover">
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="Goldman Sachs">
                 <div class="p-6">
                     <div class="company-logo-container mb-4">
                         <img class="h-full max-w-full object-contain" src="https://logo.clearbit.com/goldmansachs.com" alt="Goldman Sachs logo">
@@ -271,7 +272,7 @@
             </div>
 
             <!-- Company Card 4 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover">
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="Tesla">
                 <div class="p-6">
                     <div class="company-logo-container mb-4">
                         <img class="h-full max-w-full object-contain" src="https://logo.clearbit.com/tesla.com" alt="Tesla logo">
@@ -304,7 +305,7 @@
             </div>
 
             <!-- Company Card 5 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover">
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="IBM">
                 <div class="p-6">
                     <div class="company-logo-container mb-4">
                         <img class="h-full max-w-full object-contain" src="https://logo.clearbit.com/ibm.com" alt="IBM logo">
@@ -337,7 +338,7 @@
             </div>
 
             <!-- Company Card 6 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover">
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="Nike">
                 <div class="p-6">
                     <div class="company-logo-container mb-4">
                         <img class="h-full max-w-full object-contain" src="https://logo.clearbit.com/nike.com" alt="Nike logo">
@@ -370,7 +371,7 @@
             </div>
 
             <!-- Company Card 7 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover">
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="SpaceX">
                 <div class="p-6">
                     <div class="company-logo-container mb-4">
                         <img class="h-full max-w-full object-contain" src="https://logo.clearbit.com/spacex.com" alt="SpaceX logo">
@@ -403,7 +404,7 @@
             </div>
 
             <!-- Company Card 8 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover">
+            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="JPMorgan logo">
                 <div class="p-6">
                     <div class="company-logo-container mb-4">
                         <img class="h-full max-w-full object-contain" src="https://logo.clearbit.com/jpmorgan.com" alt="JPMorgan logo">
@@ -435,6 +436,9 @@
                 </div>
             </div>
         </div>
+
+        <!--Message for "No companies found"-->
+        <div id="noResults">No companies found.</div>
 
         <!-- View More Button -->
         <div class="mt-12 text-center">
@@ -597,9 +601,5 @@
             </div>
         </div>
     </footer>
-
-    <script src="Companies-Scripts.js">
-       
-    </script>
 </body>
 </html>
