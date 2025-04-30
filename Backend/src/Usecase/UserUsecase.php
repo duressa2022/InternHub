@@ -57,5 +57,9 @@ class UserUsecase{
         }
         return null; 
     }
+    public function changePassword(array $data): bool
+    {
+        return $this->userRepository->changePassword($data["email"], $data["password"]);
+    }
 }
 ?>

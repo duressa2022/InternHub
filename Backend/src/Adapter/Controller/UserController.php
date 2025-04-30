@@ -4,6 +4,7 @@ use Src\Adapter\Presenters\JsonPresenter;
 use Src\Usecase\UserUsecase;
 use Src\Domain\Entity\User;
 use Src\Domain\Interface\UserInterface;
+use Src\Adapter\Gateways\Service\JwtService;
 
 class UserController{
     private UserUsecase $userUsecase;
@@ -106,15 +107,49 @@ class UserController{
             $this->jsonPresenter->respond_without(400, ['message' => 'Failed to delete user']);
         }
     }
+    
     public function login(array $data): void
     {
         $user = $this->userUsecase->login($data);
         if ($user) {
-            $this->jsonPresenter->respond_without(200, ['message' => 'Login successful', 'data' => $user]);
+            $jwt= new JWTService();
+            $data=[
+                'email' => $user->email,
+                'role' => $user->role,
+                "id" => $user->id,
+            ];
+            $accessToken = $jwt->generateAccessToken($data);
+            $refreshToken = $jwt->generateRefreshToken($data);  
+
+            $response= [
+                'access_token' => $accessToken,
+                'refresh_token' => $refreshToken,
+                'user' => $user
+            ];
+
+            setcookie('access_token', $accessToken, time() + $_ENV['ACCESS_TOKEN_EXP'], '/', '', false, true);
+            setcookie('refresh_token', $refreshToken, time() + $_ENV["REFRESH_TOKEN_EXP"], '/', '', false, true);
+
+            $this->jsonPresenter->respond_without(200, ['message' => 'Login successful', 'data' => $response]);
+    
         } else {
             $this->jsonPresenter->respond_without(401, ['message' => 'Invalid email or password']);
         }
 
     }
+    public function changePassword(array $data): void
+    {
+        if ($this->userUsecase->changePassword($data)) {
+            $this->jsonPresenter->respond_without(200, ['message' => 'Password changed successfully']);
+        } else {
+            $this->jsonPresenter->respond_without(400, ['message' => 'Failed to change password']);
+        }
+    }
 
+    public function logout(): void
+    {
+        setcookie('access_token', '', time() - 3600, '/');
+        setcookie('refresh_token', '', time() - 3600, '/');
+        $this->jsonPresenter->respond_without(200, ['message' => 'Logout successful']);
+    }
 }

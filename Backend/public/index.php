@@ -1,5 +1,5 @@
 <?php
-namespace Backend\public;
+namespace Backend\Routes;
 require_once __DIR__ . '/../vendor/autoload.php'; 
 require_once __DIR__ . '/userRoute.php'; 
 use Dotenv\Dotenv;
@@ -19,6 +19,7 @@ use Src\Usecase\UserUsecase;
 use Src\Adapter\Gateways\Database\UserRepository;
 
 $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+
 $userRepository = new UserRepository($pdo);
 $userUsecase = new UserUsecase($userRepository);
 $jsonPresenter = new JsonPresenter();

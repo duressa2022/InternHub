@@ -253,6 +253,16 @@ class UserRepository implements UserInterface{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function changePassword(string $email, string $password): bool
+    {
+        $stmt = $this->db->prepare("UPDATE users SET password = :password WHERE email = :email");
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashedPassword);
+        return $stmt->execute();
+    }
+
+
 }
 
 ?>

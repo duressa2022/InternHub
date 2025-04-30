@@ -1,8 +1,9 @@
 <?php
-$host = '127.0.0.1';       
-$db   = 'internhub';       
-$user = 'root';            
-$pass = 'root';               
+$host = $_ENV['DB_HOST'] ?? 'localhost';
+$port = $_ENV['DB_PORT'] ?? '3306';        
+$db   = $_ENV['DB_NAME'] ?? 'my_database';       
+$user = $_ENV['DB_USERNAME'] ?? '';            
+$pass = $_ENV['DB_PASSWORD'] ?? '';         
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
