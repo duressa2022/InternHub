@@ -1,0 +1,6 @@
+{
+    "require": {
+        "zircote/swagger-php": "*",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
