@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Resources - InternHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./resources-style.css">
+
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="flex items-center">
+                            <i class="fas fa-briefcase text-indigo-600 text-2xl mr-2"></i>
+                            <span class="text-xl font-bold text-gray-900">InternHub</span>
+                        </a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="../../../../home.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                        <a href="browse.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Browse Internships</a>
+                        <a href="companies.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Companies</a>
+                        <a href="resources.html" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Resources</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Post an Internship</button>
+                    <div class="ml-4 relative flex-shrink-0">
+                        <div>
+                            <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                    Career Resources Hub
+                </h1>
+                <p class="mt-6 max-w-lg mx-auto text-xl">
+                    Everything you need to land your dream internship and launch your career.
+                </p>
+                <div class="mt-10">
+                    <div class="inline-flex rounded-md shadow">
+                        <a href="#resume-builder" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50">
+                            Build Your Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Resource Tabs -->
+        <div class="mb-12">
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button class="tab-button active px-6 py-3 rounded-full font-medium transition-colors duration-300" data-tab="all">All Resources</button>
+                <button class="tab-button px-6 py-3 rounded-full font-medium transition-colors duration-300" data-tab="resume">Resume & Cover Letter</button>
+                <button class="tab-button px-6 py-3 rounded-full font-medium transition-colors duration-300" data-tab="interview">Interview Prep</button>
+                <button class="tab-button px-6 py-3 rounded-full font-medium transition-colors duration-300" data-tab="skills">Skill Development</button>
+                <button class="tab-button px-6 py-3 rounded-full font-medium transition-colors duration-300" data-tab="tools">Career Tools</button>
+            </div>
+
+            <!-- All Resources Tab -->
+            <div id="all" class="tab-content active">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Essential Career Resources</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Resource Card 1 -->
+                    <div class="resource-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-file-alt text-indigo-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">Resume Builder Tool</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Create a professional resume in minutes with our easy-to-use builder. Perfectly formatted and ATS-friendly.</p>
+                        <a href="#resume-builder" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+                            Try Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Resource Card 2 -->
+                    <div class="resource-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-comments text-blue-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">Interview Question Bank</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Practice with 500+ common interview questions and get expert tips for your responses.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+                            Explore Questions <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Resource Card 3 -->
+                    <div class="resource-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-laptop-code text-green-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">Technical Skills Courses</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Free and paid courses to develop in-demand technical skills for your dream internship.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+                            Browse Courses <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Resource Card 4 -->
+                    <div class="resource-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope-open-text text-purple-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">Cover Letter Templates</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Download professionally designed cover letter templates tailored for different industries.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+                            Get Templates <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Resource Card 5 -->
+                    <div class="resource-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-users text-yellow-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">Networking Guide</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Learn how to build professional relationships that can help you land internships and jobs.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+                            Read Guide <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Resource Card 6 -->
+                    <div class="resource-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-red-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-chart-line text-red-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold">Career Path Explorer</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Discover different career paths and the internships that can help you get there.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+                            Explore Paths <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resume & Cover Letter Tab -->
+            <div id="resume" class="tab-content">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Resume & Cover Letter Resources</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Resume Builder Section -->
+                    <div id="resume-builder" class="bg-white rounded-lg shadow-md overflow-hidden p-6 md:col-span-2">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Interactive Resume Builder</h3>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <div class="lg:col-span-2">
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                    <input type="text" name="full_name" class="resumeInput w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your Name">
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Professional Title</label>
+                                    <input type="text" name="Profession" class="resumeInput w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Computer Science Student">
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Contact Information</label>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <input name="Email" type="email" class="resumeInput px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Email">
+                                        <input name="Phone" type="tel" class="resumeInput px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Phone">
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Education</label>
+                                    <textarea name="Education" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" rows="3" placeholder="University, Degree, GPA, Graduation Year"></textarea>
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Experience</label>
+                                    <textarea name="Expireance" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" rows="4" placeholder="List your work experience with bullet points"></textarea>
+                                </div>
+                                <button id="resumeBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-md font-medium">
+                                    Generate Resume
+                                </button>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-medium mb-4">Resume Preview</h4>
+                                <div class="bg-white p-6 shadow-sm border border-gray-200">
+                                    <div class="text-center mb-6">
+                                        <h2 class="text-xl font-bold">Your Name</h2>
+                                        <p class="text-gray-600">Professional Title</p>
+                                    </div>
+                                    <div class="mb-6">
+                                        <h3 class="font-bold border-b border-gray-200 pb-1 mb-2">Education</h3>
+                                        <p>University Name, Degree</p>
+                                        <p class="text-sm text-gray-600">GPA: 3.8 | Expected Graduation: 2025</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold border-b border-gray-200 pb-1 mb-2">Experience</h3>
+                                        <p class="font-medium">Company Name</p>
+                                        <p class="text-sm text-gray-600 mb-2">Position | Dates</p>
+                                        <ul class="list-disc pl-5 text-sm">
+                                            <li>Accomplishment or responsibility</li>
+                                            <li>Quantifiable achievement</li>
+                                            <li>Skill demonstrated</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-4 text-center">
+                                    <button class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                                        <i class="fas fa-download mr-1"></i> Download Template
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cover Letter Resources -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Cover Letter Guide</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <h4 class="font-medium text-blue-800 mb-2">1. Header & Greeting</h4>
+                                <p class="text-sm text-gray-700">Include your contact info and address the hiring manager by name if possible.</p>
+                            </div>
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <h4 class="font-medium text-blue-800 mb-2">2. Opening Paragraph</h4>
+                                <p class="text-sm text-gray-700">Mention the position you're applying for and your enthusiasm for the role.</p>
+                            </div>
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <h4 class="font-medium text-blue-800 mb-2">3. Body Paragraphs</h4>
+                                <p class="text-sm text-gray-700">Highlight 2-3 relevant experiences or skills that match the job requirements.</p>
+                            </div>
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <h4 class="font-medium text-blue-800 mb-2">4. Closing Paragraph</h4>
+                                <p class="text-sm text-gray-700">Express your interest in an interview and thank the reader.</p>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+                                Download Cover Letter Templates <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Resume Tips -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Resume Writing Tips</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Keep it to one page (for students and recent grads)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Use strong action verbs (developed, led, implemented)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Quantify achievements when possible</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Tailor your resume for each application</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Use a clean, professional format</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Proofread multiple times for errors</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+                                View Resume Examples <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interview Prep Tab -->
+            <div id="interview" class="tab-content">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Interview Preparation Resources</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Common Questions -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Common Interview Questions</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <h4 class="font-medium mb-2">"Tell me about yourself"</h4>
+                                <p class="text-sm text-gray-600">Structure your answer with: Present (current role/studies), Past (relevant experience), Future (goals and how this role fits).</p>
+                            </div>
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <h4 class="font-medium mb-2">"Why do you want this internship?"</h4>
+                                <p class="text-sm text-gray-600">Connect your skills/interests to the company's work and culture.</p>
+                            </div>
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <h4 class="font-medium mb-2">"What's your greatest strength?"</h4>
+                                <p class="text-sm text-gray-600">Pick one relevant to the role and provide a specific example.</p>
+                            </div>
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <h4 class="font-medium mb-2">"Describe a challenge you faced"</h4>
+                                <p class="text-sm text-gray-600">Use the STAR method: Situation, Task, Action, Result.</p>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+                                View All Questions <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Technical Interviews -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Technical Interview Prep</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-laptop-code text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Coding Challenges</h4>
+                                    <p class="text-sm text-gray-600">Practice with our coding playground and common algorithm problems.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-green-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-chalkboard-teacher text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">System Design</h4>
+                                    <p class="text-sm text-gray-600">Learn how to approach system design questions for software roles.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-chart-bar text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Case Studies</h4>
+                                    <p class="text-sm text-gray-600">Practice business case interviews for consulting and finance roles.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-yellow-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-flask text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Whiteboarding</h4>
+                                    <p class="text-sm text-gray-600">Tips for effectively solving problems on a whiteboard.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+                                Start Practicing <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mock Interviews -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden p-6 md:col-span-2">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Mock Interview Simulator</h3>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div>
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Select Interview Type</label>
+                                    <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                                        <option>Behavioral</option>
+                                        <option>Technical (Software)</option>
+                                        <option>Case Study</option>
+                                        <option>Product Management</option>
+                                        <option>Finance</option>
+                                    </select>
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Difficulty Level</label>
+                                    <div class="flex space-x-4">
+                                        <button class="px-4 py-2 border border-gray-300 rounded-md bg-gray-100">Easy</button>
+                                        <button class="px-4 py-2 border border-indigo-600 rounded-md bg-indigo-100 text-indigo-800">Medium</button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-md">Hard</button>
+                                    </div>
+                                </div>
+                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-md font-medium w-full">
+                                    Start Mock Interview
+                                </button>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <h4 class="font-medium mb-4">How it works:</h4>
+                                <ol class="list-decimal pl-5 space-y-3">
+                                    <li class="text-sm text-gray-700">Select your interview type and difficulty</li>
+                                    <li class="text-sm text-gray-700">Answer questions verbally or in writing</li>
+                                    <li class="text-sm text-gray-700">Get instant feedback on your responses</li>
+                                    <li class="text-sm text-gray-700">Review sample answers and tips</li>
+                                </ol>
+                                <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                                    <p class="text-sm text-blue-800"><i class="fas fa-lightbulb mr-2"></i> Pro Tip: Record yourself to review your body language and tone.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Development Tab -->
+            <div id="skills" class="tab-content">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Skill Development Resources</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Course 1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Programming course" class="w-full h-40 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Free</span>
+                                <span class="text-gray-500 text-sm ml-auto">4.8 ★ (1.2k)</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Python for Data Science</h3>
+                            <p class="text-gray-600 text-sm mb-4">Learn Python fundamentals and data analysis with Pandas and NumPy.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">12 hours</span>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Start Course</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 2 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Web development course" class="w-full h-40 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Premium</span>
+                                <span class="text-gray-500 text-sm ml-auto">4.9 ★ (890)</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Full-Stack Web Development</h3>
+                            <p class="text-gray-600 text-sm mb-4">Build complete web applications with React, Node.js, and MongoDB.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">30 hours</span>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Start Course</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Excel course" class="w-full h-40 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Free</span>
+                                <span class="text-gray-500 text-sm ml-auto">4.7 ★ (2.1k)</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Excel for Business Analysis</h3>
+                            <p class="text-gray-600 text-sm mb-4">Master pivot tables, VLOOKUP, and data visualization for business.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">8 hours</span>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Start Course</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 4 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Design course" class="w-full h-40 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Premium</span>
+                                <span class="text-gray-500 text-sm ml-auto">4.8 ★ (650)</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">UI/UX Design Fundamentals</h3>
+                            <p class="text-gray-600 text-sm mb-4">Learn user research, wireframing, and prototyping with Figma.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">15 hours</span>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Start Course</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 5 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1617791160536-598cf32026fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Marketing course" class="w-full h-40 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Free</span>
+                                <span class="text-gray-500 text-sm ml-auto">4.6 ★ (980)</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Digital Marketing Essentials</h3>
+                            <p class="text-gray-600 text-sm mb-4">SEO, social media, and content marketing strategies for beginners.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">10 hours</span>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Start Course</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 6 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1628348068343-6f89875b4787?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Soft skills course" class="w-full h-40 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Free</span>
+                                <span class="text-gray-500 text-sm ml-auto">4.9 ★ (1.5k)</span>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Professional Communication</h3>
+                            <p class="text-gray-600 text-sm mb-4">Improve your email writing, presentations, and workplace communication.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">6 hours</span>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Start Course</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <button class="bg-white border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-6 py-3 rounded-md text-sm font-medium transition-colors duration-300">
+                        Browse All Courses
+                    </button>
+                </div>
+            </div>
+
+            <!-- Career Tools Tab -->
+            <div id="tools" class="tab-content">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Career Tools</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Tool 1 -->
+                    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden p-6 text-center transition-all duration-300">
+                        <div class="tool-icon bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300">
+                            <i class="fas fa-search-dollar text-indigo-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Salary Calculator</h3>
+                        <p class="text-gray-600 text-sm mb-4">Estimate fair compensation for internships in your field and location.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Try Tool</a>
+                    </div>
+
+                    <!-- Tool 2 -->
+                    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden p-6 text-center transition-all duration-300">
+                        <div class="tool-icon bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300">
+                            <i class="fas fa-network-wired text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">LinkedIn Optimizer</h3>
+                        <p class="text-gray-600 text-sm mb-4">Get personalized tips to improve your LinkedIn profile for recruiters.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Try Tool</a>
+                    </div>
+
+                    <!-- Tool 3 -->
+                    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden p-6 text-center transition-all duration-300">
+                        <div class="tool-icon bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300">
+                            <i class="fas fa-bullseye text-green-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Career Path Matcher</h3>
+                        <p class="text-gray-600 text-sm mb-4">Discover careers that match your skills, interests, and values.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Try Tool</a>
+                    </div>
+
+                    <!-- Tool 4 -->
+                    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden p-6 text-center transition-all duration-300">
+                        <div class="tool-icon bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300">
+                            <i class="fas fa-calendar-check text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Application Tracker</h3>
+                        <p class="text-gray-600 text-sm mb-4">Organize and track your internship applications in one place.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Try Tool</a>
+                    </div>
+
+                    <!-- Tool 5 -->
+                    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden p-6 text-center transition-all duration-300">
+                        <div class="tool-icon bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300">
+                            <i class="fas fa-user-tie text-yellow-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Mentor Connect</h3>
+                        <p class="text-gray-600 text-sm mb-4">Find professionals in your field willing to offer career advice.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Try Tool</a>
+                    </div>
+
+                    <!-- Tool 6 -->
+                    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden p-6 text-center transition-all duration-300">
+                        <div class="tool-icon bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300">
+                            <i class="fas fa-chart-pie text-red-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Skill Gap Analyzer</h3>
+                        <p class="text-gray-600 text-sm mb-4">Identify skills you need to develop for your target roles.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Try Tool</a>
+                    </div>
+
+                    <!-- Tool 7 -->
+                    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden p-6 text-center transition-all duration-300">
+                        <div class="tool-icon bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300">
+                            <i class="fas fa-building text-pink-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Company Research</h3>
+                        <p class="text-gray-600 text-sm mb-4">Get detailed insights about companies you're interviewing with.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Try Tool</a>
+                    </div>
+
+                    <!-- Tool 8 -->
+                    <div class="tool-card bg-white rounded-lg shadow-md overflow-hidden p-6 text-center transition-all duration-300">
+                        <div class="tool-icon bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300">
+                            <i class="fas fa-file-invoice-dollar text-teal-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Offer Evaluator</h3>
+                        <p class="text-gray-600 text-sm mb-4">Compare internship offers considering compensation, benefits, and growth.</p>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Try Tool</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Stories Section -->
+        <div class="mt-20">
+            <h2 class="text-2xl font-bold text-center text-gray-900 mb-12">Success Stories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Story 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Maria Rodriguez">
+                        <div class="ml-4">
+                            <h4 class="font-medium">Maria Rodriguez</h4>
+                            <p class="text-sm text-gray-500">Software Engineer at Google</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        "InternHub's resume builder and interview prep helped me land internships at three FAANG companies. The technical interview resources were especially valuable."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- Story 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Chen">
+                        <div class="ml-4">
+                            <h4 class="font-medium">James Chen</h4>
+                            <p class="text-sm text-gray-500">Investment Banking Analyst at Goldman Sachs</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        "The finance interview prep and networking guide were game-changers for me. I went from no responses to multiple offers using InternHub's resources."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+                <!-- Story 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya Patel">
+                        <div class="ml-4">
+                            <h4 class="font-medium">Priya Patel</h4>
+                            <p class="text-sm text-gray-500">UX Designer at Airbnb</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        "As a design student, I struggled with portfolio presentation. The design courses and portfolio review tools helped me showcase my work effectively."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="bg-indigo-50 mt-20 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="lg:w-1/2">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Get Career Tips Straight to Your Inbox</h2>
+                    <p class="text-gray-600">
+                        Subscribe to our newsletter for the latest internship strategies, resume tips, and exclusive opportunities.
+                    </p>
+                </div>
+                <div class="mt-8 lg:mt-0 lg:w-1/2">
+                    <form class="sm:flex">
+                        <input type="email" placeholder="Enter your email" class="w-full px-5 py-3 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs border-gray-300 rounded-md">
+                        <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+                            <button type="submit" class="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Subscribe
+                            </button>
+                        </div>
+                    </form>
+                    <p class="mt-3 text-sm text-gray-500">
+                        We respect your privacy. Unsubscribe at any time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="resources-script.js" charset="utf-8"></script>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- About Section -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-briefcase text-indigo-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">InternHub</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Connecting students with the best internship opportunities worldwide. Our mission is to help you launch your career.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="footer-links text-gray-400">
+                        <li class="transition-colors duration-300">Browse Internships</li>
+                        <li class="transition-colors duration-300">Top Companies</li>
+                        <li class="transition-colors duration-300">Career Resources</li>
+                        <li class="transition-colors duration-300">Success Stories</li>
+                        <li class="transition-colors duration-300">Post an Internship</li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Resources</h3>
+                    <ul class="footer-links text-gray-400">
+                        <li class="transition-colors duration-300">Resume Builder</li>
+                        <li class="transition-colors duration-300">Cover Letter Tips</li>
+                        <li class="transition-colors duration-300">Interview Prep</li>
+                        <li class="transition-colors duration-300">Career Blog</li>
+                        <li class="transition-colors duration-300">FAQ</li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Stay Updated</h3>
+                    <p class="text-gray-400 mb-4">
+                        Subscribe to our newsletter for the latest internship opportunities and career tips.
+                    </p>
+                    <form class="space-y-4">
+                        <input type="email" placeholder="Your email address" class="w-full px-4 py-3 rounded-md bg-gray-800 text-white placeholder-gray-500 focus:outline-none">
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md font-medium transition-colors duration-300">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-gray-800 my-8"></div>
+
+            <!-- Bottom Footer -->
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2025 InternHub. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
