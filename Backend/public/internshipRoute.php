@@ -128,6 +128,12 @@ function INTERNSHIP_ROUTES(string $requestMethod, string $requestUri, Internship
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
         $internshipController->getInternshipByType($type, $page, $limit);
+        
+    }elseif ($requestMethod === 'GET' && $parsedUrl === '/internships/by-company-id'){
+        $companyId = $_GET['company_id'] ?? '';
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+        $internshipController->getInternshipByCompanyId($companyId, $page, $limit);
     }
 
     else {

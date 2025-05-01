@@ -17,4 +17,5 @@ interface InternshipInterface {
     public function searchInternships(array $query, int $page, int $limit): array;
     public function applyToInternship(int $internshipId, int $userId): bool;
     public function getInternshipApplications(int $internshipId): array; 
+    public function getInternshipByCompanyId(int $companyId, int $page, int $limit): array;
 }

@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/userRoute.php';
 require_once __DIR__ . '/internshipRoute.php';
 require_once __DIR__ . '/companyRoute.php';
+require_once __DIR__ . '/appsRoute.php';
 
 use Dotenv\Dotenv;
 use PDO;
@@ -20,13 +21,16 @@ $pass = $_ENV['DB_PASSWORD'];
 use Src\Adapter\Controllers\UserController;
 use Src\Adapter\Controllers\InternshipController;
 use Src\Adapter\Controllers\CompanyController;
+use Src\Adapter\Controllers\ApplicationController;
 use Src\Adapter\Presenters\JsonPresenter;
 use Src\Usecase\UserUsecase;
 use Src\Usecase\InternshipUsecase;
 use Src\Usecase\CompanyUsecase;
+use Src\Usecase\ApplicationUsecase;
 use Src\Adapter\Gateways\Database\UserRepository;
 use Src\Adapter\Gateways\Database\InternshipRepository;
 use Src\Adapter\Gateways\Database\CompanyRepository;
+use Src\Adapter\Gateways\Database\ApplicationRepository;
 
 $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
 
@@ -43,6 +47,10 @@ $companyRepository = new CompanyRepository($pdo);
 $companyUsecase = new CompanyUsecase($companyRepository);
 $companyController = new CompanyController($companyUsecase, $jsonPresenter);
 
+$applicationRepository = new ApplicationRepository($pdo);
+$applicationUsecase = new ApplicationUsecase($applicationRepository);
+$applicationController = new ApplicationController($applicationUsecase, $jsonPresenter);
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestUri = $_SERVER['REQUEST_URI'];
 
@@ -52,6 +60,8 @@ if (str_starts_with($requestUri, '/users')) {
     INTERNSHIP_ROUTES($requestMethod, $requestUri, $internshipController);
 } elseif (str_starts_with($requestUri, '/companies')) {
     COMPANY_ROUTES($requestMethod, $requestUri, $companyController);
+} elseif (str_starts_with($requestUri, '/applications')) {
+    APPLICATION_ROUTES($requestMethod, $requestUri, $applicationController);
 } else {
     http_response_code(404);
     echo json_encode(["message" => "Route not found"]);

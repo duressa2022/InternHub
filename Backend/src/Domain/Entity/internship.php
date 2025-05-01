@@ -5,6 +5,7 @@ namespace Src\Domain\Entity;
 class Internship
 {
     public function __construct(
+        public int $company_id,
         public string $title,
         public string $company,
         public string $location,

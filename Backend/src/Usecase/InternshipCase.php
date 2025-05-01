@@ -76,5 +76,9 @@ class InternshipUsecase {
     {
         return $this->internshipRepository->getInternshipApplications($internshipId);
     }
+    public function getInternshipByCompanyId(int $companyId, int $page, int $limit): array
+    {
+        return $this->internshipRepository->getInternshipByCompanyId($companyId, $page, $limit);
+    }
 }
 ?>

@@ -15,9 +15,10 @@ class InternshipRepository implements InternshipInterface
         $this->db->beginTransaction();
         try {
             $stmt = $this->db->prepare("INSERT INTO internships 
-                (title, company, location, type, category, salary_range, start_date, end_date, description, requirements, benefits, deadline, link, created_at, updated_at) 
-                VALUES (:title, :company, :location, :type, :category, :salary_range, :start_date, :end_date, :description, :requirements, :benefits, :deadline, :link, :created_at, :updated_at)");
-        
+                (company_id,title, company, location, type, category, salary_range, start_date, end_date, description, requirements, benefits, deadline, link, created_at, updated_at) 
+                VALUES (:company_id,,:title, :company, :location, :type, :category, :salary_range, :start_date, :end_date, :description, :requirements, :benefits, :deadline, :link, :created_at, :updated_at)");
+            
+            $stmt->bindParam(':company_id', $internship->company_id, PDO::PARAM_INT);
             $stmt->bindParam(':title', $internship->title);
             $stmt->bindParam(':company', $internship->company);
             $stmt->bindParam(':location', $internship->location);
@@ -177,6 +178,17 @@ class InternshipRepository implements InternshipInterface
         $stmt = $this->db->prepare("SELECT * FROM internship_applications WHERE internship_id = :id");
         $stmt->execute([':id' => $internshipId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getInternshipByCompanyId(int $companyId, int $page, int $limit): array
+    {
+        $offset = ($page - 1) * $limit;
+        $stmt = $this->db->prepare("SELECT * FROM internships WHERE company_id = :company_id LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':company_id', $companyId, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return array_map([$this, 'mapToInternship'], $rows);
     }
 
     private function getByField(string $field, string $value, int $page, int $limit): array

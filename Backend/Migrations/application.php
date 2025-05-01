@@ -17,30 +17,26 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 
     $sql = "
-    CREATE TABLE IF NOT EXISTS internships (
+    CREATE TABLE IF NOT EXISTS applications (
         id INT AUTO_INCREMENT PRIMARY KEY,
         company_id INT NOT NULL,
-        title VARCHAR(255) NOT NULL,
-        company VARCHAR(255) NOT NULL,
-        location VARCHAR(255) NOT NULL,
-        category VARCHAR(100) NOT NULL,
-        type VARCHAR(50) NOT NULL,
-        start_date VARCHAR(50) NOT NULL,
-        end_date VARCHAR(50) NOT NULL,
-        description TEXT NOT NULL,
-        requirements TEXT NOT NULL,
-        salary_range VARCHAR(100),
-        benefits TEXT,
-        deadline VARCHAR(50) NOT NULL,
-        link VARCHAR(255) NOT NULL,
+        user_id INT NOT NULL,
+        internship_id INT NOT NULL,
+        status VARCHAR(50) NOT NULL,
+        resume_url VARCHAR(255),
+        cover_letter TEXT,
+        additional_documents TEXT,
+        submission_date DATE NOT NULL,
         created_at DATETIME NOT NULL,
-        updated_at DATETIME NOT NULL
+        updated_at DATETIME NOT NULL,
         FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY (internship_id) REFERENCES internships(id) ON DELETE CASCADE
     );
     ";
 
     $pdo->exec($sql);
-    echo "✅ Internships table created successfully.\n";
+    echo "✅ Applications table created successfully.\n";
 } catch (PDOException $e) {
     echo "❌ DB Error: " . $e->getMessage() . "\n";
 }

@@ -18,6 +18,7 @@ class InternshipController {
     public function createInternship(array $request): void
     {
         $internship = new Internship(
+            company_id: (int)$request['company_id'],
             title: $request['title'],
             company: $request['company'],
             location: $request['location'],
@@ -149,6 +150,15 @@ class InternshipController {
     public function getInternshipByType(string $type,int $page, int $limit): void
     {
         $internship = $this->internshipUsecase->getInternshipsByType($type,$page, $limit);
+        if ($internship) {
+            $this->jsonPresenter->respond_without(200, ['data' => $internship]);
+        } else {
+            $this->jsonPresenter->respond_without(404, ['message' => 'Internship not found']);
+        }
+    }
+    public function getInternshipByCompanyID(int $companyId,int $page, int $limit): void
+    {
+        $internship = $this->internshipUsecase->getInternshipsByCompanyID($companyId,$page, $limit);
         if ($internship) {
             $this->jsonPresenter->respond_without(200, ['data' => $internship]);
         } else {

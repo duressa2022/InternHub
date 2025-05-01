@@ -374,6 +374,7 @@ This document describes the API endpoints for User and Internship functionalitie
 - **Request Body**:
   ```json
   {
+    "company_id":1,
     "title": "Software Engineering Intern",
     "company": "Tech Corp",
     "location": "San Francisco, CA",
@@ -744,7 +745,36 @@ This document describes the API endpoints for User and Internship functionalitie
     ```json
     { "message": "Internship not found" }
     ```
-
+### 14. Get Internships by company-Id
+- **Endpoint**: `GET /internships/by-company-id/{company_id}`
+- **Description**: Retrieves internships by company id.
+- **Authentication**: None required.
+- **Query Parameters**:
+  - `company_id` (required, int): company id to search for.
+  - `page` (optional, integer, default: 1): Page number for pagination.
+  - `limit` (optional, integer, default: 10): Number of internships per page.
+- **Request Example**:
+  ```
+  GET /internships/by-company-id1
+  ```
+- **Response**:
+  - **200 OK**:
+    ```json
+    {
+      "data": [
+        {
+          "id": 1,
+          "type": "Full-time",
+          ...
+        },
+        ...
+      ]
+    }
+    ```
+  - **404 Not Found**:
+    ```json
+    { "message": "Internship not found" }
+    ```
 ## Error Handling
 - **404 Not Found**: Returned when the requested resource or route is not found.
   ```json
