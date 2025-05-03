@@ -1,1 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GojoHub - Your Gateway to Dream Internships</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        
+        
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-briefcase text-indigo-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-900">GojoHub</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="#features" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Features</a>
+                        <a href="#how-it-works" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">How It Works</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <a href="/login" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">Log In</a>
+                    <a href="/signup" class="ml-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign Up Free</a>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
 
+        <!-- Mobile menu -->
+        <div class="hidden sm:hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#features" class="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Features</a>
+                <a href="#how-it-works" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">How It Works</a>
+                <a href="#testimonials" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Testimonials</a>
+                <div class="pt-4 pb-3 border-t border-gray-200">
+                    <div class="space-y-1">
+                        <a href="/login" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Log In</a>
+                        <a href="/signup" class="block px-4 py-2 text-base font-medium text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-gradient text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+                <div class="mb-12 lg:mb-0">
+                    <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mb-6">
+                        Launch Your Career with the Perfect Internship
+                    </h1>
+                    <p class="text-xl mb-8">
+                        GojoHub connects students with top internship opportunities worldwide, providing the tools and resources you need to succeed in your career journey.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="/signup" class="bg-white text-indigo-600 hover:bg-gray-100 px-8 py-4 rounded-md text-lg font-semibold text-center">
+                            Get Started Free
+                        </a>
+                        <a href="#how-it-works" class="bg-transparent border-2 border-white hover:bg-white hover:bg-opacity-10 px-8 py-4 rounded-md text-lg font-semibold text-center flex items-center justify-center">
+                            How It Works <i class="fas fa-arrow-right ml-2 animated-arrow"></i>
+                        </a>
+                    </div>
+                    <div class="mt-8 flex items-center">
+                        <!-- Trusted by and user images removed as requested -->
+                    </div>
+                </div>
+                <div class="relative hidden lg:block">
+                    <div class="absolute -top-10 -left-10 w-64 h-64 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
+                    <div class="absolute -bottom-8 -right-8 w-64 h-64 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
+                    <div class="relative floating">
+                        <img src="https://illustrations.popsy.co/amber/digital-nomad.svg" alt="Student finding internship" class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logo Cloud -->
+    <div class="bg-gray-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm font-semibold uppercase text-gray-500 tracking-wide mb-8">
+                Trusted by top companies worldwide
+            </p>
+            <div class="grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
+                <div class="col-span-1 flex justify-center">
+                    <img class="h-12" src="https://logo.clearbit.com/google.com" alt="Google">
+                </div>
+                <div class="col-span-1 flex justify-center">
+                    <img class="h-12" src="https://logo.clearbit.com/microsoft.com" alt="Microsoft">
+                </div>
+                <div class="col-span-1 flex justify-center">
+                    <img class="h-12" src="https://logo.clearbit.com/amazon.com" alt="Amazon">
+                </div>
+                <div class="col-span-1 flex justify-center">
+                    <img class="h-12" src="https://logo.clearbit.com/facebook.com" alt="Facebook">
+                </div>
+                <div class="col-span-1 flex justify-center">
+                    <img class="h-12" src="https://logo.clearbit.com/apple.com" alt="Apple">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div id="features" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Everything You Need to Land Your Dream Internship
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Our comprehensive platform provides all the tools and resources to help you succeed.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-100 text-indigo-600 mb-6">
+                        <i class="fas fa-search text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-3">Smart Internship Search</h3>
+                    <p class="text-gray-500">
+                        Advanced filters for location, job type, industry, and salary range. Personalized recommendations based on your profile and preferences.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-purple-100 text-purple-600 mb-6">
+                        <i class="fas fa-file-alt text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-3">AI Resume Builder</h3>
+                    <p class="text-gray-500">
+                        Create ATS-friendly resumes with our interactive tool. Get real-time feedback and suggestions to improve your resume.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600 mb-6">
+                        <i class="fas fa-comments text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-3">Interview Preparation</h3>
+                    <p class="text-gray-500">
+                        Mock interview simulator with AI feedback. Practice common questions and get detailed analysis of your responses.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 text-green-600 mb-6">
+                        <i class="fas fa-chart-line text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-3">Skill Development</h3>
+                    <p class="text-gray-500">
+                        Access curated courses in tech, business, and design to build the skills employers are looking for.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-red-100 text-red-600 mb-6">
+                        <i class="fas fa-building text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-3">Company Insights</h3>
+                    <p class="text-gray-500">
+                        Detailed company profiles with ratings, reviews, and employee testimonials to help you make informed decisions.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card bg-white p-8 rounded-xl shadow-md transition-all duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-100 text-yellow-600 mb-6">
+                        <i class="fas fa-robot text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-3">AI Career Assistant</h3>
+                    <p class="text-gray-500">
+                        24/7 chatbot support for instant career guidance, application tips, and interview advice.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div id="how-it-works" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    How GojoHub Works
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Get from signup to internship in just a few simple steps.
+                </p>
+            </div>
+
+            <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+                <!-- Step 1 -->
+                <div class="mb-12 lg:mb-0">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 text-white mb-6 mx-auto">
+                        <span class="text-lg font-bold">1</span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Create Your Profile</h3>
+                        <p class="text-gray-500">
+                            Tell us about your skills, interests, and career goals. Our AI will use this to personalize your experience.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="mb-12 lg:mb-0">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 text-white mb-6 mx-auto">
+                        <span class="text-lg font-bold">2</span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Find & Apply</h3>
+                        <p class="text-gray-500">
+                            Browse thousands of internships or let our matching system recommend the best opportunities for you.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="mb-12 lg:mb-0">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 text-white mb-6 mx-auto">
+                        <span class="text-lg font-bold">3</span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Prepare & Succeed</h3>
+                        <p class="text-gray-500">
+                            Use our career tools to prepare for interviews, track applications, and develop your professional skills.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="/signup" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                    Get Started Today
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <!-- Testimonials section removed -->
+
+    <!-- CTA Section -->
+    <div class="cta-gradient text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+                <div class="mb-8 lg:mb-0">
+                    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl mb-4">
+                        Ready to find your dream internship?
+                    </h2>
+                    <p class="text-xl">
+                        Join thousands of students who have already launched their careers with GojoHub.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="/signup" class="bg-white text-indigo-600 hover:bg-gray-100 px-8 py-4 rounded-md text-lg font-semibold text-center">
+                        Get Started Free
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- About Section -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-briefcase text-indigo-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">GojoHub</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Connecting students with the best internship opportunities worldwide. Our mission is to help you launch your career.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Browse Internships</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Top Companies</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Career Resources</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Success Stories</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Post an Internship</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Resources</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Resume Builder</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Cover Letter Tips</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Interview Prep</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Career Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Contact Us</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>This is our current address</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3"></i>
+                            <span>This is our phone number</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3"></i>
+                            <span>hello@gojohub.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-gray-800 my-8"></div>
+
+            <!-- Bottom Footer -->
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2025 GojoHub. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="chatbotButton" class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full h-16 w-16 flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-110">
+            <i class="fas fa-comment-dots text-2xl"></i>
+        </button>
+        <div id="chatbotWindow" class="hidden absolute bottom-20 right-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden">
+            <div class="bg-indigo-600 text-white px-4 py-3 flex justify-between items-center">
+                <h3 class="font-medium">GojoHub Assistant</h3>
+                <button id="closeChatbot" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4 h-64 overflow-y-auto" id="chatMessages">
+                <div class="mb-4">
+                    <div class="bg-gray-100 rounded-lg p-3 inline-block">
+                        <p>Hi there! 👋 I'm your GojoHub Assistant. How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 p-3">
+                <div class="flex">
+                    <input type="text" id="chatInput" placeholder="Type your message..." class="flex-1 border border-gray-300 rounded-l-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <button id="sendMessage" class="bg-indigo-600 text-white px-4 py-2 rounded-r-lg hover:bg-indigo-700">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        
+    </script>
+</body>
+</html>
