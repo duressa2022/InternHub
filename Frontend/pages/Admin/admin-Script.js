@@ -12,10 +12,10 @@ toggleSidebar.addEventListener("click", function () {
 document.addEventListener("DOMContentLoaded", () => {
   let mockData = {
     stats: {
-      totalInternships: 1000,
-      activeCompanies: 324,
-      registeredStudents: 8742,
-      pendingApprovals: 18,
+      totalInternships: 100,
+      activeCompanies: 20,
+      registeredStudents: 10,
+      pendingApprovals: 4,
     },
     companies: [
       { id: 1, name: "ETechStar IT Solutions PLC" },
