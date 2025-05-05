@@ -47,6 +47,10 @@ class UserController{
         }else{
             $this->jsonPresenter->respond_without(400, ['message' => 'Failed to create user']);
         }
+
+
+
+        
     }
 
     public function getUserById(int $id): void

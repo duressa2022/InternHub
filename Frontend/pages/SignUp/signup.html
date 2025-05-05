@@ -20,14 +20,14 @@
             <div class="flex-shrink-0 flex items-center">
               <a href="/" class="flex items-center">
                 <i class="fas fa-briefcase text-indigo-600 text-2xl mr-2"></i>
-                <span class="text-xl font-bold text-gray-900">InternHub</span>
+                <span class="text-xl font-bold text-gray-900">InternGojo</span>
               </a>
             </div>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:items-center">
             <p class="text-gray-500 mr-4">Already have an account?</p>
             <a
-              href="/login"
+              href="../Login/login.html"
               class="text-indigo-600 hover:text-indigo-800 px-4 py-2 rounded-md text-sm font-medium border border-indigo-600 hover:border-indigo-800"
               >Log In</a
             >
@@ -43,7 +43,7 @@
         class="w-full lg:w-1/2 p-8 sm:p-12 lg:p-24 flex items-center justify-center"
       >
         <div class="w-full max-w-md">
-          <div class="text-center mb-8 lg:hidden">
+          <div class="text-center mb-8">
             <h1 class="text-3xl font-extrabold text-gray-900">
               Join InternGojo
             </h1>
@@ -57,20 +57,20 @@
 
             <!-- Social Login Buttons -->
             <div class="grid grid-cols-2 gap-4 mb-6">
-              <a
-                href="#"
+              <button
+                type="button"
                 class="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
               >
                 <i class="fab fa-google text-red-500 mr-2"></i>
                 Google
-              </a>
-              <a
-                href="#"
+              </button>
+              <button
+                type="button"
                 class="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
               >
                 <i class="fab fa-linkedin text-blue-600 mr-2"></i>
                 LinkedIn
-              </a>
+              </button>
             </div>
 
             <div class="relative mb-6">
@@ -87,21 +87,21 @@
             <!-- Signup Form -->
             <form class="space-y-6">
               <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <!-- Basic Info -->
                 <div>
                   <label
                     for="first-name"
                     class="block text-sm font-medium text-gray-700"
                     >First name</label
                   >
-                  <div class="mt-1 relative rounded-md shadow-sm">
-                    <input
-                      type="text"
-                      name="first-name"
-                      id="first-name"
-                      class="input-focus py-3 px-4 block w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                      placeholder="John"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    id="first-name"
+                    name="first-name"
+                    required
+                    maxlength="100"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  />
                 </div>
                 <div>
                   <label
@@ -109,179 +109,293 @@
                     class="block text-sm font-medium text-gray-700"
                     >Last name</label
                   >
-                  <div class="mt-1 relative rounded-md shadow-sm">
-                    <input
-                      type="text"
-                      name="last-name"
-                      id="last-name"
-                      class="input-focus py-3 px-4 block w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                      placeholder="Doe"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    id="last-name"
+                    name="last-name"
+                    required
+                    maxlength="100"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  />
                 </div>
-              </div>
 
-              <div>
-                <label
-                  for="email"
-                  class="block text-sm font-medium text-gray-700"
-                  >Email address</label
-                >
-                <div class="mt-1 relative rounded-md shadow-sm">
+                <!-- Contact Info -->
+                <div class="sm:col-span-2">
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-gray-700"
+                    >Email</label
+                  >
                   <input
                     type="email"
-                    name="email"
                     id="email"
-                    class="input-focus py-3 px-4 block w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="you@example.com"
+                    name="email"
+                    required
+                    maxlength="255"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
                   />
                 </div>
-              </div>
-
-              <div>
-                <label
-                  for="password"
-                  class="block text-sm font-medium text-gray-700"
-                  >Password</label
-                >
-                <div class="mt-1 relative rounded-md shadow-sm">
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    class="input-focus py-3 px-4 block w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="••••••••"
-                  />
-                </div>
-                <p class="mt-2 text-xs text-gray-500">
-                  Must be at least 8 characters
-                </p>
-              </div>
-
-              <div class="border-gray-300 rounded-lg">
-                <label
-                  for="user-type"
-                  class="block text-sm font-medium text-gray-700"
-                  >I am a</label
-                >
-
-                <select
-                  id="user-type"
-                  name="user-type"
-                  class="mt-1 block w-full pl-3 pr-10 py-3 text-base border-blue-300 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                >
-                  <option>Student looking for internships</option>
-                  <option>Employer posting internships</option>
-                </select>
-              </div>
-
-              <div class="flex items-start">
-                <div class="flex items-center h-5">
-                  <input
-                    id="terms"
-                    name="terms"
-                    type="checkbox"
-                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded checkbox"
-                  />
-                </div>
-                <div class="ml-3 text-sm">
-                  <label for="terms" class="font-medium text-gray-700"
-                    >I agree to the
-                    <a href="#" class="text-indigo-600 hover:text-indigo-500"
-                      >Terms of Service</a
-                    >
-                    and
-                    <a href="#" class="text-indigo-600 hover:text-indigo-500"
-                      >Privacy Policy</a
-                    ></label
+                <div class="sm:col-span-2">
+                  <label
+                    for="phone"
+                    class="block text-sm font-medium text-gray-700"
+                    >Phone</label
                   >
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    maxlength="20"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  />
+                </div>
+
+                <!-- Professional Info -->
+                <div class="sm:col-span-2">
+                  <label
+                    for="field"
+                    class="block text-sm font-medium text-gray-700"
+                    >Field of Study/Work</label
+                  >
+                  <select
+                    id="field"
+                    name="field"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  >
+                    <option value="">Select your field</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Business">Business</option>
+                    <option value="Design">Design</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <!-- Role Selection -->
+                <div class="sm:col-span-2">
+                  <label
+                    for="role"
+                    class="block text-sm font-medium text-gray-700"
+                    >I am a</label
+                  >
+                  <select
+                    id="role"
+                    name="role"
+                    required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  >
+                    <option value="">Select your role</option>
+                    <option value="student">Student</option>
+                    <option value="employer">Employer</option>
+                  </select>
+                </div>
+
+                <!-- Personal Details -->
+                <div>
+                  <label
+                    for="gender"
+                    class="block text-sm font-medium text-gray-700"
+                    >Gender</label
+                  >
+                  <select
+                    id="gender"
+                    name="gender"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  >
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="dob"
+                    class="block text-sm font-medium text-gray-700"
+                    >Date of Birth</label
+                  >
+                  <input
+                    type="date"
+                    id="dob"
+                    name="dob"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  />
+                </div>
+
+                <!-- Address -->
+                <div class="sm:col-span-2">
+                  <label
+                    for="address"
+                    class="block text-sm font-medium text-gray-700"
+                    >Address</label
+                  >
+                  <textarea
+                    id="address"
+                    name="address"
+                    rows="2"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  ></textarea>
+                </div>
+
+                <div>
+                  <label
+                    for="city"
+                    class="block text-sm font-medium text-gray-700"
+                    >City</label
+                  >
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    maxlength="100"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    for="state"
+                    class="block text-sm font-medium text-gray-700"
+                    >State/Province</label
+                  >
+                  <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    maxlength="100"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    for="country"
+                    class="block text-sm font-medium text-gray-700"
+                    >Country</label
+                  >
+                  <input
+                    type="text"
+                    id="country"
+                    name="country"
+                    maxlength="100"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    for="postal-code"
+                    class="block text-sm font-medium text-gray-700"
+                    >Postal Code</label
+                  >
+                  <input
+                    type="text"
+                    id="postal-code"
+                    name="postal-code"
+                    maxlength="20"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  />
+                </div>
+
+                <!-- Website -->
+                <div class="sm:col-span-2">
+                  <label
+                    for="website"
+                    class="block text-sm font-medium text-gray-700"
+                    >Website (optional)</label
+                  >
+                  <input
+                    type="url"
+                    id="website"
+                    name="website"
+                    maxlength="255"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                  />
+                </div>
+
+                <!-- Password -->
+                <div class="sm:col-span-2">
+                  <label
+                    for="password"
+                    class="block text-sm font-medium text-gray-700"
+                    >Password</label
+                  >
+                  <div class="relative mt-1">
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      required
+                      minlength="8"
+                      class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
+                    />
+                    <button
+                      type="button"
+                      class="absolute inset-y-0 right-0 pr-3 flex items-center password-toggle"
+                    >
+                      <i class="fas fa-eye text-gray-400"></i>
+                    </button>
+                  </div>
+                  <p class="mt-2 text-xs text-gray-500">
+                    Must be at least 8 characters
+                  </p>
+                </div>
+
+                <!-- Terms -->
+                <div class="sm:col-span-2">
+                  <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                      <input
+                        id="terms"
+                        name="terms"
+                        type="checkbox"
+                        required
+                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                      />
+                    </div>
+                    <div class="ml-3 text-sm">
+                      <label for="terms" class="font-medium text-gray-700"
+                        >I agree to the
+                        <a
+                          href="#"
+                          class="text-indigo-600 hover:text-indigo-500"
+                          >Terms of Service</a
+                        >
+                        and
+                        <a
+                          href="#"
+                          class="text-indigo-600 hover:text-indigo-500"
+                          >Privacy Policy</a
+                        ></label
+                      >
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div>
                 <button
                   type="submit"
-                  class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Create Account
                 </button>
               </div>
             </form>
-
-            <div class="mt-6 text-center">
-              <p class="text-sm text-gray-600">
-                Already have an account?
-                <a
-                  href="../Login/login.html"
-                  class="font-medium text-indigo-600 hover:text-indigo-500"
-                  >Log in</a
-                >
-              </p>
-            </div>
           </div>
         </div>
       </div>
 
-      <!-- Right Side - Illustration -->
+      <!-- Right Side - Image -->
       <div
-        class="hidden lg:flex lg:w-1/2 signup-gradient text-white p-12 flex-col justify-center"
-      >
-        <div class="max-w-lg mx-auto">
-          <div class="relative floating">
-            <img
-              src="https://illustrations.popsy.co/amber/student.svg"
-              alt="Student finding internship"
-              class="w-full h-auto"
-            />
-          </div>
-          <h1 class="text-4xl font-extrabold tracking-tight mt-8">
-            Start Your Career Journey
-          </h1>
-          <p class="mt-4 text-xl">
-            Join thousands of students who found their dream internships through
-            InternGojo. Get access to exclusive opportunities and career
-            resources.
-          </p>
-          <div class="mt-8 grid grid-cols-3 gap-4">
-            <div class="bg-white bg-opacity-10 p-4 rounded-lg">
-              <i class="fas fa-briefcase text-2xl mb-2"></i>
-              <p class="text-sm font-medium">10,000+ Internships</p>
-            </div>
-            <div class="bg-white bg-opacity-10 p-4 rounded-lg">
-              <i class="fas fa-building text-2xl mb-2"></i>
-              <p class="text-sm font-medium">1,200+ Companies</p>
-            </div>
-            <div class="bg-white bg-opacity-10 p-4 rounded-lg">
-              <i class="fas fa-graduation-cap text-2xl mb-2"></i>
-              <p class="text-sm font-medium">50+ Universities</p>
-            </div>
-          </div>
-        </div>
-      </div>
+        class="hidden lg:block lg:w-1/2 bg-cover bg-center"
+        style="
+          background-image: url('https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80');
+        "
+      ></div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <p class="text-gray-500 text-sm">
-            &copy; 2025 InternGojo. All rights reserved.
-          </p>
-          <div class="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" class="text-gray-500 hover:text-gray-700 text-sm"
-              >Privacy Policy</a
-            >
-            <a href="#" class="text-gray-500 hover:text-gray-700 text-sm"
-              >Terms of Service</a
-            >
-            <a href="#" class="text-gray-500 hover:text-gray-700 text-sm"
-              >Cookie Policy</a
-            >
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <script src="signUp-Script.js"></script>
+    <script type="module" src="signUp-Script.js"></script>
   </body>
 </html>
