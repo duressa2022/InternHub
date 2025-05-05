@@ -17,6 +17,8 @@ const LOGIN_ENDPOINT = '/auth/login';
  */
 export async function loginUser(loginData) {
     try {
+
+        console.log("User Login information :", loginData);
         // Validate data before sending to API
         if (!loginData.email || !loginData.password) {
             return {
@@ -40,7 +42,7 @@ export async function loginUser(loginData) {
                 'Accept': 'application/json'
             },
             body: JSON.stringify(requestData),
-            credentials: 'include' // Include cookies in the request
+            credentials: 'include'
         });
 
         // Parse response
