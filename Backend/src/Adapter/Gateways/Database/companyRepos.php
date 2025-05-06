@@ -100,6 +100,7 @@ class CompanyRepository implements CompanyInterface
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return array_map([$this, 'mapToCompany'], $rows);
     }
+    
 
     public function getCompanyByName(string $name, int $page, int $limit): array
     {
@@ -134,12 +135,37 @@ class CompanyRepository implements CompanyInterface
         $conditions = [];
         $params = [];
 
-        foreach ($query as $key => $value) {
-            $conditions[] = "$key LIKE :$key";
-            $params[":$key"] = "%$value%";
+        if (isset($query['letter']) && $query['letter'] !== 'All') {
+            $conditions[] = "name LIKE :letter";
+            $params[':letter'] = $query['letter'] . '%';
         }
 
-        $sql = "SELECT * FROM companies WHERE " . implode(" AND ", $conditions) . " LIMIT :limit OFFSET :offset";
+        if (isset($query['name'])) {
+            $conditions[] = "name LIKE :name";
+            $params[':name'] = "%{$query['name']}%";
+        }
+
+        if (isset($query['industry'])) {
+            $conditions[] = "category LIKE :industry";
+            $params[':industry'] = "%{$query['industry']}%";
+        }
+
+        if (isset($query['location'])) {
+            $conditions[] = "location LIKE :location";
+            $params[':location'] = "%{$query['location']}%";
+        }
+
+        if (isset($query['rating'])) {
+            $conditions[] = "rating >= :rating";
+            $params[':rating'] = $query['rating'];
+        }
+
+        $sql = "SELECT * FROM companies";
+        if (!empty($conditions)) {
+            $sql .= " WHERE " . implode(" AND ", $conditions);
+        }
+        $sql .= " LIMIT :limit OFFSET :offset";
+
         $stmt = $this->db->prepare($sql);
         foreach ($params as $key => $val) {
             $stmt->bindValue($key, $val);

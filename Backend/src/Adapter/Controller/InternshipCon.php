@@ -27,8 +27,8 @@ class InternshipController {
             salaryRange: $request['salary_range'],
             startDate: $request['start_date'],
             endDate: $request['end_date'],
-            description: $request['description'],
             requirements: $request['requirements'],
+            description: $request['description'],
             benefits: $request['benefits'] ?? null,
             deadline: $request['deadline'],
             link: $request['link'],
@@ -36,7 +36,9 @@ class InternshipController {
             updated_at:date('Y-m-d H:i:s')
         );
 
+        echo $request;
         $createdInternship = $this->internshipUsecase->createInternship($internship);
+        echo $createdInternship;
         if ($createdInternship) {
             $this->jsonPresenter->respond_without(201, ['message' => 'Internship created successfully', 'data' => $createdInternship]);
         } else {

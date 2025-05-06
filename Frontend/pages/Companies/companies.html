@@ -1,605 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Top Companies - InternHub</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <script type="module" src="Companies-Scripts.js" defer></script>
-   <link rel="stylesheet" href="Companies-Style.css">
-</head>
-<body class="bg-gray-50 font-sans">
+    <link rel="stylesheet" href="Companies-Style.css" />
+    <style>
+      .gradient-bg {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .company-logo-container {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .footer-link {
+        margin-bottom: 0.75rem;
+      }
+      .footer-link:hover {
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
     <!-- Navigation -->
     <nav class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="index.html" class="flex items-center">
-                            <i class="fas fa-briefcase text-indigo-600 text-2xl mr-2"></i>
-                            <a href="../index.html"><span class="text-xl font-bold text-gray-900">InternGojo</span></a>
-                        </a>
-                    </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="../index.html" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
-                        <a href="../Browse/browse.html" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Browse Internships</a>
-                        <a href="companies.html" class="nav-link border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Companies</a>
-                        <a href="../ResourcePage/resources.html" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Resources</a>
-                    </div>
-                </div>
-                <div class="hidden sm:ml-6 sm:flex sm:items-center">
-                    <button class="post-internship-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Post an Internship</button>
-                    <div class="ml-4 relative flex-shrink-0">
-                        <div>
-                            <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button">
-                                <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                        <span class="sr-only">Open main menu</span>
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <a href="index.html" class="flex items-center">
+                <i class="fas fa-briefcase text-indigo-600 text-2xl mr-2"></i>
+                <a href="../index.html"
+                  ><span class="text-xl font-bold text-gray-900"
+                    >InternGojo</span
+                  ></a
+                >
+              </a>
             </div>
+            <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <a
+                href="../index.html"
+                class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Home</a
+              >
+              <a
+                href="../Browse/browse.html"
+                class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Browse Internships</a
+              >
+              <a
+                href="companies.html"
+                class="nav-link border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Companies</a
+              >
+              <a
+                href="../ResourcePage/resources.html"
+                class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Resources</a
+              >
+            </div>
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center">
+            <button
+              class="post-internship-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+            >
+              Post an Internship
+            </button>
+            <div class="ml-4 relative flex-shrink-0">
+              <div>
+                <button
+                  type="button"
+                  class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  id="user-menu-button"
+                >
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="h-8 w-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="-mr-2 flex items-center sm:hidden">
+            <button
+              type="button"
+              class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+            >
+              <span class="sr-only">Open main menu</span>
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <div class="gradient-bg text-white">
-        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                    Top Companies Hiring Interns
-                </h1>
-                <p class="mt-6 max-w-lg mx-auto text-xl">
-                    Discover the best companies offering internship opportunities and kickstart your career.
-                </p>
-                <div class="mt-10 relative max-w-md mx-auto">
-                    <div class="relative">
-                        <input type="text" id="companySearch" class="search-input block w-full rounded-md border-0 py-4 px-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Search companies by name or industry">
-                        <button class="search-button absolute right-2.5 bottom-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md px-4 py-2 text-sm font-medium">
-                            <i class="fas fa-search mr-2"></i> Search
-                        </button>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1
+            class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+          >
+            Top Companies Hiring Interns
+          </h1>
+          <p class="mt-6 max-w-lg mx-auto text-xl">
+            Discover the best companies offering internship opportunities and
+            kickstart your career.
+          </p>
+          <div class="mt-10 relative max-w-md mx-auto">
+            <div class="relative">
+              <input
+                type="text"
+                id="companySearch"
+                class="search-input block w-full rounded-md border-0 py-4 px-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="Search companies by name or industry"
+              />
+              <button
+                class="clear-search absolute right-24 bottom-2.5 text-gray-400 hover:text-gray-600 hidden"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+              <button
+                class="search-button absolute right-2.5 bottom-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md px-4 py-2 text-sm font-medium"
+              >
+                <i class="fas fa-search mr-2"></i> Search
+              </button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- Alphabet Filter -->
-        <div class="mb-8">
-            <div class="flex flex-wrap justify-center gap-1">
-                <ul id="alphabetFilter" class="flex flex-wrap justify-center gap-1">
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white font-medium cursor-pointer active">All</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">A</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">B</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">C</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">D</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">E</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">F</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">G</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">H</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">I</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">J</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">K</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">L</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">M</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">N</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">O</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">P</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">Q</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">R</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">S</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">T</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">U</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">V</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">W</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">X</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">Y</li>
-                    <li class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer">Z</li>
-                </ul>
-            </div>
+      <!-- Alphabet Filter -->
+      <div class="mb-8">
+        <div class="flex flex-wrap justify-center gap-1">
+          <ul id="alphabetFilter" class="flex flex-wrap justify-center gap-1">
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white font-medium cursor-pointer active"
+            >
+              All
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              A
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              B
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              C
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              D
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              E
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              F
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              G
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              H
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              I
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              J
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              K
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              L
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              M
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              N
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              O
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              P
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              Q
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              R
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              S
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              T
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              U
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              V
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              W
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              X
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              Y
+            </li>
+            <li
+              class="alphabet-filter-item w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 font-medium cursor-pointer"
+            >
+              Z
+            </li>
+          </ul>
         </div>
+      </div>
 
-        <!-- Filters -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-            <h2 class="text-2xl font-bold text-gray-900">Featured Companies</h2>
-            <div class="flex flex-wrap gap-3">
-                <div class="dropdown relative">
-                    <button class="filter-dropdown industry-filter flex items-center gap-2 bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        <i class="fas fa-industry"></i> Industry
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-content industry-dropdown absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
-                        <div class="py-1">
-                            <input type="text" placeholder="Search industries" class="industry-search w-full px-4 py-2 text-sm border-b border-gray-200">
-                            <div class="max-h-60 overflow-y-auto">
-                                <a href="#" class="industry-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Technology</a>
-                                <a href="#" class="industry-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Finance</a>
-                                <a href="#" class="industry-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Healthcare</a>
-                                <a href="#" class="industry-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Retail</a>
-                                <a href="#" class="industry-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Manufacturing</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="dropdown relative">
-                    <button class="filter-dropdown location-filter flex items-center gap-2 bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        <i class="fas fa-map-marker-alt"></i> Location
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-content location-dropdown absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
-                        <div class="py-1">
-                            <input type="text" placeholder="Search locations" class="location-search w-full px-4 py-2 text-sm border-b border-gray-200">
-                            <div class="max-h-60 overflow-y-auto">
-                                <a href="#" class="location-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">United States</a>
-                                <a href="#" class="location-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">United Kingdom</a>
-                                <a href="#" class="location-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Canada</a>
-                                <a href="#" class="location-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Germany</a>
-                                <a href="#" class="location-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Remote</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="dropdown relative">
-                    <button class="filter-dropdown rating-filter flex items-center gap-2 bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-                        <i class="fas fa-star"></i> Rating
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-content rating-dropdown absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
-                        <div class="py-1">
-                            <a href="#" class="rating-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">4+ Stars</a>
-                            <a href="#" class="rating-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">3+ Stars</a>
-                            <a href="#" class="rating-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">All Ratings</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <button class="reset-filters bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-                    <i class="fas fa-sync-alt mr-2"></i> Reset Filters
-                </button>
-            </div>
-        </div>
- 
-        <!-- Companies Grid -->
-        <div id="companiesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Company Card 1 -->
-            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="Google">
-                <div class="p-6">
-                    <div class="company-logo-container mb-4">
-                        <img class="company-logo h-full max-w-full object-contain" src="https://logo.clearbit.com/google.com" alt="Google logo">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="company-name text-xl font-semibold text-gray-900 mb-2 transition-colors duration-300">Google</h3>
-                        <div class="flex justify-center items-center mb-3">
-                            <div class="company-rating flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="rating-value text-sm text-gray-500 ml-1">4.7</span>
-                        </div>
-                        <div class="flex flex-wrap justify-center gap-2 mb-4">
-                            <span class="company-industry inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800">Technology</span>
-                            <span class="company-location inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">Mountain View, CA</span>
-                        </div>
-                        <p class="company-description text-sm text-gray-600 mb-4 line-clamp-3">
-                            Google offers internships across various domains including engineering, business, and design, providing hands-on experience with cutting-edge technology.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="internship-count text-sm text-gray-500">12 open internships</span>
-                            <a href="company-detail.html" class="view-details text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Company Card 2 -->
-            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="Microsoft">
-                <div class="p-6">
-                    <div class="company-logo-container mb-4">
-                        <img class="company-logo h-full max-w-full object-contain" src="https://logo.clearbit.com/microsoft.com" alt="Microsoft logo">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="company-name text-xl font-semibold text-gray-900 mb-2 transition-colors duration-300">Microsoft</h3>
-                        <div class="flex justify-center items-center mb-3">
-                            <div class="company-rating flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="rating-value text-sm text-gray-500 ml-1">4.3</span>
-                        </div>
-                        <div class="flex flex-wrap justify-center gap-2 mb-4">
-                            <span class="company-industry inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800">Technology</span>
-                            <span class="company-location inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">Redmond, WA</span>
-                        </div>
-                        <p class="company-description text-sm text-gray-600 mb-4 line-clamp-3">
-                            Microsoft's internship program offers opportunities to work on meaningful projects, network with professionals, and develop skills in a supportive environment.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="internship-count text-sm text-gray-500">8 open internships</span>
-                            <a href="company-detail.html" class="view-details text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Company Card 3 -->
-            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="Goldman Sachs">
-                <div class="p-6">
-                    <div class="company-logo-container mb-4">
-                        <img class="company-logo h-full max-w-full object-contain" src="https://logo.clearbit.com/goldmansachs.com" alt="Goldman Sachs logo">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="company-name text-xl font-semibold text-gray-900 mb-2 transition-colors duration-300">Goldman Sachs</h3>
-                        <div class="flex justify-center items-center mb-3">
-                            <div class="company-rating flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="rating-value text-sm text-gray-500 ml-1">4.8</span>
-                        </div>
-                        <div class="flex flex-wrap justify-center gap-2 mb-4">
-                            <span class="company-industry inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800">Finance</span>
-                            <span class="company-location inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">New York, NY</span>
-                        </div>
-                        <p class="company-description text-sm text-gray-600 mb-4 line-clamp-3">
-                            Goldman Sachs offers summer internships for students to gain experience in investment banking, asset management, and other financial services.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="internship-count text-sm text-gray-500">5 open internships</span>
-                            <a href="company-detail.html" class="view-details text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Company Card 4 -->
-            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="Tesla">
-                <div class="p-6">
-                    <div class="company-logo-container mb-4">
-                        <img class="company-logo h-full max-w-full object-contain" src="https://logo.clearbit.com/tesla.com" alt="Tesla logo">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="company-name text-xl font-semibold text-gray-900 mb-2 transition-colors duration-300">Tesla</h3>
-                        <div class="flex justify-center items-center mb-3">
-                            <div class="company-rating flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="rating-value text-sm text-gray-500 ml-1">4.6</span>
-                        </div>
-                        <div class="flex flex-wrap justify-center gap-2 mb-4">
-                            <span class="company-industry inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-800">Automotive</span>
-                            <span class="company-location inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">Palo Alto, CA</span>
-                        </div>
-                        <p class="company-description text-sm text-gray-600 mb-4 line-clamp-3">
-                            Tesla's internship program allows students to work on revolutionary energy and transportation solutions alongside industry experts.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="internship-count text-sm text-gray-500">7 open internships</span>
-                            <a href="company-detail.html" class="view-details text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Company Card 5 -->
-            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="IBM">
-                <div class="p-6">
-                    <div class="company-logo-container mb-4">
-                        <img class="company-logo h-full max-w-full object-contain" src="https://logo.clearbit.com/ibm.com" alt="IBM logo">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="company-name text-xl font-semibold text-gray-900 mb-2 transition-colors duration-300">IBM</h3>
-                        <div class="flex justify-center items-center mb-3">
-                            <div class="company-rating flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="rating-value text-sm text-gray-500 ml-1">4.2</span>
-                        </div>
-                        <div class="flex flex-wrap justify-center gap-2 mb-4">
-                            <span class="company-industry inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800">Technology</span>
-                            <span class="company-location inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">Armonk, NY</span>
-                        </div>
-                        <p class="company-description text-sm text-gray-600 mb-4 line-clamp-3">
-                            IBM offers internships in AI, cloud computing, quantum computing, and more, providing students with real-world experience in cutting-edge technologies.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="internship-count text-sm text-gray-500">10 open internships</span>
-                            <a href="company-detail.html" class="view-details text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Company Card 6 -->
-            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="Nike">
-                <div class="p-6">
-                    <div class="company-logo-container mb-4">
-                        <img class="company-logo h-full max-w-full object-contain" src="https://logo.clearbit.com/nike.com" alt="Nike logo">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="company-name text-xl font-semibold text-gray-900 mb-2 transition-colors duration-300">Nike</h3>
-                        <div class="flex justify-center items-center mb-3">
-                            <div class="company-rating flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="rating-value text-sm text-gray-500 ml-1">4.9</span>
-                        </div>
-                        <div class="flex flex-wrap justify-center gap-2 mb-4">
-                            <span class="company-industry inline-flex items-center rounded-full bg-pink-100 px-3 py-1 text-xs font-medium text-pink-800">Retail</span>
-                            <span class="company-location inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">Beaverton, OR</span>
-                        </div>
-                        <p class="company-description text-sm text-gray-600 mb-4 line-clamp-3">
-                            Nike's internship program offers opportunities in design, marketing, supply chain, and more, allowing students to contribute to the future of sport.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="internship-count text-sm text-gray-500">6 open internships</span>
-                            <a href="company-detail.html" class="view-details text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Company Card 7 -->
-            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="SpaceX">
-                <div class="p-6">
-                    <div class="company-logo-container mb-4">
-                        <img class="company-logo h-full max-w-full object-contain" src="https://logo.clearbit.com/spacex.com" alt="SpaceX logo">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="company-name text-xl font-semibold text-gray-900 mb-2 transition-colors duration-300">SpaceX</h3>
-                        <div class="flex justify-center items-center mb-3">
-                            <div class="company-rating flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="rating-value text-sm text-gray-500 ml-1">4.7</span>
-                        </div>
-                        <div class="flex flex-wrap justify-center gap-2 mb-4">
-                            <span class="company-industry inline-flex items-center rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-800">Aerospace</span>
-                            <span class="company-location inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">Hawthorne, CA</span>
-                        </div>
-                        <p class="company-description text-sm text-gray-600 mb-4 line-clamp-3">
-                            SpaceX offers internships for students to work on revolutionary space technology and help make life multiplanetary.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="internship-count text-sm text-gray-500">4 open internships</span>
-                            <a href="company-detail.html" class="view-details text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Company Card 8 -->
-            <div class="company-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover" data-name="JPMorgan logo">
-                <div class="p-6">
-                    <div class="company-logo-container mb-4">
-                        <img class="company-logo h-full max-w-full object-contain" src="https://logo.clearbit.com/jpmorgan.com" alt="JPMorgan logo">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="company-name text-xl font-semibold text-gray-900 mb-2 transition-colors duration-300">JPMorgan Chase</h3>
-                        <div class="flex justify-center items-center mb-3">
-                            <div class="company-rating flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="rating-value text-sm text-gray-500 ml-1">4.1</span>
-                        </div>
-                        <div class="flex flex-wrap justify-center gap-2 mb-4">
-                            <span class="company-industry inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800">Finance</span>
-                            <span class="company-location inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">New York, NY</span>
-                        </div>
-                        <p class="company-description text-sm text-gray-600 mb-4 line-clamp-3">
-                            JPMorgan Chase offers summer internships across various business areas including investment banking, asset management, and technology.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="internship-count text-sm text-gray-500">9 open internships</span>
-                            <a href="company-detail.html" class="view-details text-indigo-600 hover:text-indigo-800 text-sm font-medium">View Details <i class="fas fa-arrow-right ml-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Message for "No companies found"-->
-        <div id="noResults" class="no-results-message">No companies found.</div>
-
-        <!-- View More Button -->
-        <div class="mt-12 text-center">
-            <button class="load-more-btn bg-white border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-6 py-3 rounded-md text-sm font-medium transition-colors duration-300">
-                Load More Companies
+      <!-- Filters -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"
+      >
+        <h2 class="text-2xl font-bold text-gray-900">Featured Companies</h2>
+        <div class="flex flex-wrap gap-3">
+          <div class="dropdown relative">
+            <button
+              class="filter-dropdown industry-filter flex items-center gap-2 bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            >
+              <i class="fas fa-industry"></i> Industry
+              <i class="fas fa-chevron-down text-xs"></i>
             </button>
-        </div>
-
-        <!-- Testimonials Section -->
-        <div class="mt-20">
-            <h2 class="text-2xl font-bold text-center text-gray-900 mb-12">What Students Say About Their Internships</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="testimonial bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex items-center mb-4">
-                        <img class="testimonial-avatar h-12 w-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson">
-                        <div class="ml-4">
-                            <h4 class="testimonial-name font-medium">Sarah Johnson</h4>
-                            <p class="testimonial-position text-sm text-gray-500">Software Engineering Intern at Google</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-rating flex text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text text-gray-600">
-                        "My internship at Google was transformative. I worked on real projects that impacted millions of users, and the mentorship I received was exceptional. The culture of innovation is truly inspiring."
-                    </p>
+            <div
+              class="dropdown-content industry-dropdown absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
+            >
+              <div class="py-1">
+                <input
+                  type="text"
+                  placeholder="Search industries"
+                  class="industry-search w-full px-4 py-2 text-sm border-b border-gray-200"
+                />
+                <div class="max-h-60 overflow-y-auto">
+                  <a
+                    href="#"
+                    class="industry-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Technology</a
+                  >
+                  <a
+                    href="#"
+                    class="industry-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Finance</a
+                  >
+                  <a
+                    href="#"
+                    class="industry-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Healthcare</a
+                  >
+                  <a
+                    href="#"
+                    class="industry-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Retail</a
+                  >
+                  <a
+                    href="#"
+                    class="industry-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Manufacturing</a
+                  >
                 </div>
-
-                <!-- Testimonial 2 -->
-                <div class="testimonial bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex items-center mb-4">
-                        <img class="testimonial-avatar h-12 w-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael Chen">
-                        <div class="ml-4">
-                            <h4 class="testimonial-name font-medium">Michael Chen</h4>
-                            <p class="testimonial-position text-sm text-gray-500">Finance Intern at Goldman Sachs</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-rating flex text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p class="testimonial-text text-gray-600">
-                        "The learning curve was steep but rewarding. Goldman provided excellent training and networking opportunities. I gained practical skills that have given me a competitive edge in my job search."
-                    </p>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="testimonial bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex items-center mb-4">
-                        <img class="testimonial-avatar h-12 w-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya Patel">
-                        <div class="ml-4">
-                            <h4 class="testimonial-name font-medium">Priya Patel</h4>
-                            <p class="testimonial-position text-sm text-gray-500">Design Intern at Nike</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-rating flex text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text text-gray-600">
-                        "Nike's creative environment was perfect for my growth as a designer. I collaborated with talented professionals and even saw my work go into production! The internship exceeded all my expectations."
-                    </p>
-                </div>
+              </div>
             </div>
+          </div>
+
+          <div class="dropdown relative">
+            <button
+              class="filter-dropdown location-filter flex items-center gap-2 bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            >
+              <i class="fas fa-map-marker-alt"></i> Location
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div
+              class="dropdown-content location-dropdown absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
+            >
+              <div class="py-1">
+                <input
+                  type="text"
+                  placeholder="Search locations"
+                  class="location-search w-full px-4 py-2 text-sm border-b border-gray-200"
+                />
+                <div class="max-h-60 overflow-y-auto">
+                  <a
+                    href="#"
+                    class="location-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >United States</a
+                  >
+                  <a
+                    href="#"
+                    class="location-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >United Kingdom</a
+                  >
+                  <a
+                    href="#"
+                    class="location-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Canada</a
+                  >
+                  <a
+                    href="#"
+                    class="location-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Germany</a
+                  >
+                  <a
+                    href="#"
+                    class="location-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Remote</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dropdown relative">
+            <button
+              class="filter-dropdown rating-filter flex items-center gap-2 bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            >
+              <i class="fas fa-star"></i> Rating
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div
+              class="dropdown-content rating-dropdown absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
+            >
+              <div class="py-1">
+                <a
+                  href="#"
+                  class="rating-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >4+ Stars</a
+                >
+                <a
+                  href="#"
+                  class="rating-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >3+ Stars</a
+                >
+                <a
+                  href="#"
+                  class="rating-option block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >All Ratings</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="reset-filters bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            <i class="fas fa-sync-alt mr-2"></i> Reset Filters
+          </button>
         </div>
+      </div>
+
+      <!-- Loading Indicator -->
+      <div
+        id="loadingIndicator"
+        class="text-center py-12"
+        style="display: none"
+      >
+        <i class="fas fa-spinner fa-spin text-indigo-600 text-2xl"></i>
+        <p class="mt-2 text-gray-600">Loading companies...</p>
+      </div>
+
+      <!-- Companies Grid -->
+      <div
+        id="companiesGrid"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      >
+        <!-- Company cards will be dynamically inserted here by JavaScript -->
+      </div>
+
+      <!-- Message for "No companies found" -->
+      <div
+        id="noResults"
+        class="no-results-message text-center py-12 text-gray-500"
+        style="display: none"
+      >
+        No companies found matching your criteria.
+      </div>
+
+      <!-- View More Button -->
+      <div class="mt-12 text-center">
+        <button
+          class="load-more-btn bg-white border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-6 py-3 rounded-md text-sm font-medium transition-colors duration-300"
+        >
+          Load More Companies
+        </button>
+      </div>
+
+      <!-- Testimonials Section -->
+      <div class="mt-20">
+        <h2 class="text-2xl font-bold text-center text-gray-900 mb-12">
+          What Students Say About Their Internships
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="testimonial bg-white p-6 rounded-lg shadow-md">
+            <div class="flex items-center mb-4">
+              <img
+                class="testimonial-avatar h-12 w-12 rounded-full object-cover"
+                src="https://randomuser.me/api/portraits/women/32.jpg"
+                alt="Sarah Johnson"
+              />
+              <div class="ml-4">
+                <h4 class="testimonial-name font-medium">Sarah Johnson</h4>
+                <p class="testimonial-position text-sm text-gray-500">
+                  Software Engineering Intern at Google
+                </p>
+              </div>
+            </div>
+            <div class="testimonial-rating flex text-yellow-400 mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text text-gray-600">
+              "My internship at Google was transformative. I worked on real
+              projects that impacted millions of users, and the mentorship I
+              received was exceptional. The culture of innovation is truly
+              inspiring."
+            </p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial bg-white p-6 rounded-lg shadow-md">
+            <div class="flex items-center mb-4">
+              <img
+                class="testimonial-avatar h-12 w-12 rounded-full object-cover"
+                src="https://randomuser.me/api/portraits/men/45.jpg"
+                alt="Michael Chen"
+              />
+              <div class="ml-4">
+                <h4 class="testimonial-name font-medium">Michael Chen</h4>
+                <p class="testimonial-position text-sm text-gray-500">
+                  Finance Intern at Goldman Sachs
+                </p>
+              </div>
+            </div>
+            <div class="testimonial-rating flex text-yellow-400 mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p class="testimonial-text text-gray-600">
+              "The learning curve was steep but rewarding. Goldman provided
+              excellent training and networking opportunities. I gained
+              practical skills that have given me a competitive edge in my job
+              search."
+            </p>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial bg-white p-6 rounded-lg shadow-md">
+            <div class="flex items-center mb-4">
+              <img
+                class="testimonial-avatar h-12 w-12 rounded-full object-cover"
+                src="https://randomuser.me/api/portraits/women/68.jpg"
+                alt="Priya Patel"
+              />
+              <div class="ml-4">
+                <h4 class="testimonial-name font-medium">Priya Patel</h4>
+                <p class="testimonial-position text-sm text-gray-500">
+                  Design Intern at Nike
+                </p>
+              </div>
+            </div>
+            <div class="testimonial-rating flex text-yellow-400 mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text text-gray-600">
+              "Nike's creative environment was perfect for my growth as a
+              designer. I collaborated with talented professionals and even saw
+              my work go into production! The internship exceeded all my
+              expectations."
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                <!-- About Section -->
-                <div>
-                    <div class="flex items-center mb-6">
-                        <i class="fas fa-briefcase text-indigo-500 text-2xl mr-2"></i>
-                        <span class="text-xl font-bold">InternHub</span>
-                    </div>
-                    <p class="text-gray-400 mb-6">
-                        Connecting students with the best internship opportunities worldwide. Our mission is to help you launch your career.
-                    </p>
-                    <div class="social-links flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
-                    <ul class="footer-links text-gray-400">
-                        <li class="footer-link transition-colors duration-300">Browse Internships</li>
-                        <li class="footer-link transition-colors duration-300">Top Companies</li>
-                        <li class="footer-link transition-colors duration-300">Career Resources</li>
-                        <li class="footer-link transition-colors duration-300">Success Stories</li>
-                        <li class="footer-link transition-colors duration-300">Post an Internship</li>
-                    </ul>
-                </div>
-
-                <!-- Resources -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Resources</h3>
-                    <ul class="footer-links text-gray-400">
-                        <li class="footer-link transition-colors duration-300">Resume Builder</li>
-                        <li class="footer-link transition-colors duration-300">Cover Letter Tips</li>
-                        <li class="footer-link transition-colors duration-300">Interview Prep</li>
-                        <li class="footer-link transition-colors duration-300">Career Blog</li>
-                        <li class="footer-link transition-colors duration-300">FAQ</li>
-                    </ul>
-                </div>
-
-                <!-- Newsletter -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Stay Updated</h3>
-                    <p class="text-gray-400 mb-4">
-                        Subscribe to our newsletter for the latest internship opportunities and career tips.
-                    </p>
-                    <form class="newsletter-form space-y-4">
-                        <input type="email" placeholder="Your email address" class="newsletter-input w-full px-4 py-3 rounded-md bg-gray-800 text-white placeholder-gray-500 focus:outline-none">
-                        <button type="submit" class="newsletter-submit w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md font-medium transition-colors duration-300">
-                            Subscribe
-                        </button>
-                    </form>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <!-- About Section -->
+          <div>
+            <div class="flex items-center mb-6">
+              <i class="fas fa-briefcase text-indigo-500 text-2xl mr-2"></i>
+              <span class="text-xl font-bold">InternHub</span>
             </div>
-
-            <!-- Divider -->
-            <div class="border-t border-gray-800 my-8"></div>
-
-            <!-- Bottom Footer -->
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                    &copy; 2023 InternHub. All rights reserved.
-                </p>
-                <div class="footer-legal flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Cookie Policy</a>
-                </div>
+            <p class="text-gray-400 mb-6">
+              Connecting students with the best internship opportunities
+              worldwide. Our mission is to help you launch your career.
+            </p>
+            <div class="social-links flex space-x-4">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
             </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+            <ul class="footer-links text-gray-400">
+              <li class="footer-link transition-colors duration-300">
+                Browse Internships
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Top Companies
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Career Resources
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Success Stories
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Post an Internship
+              </li>
+            </ul>
+          </div>
+
+          <!-- Resources -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Resources</h3>
+            <ul class="footer-links text-gray-400">
+              <li class="footer-link transition-colors duration-300">
+                Resume Builder
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Cover Letter Tips
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Interview Prep
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Career Blog
+              </li>
+              <li class="footer-link transition-colors duration-300">FAQ</li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Stay Updated</h3>
+            <p class="text-gray-400 mb-4">
+              Subscribe to our newsletter for the latest internship
+              opportunities and career tips.
+            </p>
+            <form class="newsletter-form space-y-4">
+              <input
+                type="email"
+                placeholder="Your email address"
+                class="newsletter-input w-full px-4 py-3 rounded-md bg-gray-800 text-white placeholder-gray-500 focus:outline-none"
+              />
+              <button
+                type="submit"
+                class="newsletter-submit w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md font-medium transition-colors duration-300"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
         </div>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-800 my-8"></div>
+
+        <!-- Bottom Footer -->
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-400 text-sm mb-4 md:mb-0">
+            &copy; 2023 InternHub. All rights reserved.
+          </p>
+          <div class="footer-legal flex space-x-6">
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+              >Privacy Policy</a
+            >
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+              >Terms of Service</a
+            >
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+              >Cookie Policy</a
+            >
+          </div>
+        </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
