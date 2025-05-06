@@ -22,6 +22,7 @@ public function createUser(User $user): ?User
     
     if ($checkStmt->fetch()) {
         throw new Exception("User already exists with this email.");
+
     }
 
     // Prepare JSON data first
@@ -31,15 +32,9 @@ public function createUser(User $user): ?User
 
     $stmt = $this->db->prepare("
         INSERT INTO users (
-            first_name, last_name, email, password, role,
-            field, avatar_url, gender, phone_number, address,
-            city, state, country, postal_code, date_of_birth,
-            website, social_links, created_at, updated_at
+            first_name, last_name, email, password, role, created_at, updated_at
         ) VALUES (
-            :first_name, :last_name, :email, :password, :role,
-            :field, :avatar_url, :gender, :phone_number, :address,
-            :city, :state, :country, :postal_code, :date_of_birth,
-            :website, :social_links, :created_at, :updated_at
+            :first_name, :last_name, :email, :password, :role, :created_at, :updated_at
         )
     ");
 
@@ -49,18 +44,6 @@ public function createUser(User $user): ?User
     $stmt->bindParam(':email', $user->email);
     $stmt->bindParam(':password', $user->password);
     $stmt->bindParam(':role', $user->role);
-    $stmt->bindParam(':field', $user->field);
-    $stmt->bindParam(':avatar_url', $user->avatar_url);
-    $stmt->bindParam(':gender', $user->gender);
-    $stmt->bindParam(':phone_number', $user->phone_number);
-    $stmt->bindParam(':address', $user->address);
-    $stmt->bindParam(':city', $user->city);
-    $stmt->bindParam(':state', $user->state);
-    $stmt->bindParam(':country', $user->country);
-    $stmt->bindParam(':postal_code', $user->postal_code);
-    $stmt->bindParam(':date_of_birth', $user->date_of_birth);
-    $stmt->bindParam(':website', $user->website);
-    $stmt->bindParam(':social_links', $socialLinksJson);
     $stmt->bindParam(':created_at', $createdAt);
     $stmt->bindParam(':updated_at', $updatedAt);
 
@@ -99,7 +82,6 @@ public function createUser(User $user): ?User
             $userData['id']
         );
     }
-
     throw new Exception("User creation failed");
 }
 

@@ -7,17 +7,9 @@ const lastNameInput = document.getElementById("last-name");
 const emailInput = document.getElementById("email");
 const phoneInput = document.getElementById("phone");
 const passwordInput = document.getElementById("password");
-const genderInput = document.getElementById("gender");
-const dobInput = document.getElementById("dob");
 const termsCheckbox = document.getElementById("terms");
 const roleInput = document.getElementById("role");
-const fieldInput = document.getElementById("field");
-const addressInput = document.getElementById("address");
-const cityInput = document.getElementById("city");
-const stateInput = document.getElementById("state");
-const countryInput = document.getElementById("country");
-const postalCodeInput = document.getElementById("postal-code");
-const websiteInput = document.getElementById("website");
+
 const submitButton = document.querySelector('button[type="submit"]');
 
 // Password visibility toggle
@@ -64,18 +56,6 @@ function validateForm() {
   } else if (emailInput.value.trim().length > 255) {
     errors.email = "Email must be less than 255 characters";
     isValid = false;
-  }
-
-  // Phone validation (optional)
-  if (phoneInput.value.trim()) {
-    const phoneRegex = /^\+?[\d\s-]{10,}$/;
-    if (!phoneRegex.test(phoneInput.value.trim())) {
-      errors.phone = "Please enter a valid phone number";
-      isValid = false;
-    } else if (phoneInput.value.trim().length > 20) {
-      errors.phone = "Phone number must be less than 20 characters";
-      isValid = false;
-    }
   }
 
   // Role validation
@@ -131,16 +111,7 @@ form.addEventListener("submit", async function (e) {
     email: emailInput.value.trim(),
     password: passwordInput.value,
     role: roleInput.value,
-    field: fieldInput.value || null,
-    gender: genderInput.value || null,
-    phone_number: phoneInput.value.trim() || null,
-    address: addressInput.value.trim() || null,
-    city: cityInput.value.trim() || null,
-    state: stateInput.value.trim() || null,
-    country: countryInput.value.trim() || null,
-    postal_code: postalCodeInput.value.trim() || null,
-    date_of_birth: dobInput.value || null,
-    website: websiteInput.value.trim() || null,
+
     terms_agreed: termsCheckbox.checked,
   };
 
