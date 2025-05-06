@@ -15,7 +15,7 @@ const REGISTER_ENDPOINT = "/users";
  * @param {string} userData.lastName - User's last name
  * @param {string} userData.email - User's email address
  * @param {string} userData.password - User's password
- * @param {string} userData.userType - Type of user (student or employer)
+ * @param {string} userData.userType - Type of user (student or admin)
  * @param {boolean} userData.termsAgreed - Whether user agreed to terms
  * @returns {Promise<Object>} - Response from the server
  */
