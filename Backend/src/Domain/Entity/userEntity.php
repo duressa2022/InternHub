@@ -19,7 +19,7 @@ class User{
         public ?string $postal_code=null,
         public ?string $date_of_birth=null,
         public ?string $website=null,
-        public ?string $social_links=null,
+        public ?array  $social_links=null,
         public string $created_at,
         public string $updated_at,
         public ?int $id=null,
