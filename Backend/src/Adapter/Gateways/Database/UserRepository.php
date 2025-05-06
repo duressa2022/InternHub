@@ -22,6 +22,7 @@ public function createUser(User $user): ?User
     
     if ($checkStmt->fetch()) {
         throw new Exception("User already exists with this email.");
+
     }
 
     // Prepare JSON data first
@@ -81,7 +82,6 @@ public function createUser(User $user): ?User
             $userData['id']
         );
     }
-
     throw new Exception("User creation failed");
 }
 
@@ -165,7 +165,9 @@ public function createUser(User $user): ?User
     {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->bindParam(':email', $email);
+
         $stmt->execute();
+        $social_links = isset($userData['social_links']) ? json_decode($userData['social_links'], true) : null;
         $userData = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($userData) {
             return new User(
@@ -185,7 +187,7 @@ public function createUser(User $user): ?User
                 $userData['postal_code'] ?? null,
                 $userData['date_of_birth'] ?? null,
                 $userData['website'] ?? null,
-                $userData['social_links'] ?? null,
+                $social_links,
                 $userData['created_at'],
                 $userData['updated_at'],
                 $userData['id']

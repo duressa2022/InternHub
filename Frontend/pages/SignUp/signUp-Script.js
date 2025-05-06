@@ -5,9 +5,11 @@ const form = document.querySelector("form");
 const firstNameInput = document.getElementById("first-name");
 const lastNameInput = document.getElementById("last-name");
 const emailInput = document.getElementById("email");
+const phoneInput = document.getElementById("phone");
 const passwordInput = document.getElementById("password");
 const termsCheckbox = document.getElementById("terms");
 const roleInput = document.getElementById("role");
+
 const submitButton = document.querySelector('button[type="submit"]');
 
 // Password visibility toggle
@@ -109,6 +111,7 @@ form.addEventListener("submit", async function (e) {
     email: emailInput.value.trim(),
     password: passwordInput.value,
     role: roleInput.value,
+
     terms_agreed: termsCheckbox.checked,
   };
 
