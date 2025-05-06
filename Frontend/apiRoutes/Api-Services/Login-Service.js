@@ -4,8 +4,8 @@
  */
 
 // API endpoint for user authentication
-const API_BASE_URL = "https://api.internhub.example.com"; // Replace with your actual API URL
-const LOGIN_ENDPOINT = "/auth/login";
+const API_BASE_URL = "http://localhost:8000";
+const LOGIN_ENDPOINT = "/users/login";
 
 /**
  * Authenticate a user
@@ -45,20 +45,21 @@ export async function loginUser(loginData) {
     });
 
     // Parse response
-    const data = await response.json();
+    const responseData = await response.json();
+    const data = responseData.data; // Extract data from response
 
     // Handle API response
     if (!response.ok) {
       return {
         success: false,
-        message: data.message || "Invalid email or password",
-        errors: data.errors || {},
+        message: responseData.message || "Invalid email or password",
+        errors: responseData.errors || {},
       };
     }
 
     // Store auth token if provided by API
-    if (data.token) {
-      localStorage.setItem("auth_token", data.token);
+    if (data.access_token) {
+      localStorage.setItem("auth_token", data.access_token);
 
       // If remember me is checked, store in localStorage, otherwise in sessionStorage
       if (loginData.rememberMe) {
@@ -70,16 +71,38 @@ export async function loginUser(loginData) {
       }
     }
 
-    // Store user data if provided
+    let redirectUrl = "../../pages/Admin/admin-Dashboard.html"; // Default redirect
+
+    if (data.user && data.user.role) {
+      switch (data.user.role) {
+        case "admin":
+          redirectUrl = "../../pages/Admin/admin-Dashboard.html";
+          break;
+        case "intern":
+          redirectUrl = "../../pages/Intern/intern-Dashboard.html";
+          break;
+        case "employer":
+          redirectUrl = "../../pages/Admin/admin-Dashboard.html";
+          break;
+        default:
+          redirectUrl = "../../pages/Admin/admin-Dashboard.html";
+      }
+    }
+    // console.log("Login successful:", data.user);
+    // Only store non-sensitive user data
     if (data.user) {
-      localStorage.setItem("user_data", JSON.stringify(data.user));
+      const { first_name, last_name, email, role, id } = data.user;
+      localStorage.setItem(
+        "user_data",
+        JSON.stringify({ first_name, last_name, email, role, id })
+      );
     }
 
     return {
       success: true,
-      message: "Login successful",
-      user: data.user || null,
-      redirectUrl: data.redirect_url || "/dashboard",
+      message: responseData.message || "Login successful",
+      redirectUrl,
+      user: data.user,
     };
   } catch (error) {
     console.error("Login service error:", error);
