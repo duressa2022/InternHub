@@ -27,8 +27,8 @@ class InternshipRepository implements InternshipInterface
             $stmt->bindParam(':salary_range', $internship->salaryRange);
             $stmt->bindParam(':start_date', $internship->startDate);
             $stmt->bindParam(':end_date', $internship->endDate);
-            $stmt->bindParam(':description', $internship->description);
             $stmt->bindParam(':requirements', $internship->requirements);
+            $stmt->bindParam(':description', $internship->description);
             $stmt->bindParam(':benefits', $internship->benefits);
             $stmt->bindParam(':deadline', $internship->deadline);
             $stmt->bindParam(':link', $internship->link);
@@ -42,6 +42,7 @@ class InternshipRepository implements InternshipInterface
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             $internshipData = $stmt->fetch(PDO::FETCH_ASSOC);
+
         
             if ($internshipData) {
                 $internship = new Internship(
@@ -53,8 +54,8 @@ class InternshipRepository implements InternshipInterface
                     salaryRange: $internshipData['salary_range'],
                     startDate: $internshipData['start_date'],
                     endDate: $internshipData['end_date'],
-                    description: $internshipData['description'],
                     requirements: $internshipData['requirements'],
+                    description: $internshipData['description'],
                     benefits: $internshipData['benefits'] ?? null,
                     deadline: $internshipData['deadline'],
                     link: $internshipData['link'],
