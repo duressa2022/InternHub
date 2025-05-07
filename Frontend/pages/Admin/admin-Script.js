@@ -35,10 +35,50 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       await loadStats();
       await loadCompanies();
+      // await loaduser();
       await loadInternships();
       setupEventListeners();
     } catch (error) {
       showNotification(`Initialization failed: ${error.message}`, "error");
+    }
+  }
+
+  async function loaduser() {
+    // Retrieve the entire user data object from localStorage
+    const userData = JSON.parse(localStorage.getItem("user_data"));
+
+    // Check if the userData exists and has an id
+    if (userData && userData.id) {
+      const userId = userData.id; // Get the userId from the stored user data
+
+      try {
+        // Fetch the user data by ID from the backend API
+        const user = await DashboardApiService.getUserById(userId);
+
+        // Assuming the user object is inside 'data' from the API response
+        const userDataFromAPI = user; // This is the 'data' object returned by the API
+
+        // Extract user details from the API response
+        const firstName = userDataFromAPI.first_name;
+        const lastName = userDataFromAPI.last_name;
+
+        console.log("user datatarar", firstName, lastName, userDataFromAPI);
+        const role = userDataFromAPI.role || "Super Admin"; // Default to 'Super Admin' if no role is provided
+        const imageUrl =
+          userDataFromAPI.avater_url ||
+          "https://randomuser.me/api/portraits/women/44.jpg"; // Default image if not provided
+
+        // Insert the user data into the HTML
+        document.querySelector(
+          ".user-name"
+        ).textContent = `${firstName} ${lastName}`;
+        document.querySelector(".user-role").textContent = role;
+        document.querySelector(".user-image").src = imageUrl;
+      } catch (error) {
+        console.error("Failed to load user data:", error);
+      }
+    } else {
+      console.error("User ID not found in localStorage");
     }
   }
 

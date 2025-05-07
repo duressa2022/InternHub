@@ -75,6 +75,24 @@ export const DashboardApiService = {
     }
   },
 
+  // Function to fetch user by ID
+  async getUserById(userId) {
+    try {
+      const response = await fetch(`${API_BASE}/users/${userId}`);
+
+      if (!response.ok) {
+        throw new Error("User not found");
+      }
+
+      const data = await response.json();
+      console.log("User Data", data);
+      return data.data;
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      throw error; // Propagate the error for further handling
+    }
+  },
+
   // Delete an internship
   async deleteInternship(internshipId) {
     try {
