@@ -60,6 +60,22 @@ $reviewRepository = new ReviewRepository($pdo);
 $reviewUsecase = new ReviewUsecase($reviewRepository);
 $reviewController = new ReviewController($reviewUsecase, $jsonPresenter);
 
+
+
+header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, Accept");
+header("Access-Control-Allow-Credentials: true");
+header("Content-Type: application/json");
+
+
+// Handle preflight request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestUri = $_SERVER['REQUEST_URI'];
 

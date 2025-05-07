@@ -15,8 +15,9 @@ class InternshipRepository implements InternshipInterface
         $this->db->beginTransaction();
         try {
             $stmt = $this->db->prepare("INSERT INTO internships 
-                (company_id,title, company, location, type, category, salary_range, start_date, end_date, description, requirements, benefits, deadline, link, created_at, updated_at) 
-                VALUES (:company_id,,:title, :company, :location, :type, :category, :salary_range, :start_date, :end_date, :description, :requirements, :benefits, :deadline, :link, :created_at, :updated_at)");
+                (company_id, title, company, location, type, category, salary_range, start_date, end_date, description, requirements, benefits, deadline, link, created_at, updated_at) 
+                VALUES (:company_id, :title, :company, :location, :type, :category, :salary_range, :start_date, :end_date, :description, :requirements, :benefits, :deadline, :link, :created_at, :updated_at)");
+
             
             $stmt->bindParam(':company_id', $internship->company_id, PDO::PARAM_INT);
             $stmt->bindParam(':title', $internship->title);
@@ -27,8 +28,8 @@ class InternshipRepository implements InternshipInterface
             $stmt->bindParam(':salary_range', $internship->salaryRange);
             $stmt->bindParam(':start_date', $internship->startDate);
             $stmt->bindParam(':end_date', $internship->endDate);
-            $stmt->bindParam(':description', $internship->description);
             $stmt->bindParam(':requirements', $internship->requirements);
+            $stmt->bindParam(':description', $internship->description);
             $stmt->bindParam(':benefits', $internship->benefits);
             $stmt->bindParam(':deadline', $internship->deadline);
             $stmt->bindParam(':link', $internship->link);
@@ -42,9 +43,11 @@ class InternshipRepository implements InternshipInterface
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             $internshipData = $stmt->fetch(PDO::FETCH_ASSOC);
+
         
             if ($internshipData) {
                 $internship = new Internship(
+                    company_id: (int)$internshipData['company_id'],
                     title: $internshipData['title'],
                     company: $internshipData['company'],
                     location: $internshipData['location'],
@@ -53,8 +56,8 @@ class InternshipRepository implements InternshipInterface
                     salaryRange: $internshipData['salary_range'],
                     startDate: $internshipData['start_date'],
                     endDate: $internshipData['end_date'],
-                    description: $internshipData['description'],
                     requirements: $internshipData['requirements'],
+                    description: $internshipData['description'],
                     benefits: $internshipData['benefits'] ?? null,
                     deadline: $internshipData['deadline'],
                     link: $internshipData['link'],

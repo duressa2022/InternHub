@@ -1,211 +1,185 @@
-// Form validation
+import { registerUser } from "../../apiRoutes/Api-Services/SignUp-Service.js";
+
+// Get form elements
 const form = document.querySelector("form");
 const firstNameInput = document.getElementById("first-name");
 const lastNameInput = document.getElementById("last-name");
 const emailInput = document.getElementById("email");
+const phoneInput = document.getElementById("phone");
 const passwordInput = document.getElementById("password");
-const userTypeSelect = document.getElementById("user-type");
 const termsCheckbox = document.getElementById("terms");
-const submitButton = form.querySelector('button[type="submit"]');
+const roleInput = document.getElementById("role");
 
+const submitButton = document.querySelector('button[type="submit"]');
 
-
-
-
-// Password strength indicator
-passwordInput.addEventListener("input", function () {
-    const password = this.value;
-    let strength = 0;
-
-    console.log("password Recieved > ", password);
-    // Check for length
-    if (password.length >= 8) strength++;
-    // Check for uppercase letters
-    if (/[A-Z]/.test(password)) strength++;
-    // Check for numbers
-    if (/[0-9]/.test(password)) strength++;
-    // Check for special characters
-    if (/[^A-Za-z0-9]/.test(password)) strength++;
-
-    // Visual feedback for password strength
-    const strengthText = document.querySelector(".mt-2.text-xs.text-gray-500");
-    if (strength === 0) {
-        strengthText.textContent = "Must be at least 8 characters";
-        strengthText.className = "mt-2 text-xs text-gray-500";
-    } else if (strength === 1) {
-        strengthText.textContent = "Weak password";
-        strengthText.className = "mt-2 text-xs text-red-500";
-    } else if (strength === 2) {
-        strengthText.textContent = "Medium password";
-        strengthText.className = "mt-2 text-xs text-yellow-500";
-    } else if (strength === 3) {
-        strengthText.textContent = "Strong password";
-        strengthText.className = "mt-2 text-xs text-green-500";
-    } else {
-        strengthText.textContent = "Very strong password";
-        strengthText.className = "mt-2 text-xs text-green-700";
-    }
-});
-
-// Validate email format
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+// Password visibility toggle
+const passwordToggle = document.querySelector(".password-toggle");
+if (passwordToggle) {
+  passwordToggle.addEventListener("click", function () {
+    const type =
+      passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+    const icon = this.querySelector("i");
+    icon.classList.toggle("fa-eye");
+    icon.classList.toggle("fa-eye-slash");
+  });
 }
 
-// Form validation function
+// Form validation
 function validateForm() {
-    let isValid = true;
+  let isValid = true;
+  const errors = {};
 
-    // Validate first name
-    if (!firstNameInput.value.trim()) {
-        highlightError(firstNameInput, "First name is required");
-        isValid = false;
-    } else {
-        removeError(firstNameInput);
+  // First Name validation
+  if (!firstNameInput.value.trim()) {
+    errors.firstName = "First name is required";
+    isValid = false;
+  } else if (firstNameInput.value.trim().length > 100) {
+    errors.firstName = "First name must be less than 100 characters";
+    isValid = false;
+  }
+
+  // Last Name validation
+  if (!lastNameInput.value.trim()) {
+    errors.lastName = "Last name is required";
+    isValid = false;
+  } else if (lastNameInput.value.trim().length > 100) {
+    errors.lastName = "Last name must be less than 100 characters";
+    isValid = false;
+  }
+
+  // Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailInput.value.trim() || !emailRegex.test(emailInput.value.trim())) {
+    errors.email = "Please enter a valid email address";
+    isValid = false;
+  } else if (emailInput.value.trim().length > 255) {
+    errors.email = "Email must be less than 255 characters";
+    isValid = false;
+  }
+
+  // Role validation
+  if (!roleInput.value) {
+    errors.role = "Please select your role";
+    isValid = false;
+  }
+
+  // Password validation
+  if (!passwordInput.value || passwordInput.value.length < 8) {
+    errors.password = "Password must be at least 8 characters long";
+    isValid = false;
+  }
+
+  // Terms checkbox validation
+  if (!termsCheckbox.checked) {
+    errors.terms = "You must agree to the terms and conditions";
+    isValid = false;
+  }
+
+  // Display errors if any
+  Object.keys(errors).forEach((field) => {
+    const element = document.getElementById(field);
+    if (element) {
+      const errorElement =
+        element.parentElement.querySelector(".error-message");
+      if (errorElement) {
+        errorElement.textContent = errors[field];
+      } else {
+        const error = document.createElement("p");
+        error.className = "error-message text-red-500 text-sm mt-1";
+        error.textContent = errors[field];
+        element.parentElement.appendChild(error);
+      }
     }
+  });
 
-    // Validate last name
-    if (!lastNameInput.value.trim()) {
-        highlightError(lastNameInput, "Last name is required");
-        isValid = false;
-    } else {
-        removeError(lastNameInput);
-    }
-
-    // Validate email
-    if (!emailInput.value.trim()) {
-        highlightError(emailInput, "Email is required");
-        isValid = false;
-    } else if (!isValidEmail(emailInput.value.trim())) {
-        highlightError(emailInput, "Please enter a valid email address");
-        isValid = false;
-    } else {
-        removeError(emailInput);
-    }
-
-    // Validate password
-    if (!passwordInput.value) {
-        highlightError(passwordInput, "Password is required");
-        isValid = false;
-    } else if (passwordInput.value.length < 8) {
-        highlightError(passwordInput, "Password must be at least 8 characters");
-        isValid = false;
-    } else {
-        removeError(passwordInput);
-    }
-
-    // Validate terms checkbox
-    if (!termsCheckbox.checked) {
-        const termsLabel = document.querySelector('label[for="terms"]');
-        termsLabel.classList.add("text-red-500");
-        isValid = false;
-    } else {
-        const termsLabel = document.querySelector('label[for="terms"]');
-        termsLabel.classList.remove("text-red-500");
-    }
-
-    return isValid;
+  return isValid;
 }
-
-// Helper function to highlight error
-function highlightError(inputElement, errorMessage) {
-    inputElement.classList.add("border-red-500");
-    inputElement.classList.remove("border-gray-300");
-
-    // Check if error message element already exists
-    let errorElement = inputElement.parentElement.nextElementSibling;
-    if (!errorElement || !errorElement.classList.contains("error-message")) {
-        errorElement = document.createElement("p");
-        errorElement.className = "error-message text-xs text-red-500 mt-1";
-        inputElement.parentElement.parentElement.insertBefore(errorElement, inputElement.parentElement.nextElementSibling);
-    }
-
-    errorElement.textContent = errorMessage;
-}
-
-// Helper function to remove error
-function removeError(inputElement) {
-    inputElement.classList.remove("border-red-500");
-    inputElement.classList.add("border-gray-300");
-
-    // Remove error message if it exists
-    const errorElement = inputElement.parentElement.nextElementSibling;
-    if (errorElement && errorElement.classList.contains("error-message")) {
-        errorElement.remove();
-    }
-}
-
-// Function to collect form data
-function collectFormData() {
-    return {
-        firstName: firstNameInput.value.trim(),
-        lastName: lastNameInput.value.trim(),
-        email: emailInput.value.trim(),
-        password: passwordInput.value,
-        userType: userTypeSelect.value,
-        termsAgreed: termsCheckbox.checked
-    };
-}
-
-
-
-
-// Toggle password visibility function
-function togglePasswordVisibility() {
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-}
-
-// Add password toggle button
-const passwordContainer = passwordInput.parentElement;
-const toggleButton = document.createElement("button");
-toggleButton.type = "button";
-toggleButton.className = "absolute inset-y-0 right-0 pr-3 flex items-center";
-toggleButton.innerHTML = '<i class="fas fa-eye text-gray-400"></i>';
-toggleButton.addEventListener("click", togglePasswordVisibility);
-passwordContainer.appendChild(toggleButton);
 
 // Form submission
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
+  // Clear previous error messages
+  document.querySelectorAll(".error-message").forEach((el) => el.remove());
 
+  if (!validateForm()) return;
 
-    // Validate form
-    if (!validateForm()) {
-        return;
+  const userData = {
+    first_name: firstNameInput.value.trim(),
+    last_name: lastNameInput.value.trim(),
+    email: emailInput.value.trim(),
+    password: passwordInput.value,
+    role: roleInput.value,
+
+    terms_agreed: termsCheckbox.checked,
+  };
+
+  submitButton.disabled = true;
+  submitButton.innerHTML =
+    '<i class="fas fa-spinner fa-spin mr-2"></i> Creating account...';
+
+  try {
+    console.log("Submitting user data:", userData);
+    const response = await registerUser(userData);
+    console.log("Registration response:", response);
+
+    if (response.success) {
+      // Show success message
+      const successMessage = document.createElement("div");
+      successMessage.className =
+        "bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4";
+      successMessage.innerHTML = `
+        <strong class="font-bold">Success!</strong>
+        <span class="block sm:inline"> Account created successfully!</span>
+      `;
+      form.appendChild(successMessage);
+
+      // Redirect after a short delay
+      setTimeout(() => {
+        window.location.href = "../Login/login.html";
+      }, 2000);
+    } else {
+      // Handle field-specific errors
+      const errors = response.errors || {};
+      Object.keys(errors).forEach((field) => {
+        const element = document.getElementById(field);
+        if (element) {
+          const error = document.createElement("p");
+          error.className = "error-message text-red-500 text-sm mt-1";
+          error.textContent = errors[field][0];
+          element.parentElement.appendChild(error);
+        }
+      });
+
+      // Show general error message if no field-specific errors
+      if (Object.keys(errors).length === 0) {
+        const errorMessage = document.createElement("div");
+        errorMessage.className =
+          "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4";
+        errorMessage.innerHTML = `
+          <strong class="font-bold">Error!</strong>
+          <span class="block sm:inline"> ${
+            response.message || "Registration failed. Please try again."
+          }</span>
+        `;
+        form.appendChild(errorMessage);
+      }
     }
-
-    // Collect form data
-    const userData = collectFormData();
-
-    console.log("User Information is that :", userData);
-
-    // Disable submit button and show loading state
-    submitButton.disabled = true;
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Creating account...';
-
-    // Send data to backend via services
-    import('../../apiRoutes/Api-Services/SignUp-Service')
-        .then(module => {
-            return module.registerUser(userData);
-        })
-        .then(response => {
-            if (response.success) {
-                alert("Account created successfully! Redirecting to dashboard...");
-                // Redirect to dashboard or show success message
-                // window.location.href = '/dashboard';
-            } else {
-                alert(`Registration failed: ${response.message}`);
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Create Account';
-            }
-        })
-        .catch(error => {
-            console.error("Registration error:", error);
-            alert("An error occurred during registration. Please try again.");
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Create Account';
-        });
+  } catch (err) {
+    console.error("Registration error:", err);
+    const errorMessage = document.createElement("div");
+    errorMessage.className =
+      "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4";
+    errorMessage.innerHTML = `
+      <strong class="font-bold">Error!</strong>
+      <span class="block sm:inline"> ${
+        err.message || "An unexpected error occurred. Please try again."
+      }</span>
+    `;
+    form.appendChild(errorMessage);
+  } finally {
+    submitButton.disabled = false;
+    submitButton.innerHTML = "Create Account";
+  }
 });

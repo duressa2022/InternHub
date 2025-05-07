@@ -13,46 +13,77 @@ class UserRepository implements UserInterface{
         $this->db = $db;
     }
 
-    public function createUser(User $user): ?User
-    {
-        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, email, password, role, created_at, updated_at) VALUES (:first_name, :last_name, :email, :password, :role, :created_at, :updated_at)");
-        $stmt->bindParam(':first_name', $user->first_name);
-        $stmt->bindParam(':last_name', $user->last_name);
-        $stmt->bindParam(':email', $user->email);
-        $stmt->bindParam(':password', $user->password);
-        $stmt->bindParam(':role', $user->role);
-        $stmt->bindParam(':created_at', $user->created_at);
-        $stmt->bindParam(':updated_at', $user->updated_at);
-        $stmt->execute();
-        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($userData) {
-            $user= new User(
-                $userData['first_name'],
-                $userData['last_name'],
-                $userData['email'],
-                $userData['password'], 
-                $userData['field'] ?? null,
-                $userData['role'],
-                $userData['avater_url'] ?? null,
-                $userData['gender'] ?? null,
-                $userData['phone_number'] ?? null,
-                $userData['address'] ?? null,
-                $userData['city'] ?? null,
-                $userData['state'] ?? null,
-                $userData['country'] ?? null,
-                $userData['postal_code'] ?? null,
-                $userData['date_of_birth'] ?? null,
-                $userData['website'] ?? null,
-                $userData['social_links'] ?? null,
-                $userData['created_at'],
-                $userData['updated_at'],
-                $userData['id']
-            );
-            unset($user->password);
-            return $user;
-        }
-    return null;  
+public function createUser(User $user): ?User
+{
+    // Check if email exists
+    $checkStmt = $this->db->prepare("SELECT id FROM users WHERE email = :email");
+    $checkStmt->bindParam(':email', $user->email);
+    $checkStmt->execute();
+    
+    if ($checkStmt->fetch()) {
+        throw new Exception("User already exists with this email.");
+
     }
+
+    // Prepare JSON data first
+    $socialLinksJson = json_encode($user->social_links ?: []);
+    $createdAt = $user->created_at ?? date('Y-m-d H:i:s');
+    $updatedAt = $user->updated_at ?? date('Y-m-d H:i:s');
+
+    $stmt = $this->db->prepare("
+        INSERT INTO users (
+            first_name, last_name, email, password, role, created_at, updated_at
+        ) VALUES (
+            :first_name, :last_name, :email, :password, :role, :created_at, :updated_at
+        )
+    ");
+
+    // Bind all parameters
+    $stmt->bindParam(':first_name', $user->first_name);
+    $stmt->bindParam(':last_name', $user->last_name);
+    $stmt->bindParam(':email', $user->email);
+    $stmt->bindParam(':password', $user->password);
+    $stmt->bindParam(':role', $user->role);
+    $stmt->bindParam(':created_at', $createdAt);
+    $stmt->bindParam(':updated_at', $updatedAt);
+
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to create user");
+    }
+
+    $userId = $this->db->lastInsertId();
+
+    // Return the created user
+    $getUserStmt = $this->db->prepare("SELECT * FROM users WHERE id = :id");
+    $getUserStmt->bindParam(':id', $userId);
+    $getUserStmt->execute();
+    
+    if ($userData = $getUserStmt->fetch(PDO::FETCH_ASSOC)) {
+        return new User(
+            $userData['first_name'],
+            $userData['last_name'],
+            $userData['email'],
+            '', // Don't return password
+            $userData['field'],
+            $userData['role'],
+            $userData['avatar_url'],
+            $userData['gender'],
+            $userData['phone_number'],
+            $userData['address'],
+            $userData['city'],
+            $userData['state'],
+            $userData['country'],
+            $userData['postal_code'],
+            $userData['date_of_birth'],
+            $userData['website'],
+            json_decode($userData['social_links'], true) ?: [],
+            $userData['created_at'],
+            $userData['updated_at'],
+            $userData['id']
+        );
+    }
+    throw new Exception("User creation failed");
+}
 
     public function getUserById(int $id): ?User
     {
@@ -134,7 +165,9 @@ class UserRepository implements UserInterface{
     {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->bindParam(':email', $email);
+
         $stmt->execute();
+        $social_links = isset($userData['social_links']) ? json_decode($userData['social_links'], true) : null;
         $userData = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($userData) {
             return new User(
@@ -154,7 +187,7 @@ class UserRepository implements UserInterface{
                 $userData['postal_code'] ?? null,
                 $userData['date_of_birth'] ?? null,
                 $userData['website'] ?? null,
-                $userData['social_links'] ?? null,
+                $social_links,
                 $userData['created_at'],
                 $userData['updated_at'],
                 $userData['id']
