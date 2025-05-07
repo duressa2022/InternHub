@@ -1,507 +1,586 @@
-import HomeService from "../../apiRoutes/Api-Services/HomeService.js";
+// browse-Script.js - Handles UI rendering and interactions
+import {
+  fetchInternships,
+  fetchFilteredInternships,
+  fetchPaginatedInternships,
+  submitNewsletterSubscription,
+  toggleBookmark,
+  applyForInternship,
+  isValidEmail,
+} from "../../apiRoutes/Api-Services/Browse-Service.js";
 
-// Initialize the page
-document.addEventListener("DOMContentLoaded", async function () {
-  try {
-    // Fetch and display internships
-    await loadInternships();
+// Wait for the DOM to be fully loaded before executing JavaScript
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize the page
+  let currentPage = 1;
+  const itemsPerPage = 6;
+  let filteredInternships = [];
 
-    // Initialize search functionality
-    initializeSearch();
+  // DOM elements
+  const searchInput = document.getElementById("search-input");
+  const searchButton = document.getElementById("search-button");
+  const internshipCardsContainer = document.getElementById("internship-cards");
+  const appliedFiltersContainer = document.getElementById("applied-filters");
+  const resetFiltersButton = document.getElementById("reset-filters");
+  const sortSelect = document.getElementById("sort-select");
+  const salaryRange = document.getElementById("salary-range");
+  const salaryDisplay = document.getElementById("salary-display");
+  const paginationNumbers = document.getElementById("pagination-numbers");
+  const prevPageButton = document.getElementById("prev-page");
+  const nextPageButton = document.getElementById("next-page");
+  const resultsCountStart = document.getElementById("results-count-start");
+  const resultsCountEnd = document.getElementById("results-count-end");
+  const resultsCountTotal = document.getElementById("results-count-total");
+  const noResultsMessage = document.getElementById("no-results");
 
-    // Initialize filters
-    initializeFilters();
+  // Filter elements
+  const filterToggles = document.querySelectorAll(".filter-toggle");
+  const filterCheckboxes = document.querySelectorAll(".filter-checkbox");
+  const jobTypeCheckboxes = document.querySelectorAll(".job-type-checkbox");
+  const locationCheckboxes = document.querySelectorAll(".location-checkbox");
+  const industryCheckboxes = document.querySelectorAll(".industry-checkbox");
+  const experienceCheckboxes = document.querySelectorAll(
+    ".experience-checkbox"
+  );
 
-    // Initialize chatbot
-    initializeChatbot();
-  } catch (error) {
-    console.error("Error initializing page:", error);
-    showError("Failed to load internships. Please try again later.");
-  }
-});
+  // Initialize the page
+  initializeFilters();
+  loadInternships();
 
-// Load internships from the backend
-async function loadInternships(filters = {}) {
-  try {
-    const response = await HomeService.getInternships();
-    // The response has the data in response.data
-    const internships = response.data;
-    if (!Array.isArray(internships)) {
-      console.error("Invalid response format:", response);
-      showError("Invalid data format received from server");
-      return;
-    }
-    displayInternships(internships);
-  } catch (error) {
-    console.error("Error loading internships:", error);
-    showError("Failed to load internships. Please try again later.");
-  }
-}
+  // Event listeners
+  searchButton.addEventListener("click", handleSearch);
 
-// Display internships in the DOM
-function displayInternships(internships) {
-  const internshipsContainer = document.getElementById("internships-container");
-  if (!internshipsContainer) return;
-
-  // Set the original grid layout classes
-  internshipsContainer.className =
-    "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
-  internshipsContainer.innerHTML = ""; // Clear existing content
-
-  if (!Array.isArray(internships) || internships.length === 0) {
-    // Show no results state
-    const noResultsState = document.getElementById("no-results-state");
-    if (noResultsState) {
-      noResultsState.classList.remove("hidden");
-    }
-    return;
-  }
-
-  // Hide no results state if it exists
-  const noResultsState = document.getElementById("no-results-state");
-  if (noResultsState) {
-    noResultsState.classList.add("hidden");
-  }
-
-  internships.forEach((internship) => {
-    const internshipCard = createInternshipCard(internship);
-    internshipsContainer.appendChild(internshipCard);
+  // Make search work without hitting the search button
+  searchInput.addEventListener("input", function () {
+    // Add debounce to avoid too many requests
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => {
+      handleSearch();
+    }, 500);
   });
-}
 
-// Create an internship card element
-function createInternshipCard(internship) {
-  const card = document.createElement("div");
-  card.className =
-    "bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover search-card";
-  card.innerHTML = `
-        <div class="p-6">
-            <div class="flex items-start justify-between">
-                <div class="flex items-center">
-                    <img
-                        class="h-12 w-12 rounded-full object-cover"
-                        src="https://logo.clearbit.com/${internship.company
-                          .toLowerCase()
-                          .replace(/\s+/g, "")}.com"
-                        alt="${internship.company} logo"
-                    />
-                    <div class="ml-4">
-                        <h3 class="text-lg font-semibold text-gray-900 text-search">
-                            ${internship.title}
-                        </h3>
-                        <p class="text-sm text-gray-500">${
-                          internship.company
-                        }</p>
-                    </div>
-                </div>
-                <button class="text-gray-400 hover:text-gray-500">
-                    <i class="far fa-bookmark"></i>
-                </button>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-2">
-                <span class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 tag-hover cursor-pointer">
-                    ${internship.type}
-                </span>
-                <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 tag-hover cursor-pointer">
-                    ${internship.salaryRange}
-                </span>
-                <span class="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800 tag-hover cursor-pointer">
-                    ${internship.category}
-                </span>
-            </div>
-            <div class="mt-4">
-                <p class="text-sm text-gray-600 line-clamp-3">
-                    ${internship.description}
-                </p>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-gray-500">
-                <i class="fas fa-map-marker-alt mr-2"></i>
-                <span>${internship.location}</span>
-            </div>
-            <div class="mt-4 flex items-center justify-between">
-                <div class="flex items-center text-sm text-gray-500">
-                    <i class="far fa-clock mr-2"></i>
-                    <span>Posted ${formatDate(internship.created_at)}</span>
-                </div>
-                <a href="${
-                  internship.link
-                }" target="_blank" class="apply-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300">
-                    Apply Now
-                </a>
-            </div>
-        </div>
-    `;
-  return card;
-}
+  searchInput.addEventListener("keyup", function (e) {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  });
 
-// Helper function to format dates
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  const now = new Date();
-  const diffTime = Math.abs(now - date);
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  resetFiltersButton.addEventListener("click", resetFilters);
+  sortSelect.addEventListener("change", handleSort);
+  salaryRange.addEventListener("input", handleSalaryChange);
 
-  if (diffDays === 0) return "today";
-  if (diffDays === 1) return "yesterday";
-  if (diffDays < 7) return `${diffDays} days ago`;
-  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-}
+  prevPageButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (currentPage > 1) {
+      currentPage--;
+      loadInternships();
+    }
+  });
 
-// Get status class for styling
-function getStatusClass(type) {
-  const statusClasses = {
-    "Full-time": "bg-green-100 text-green-800",
-    "Part-time": "bg-blue-100 text-blue-800",
-    Remote: "bg-purple-100 text-purple-800",
-    Hybrid: "bg-yellow-100 text-yellow-800",
-  };
-  return statusClasses[type] || "bg-gray-100 text-gray-800";
-}
+  nextPageButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    const totalPages = Math.ceil(filteredInternships.length / itemsPerPage);
+    if (currentPage < totalPages) {
+      currentPage++;
+      loadInternships();
+    }
+  });
 
-// Initialize search functionality
-function initializeSearch() {
-  const searchInput = document.getElementById("search");
-  const searchButton = document.getElementById("searchbutton");
+  // Toggle filter sections
+  filterToggles.forEach((toggle) => {
+    toggle.addEventListener("click", function () {
+      const section = this.nextElementSibling;
+      section.classList.toggle("expanded");
+      const icon = this.querySelector("i");
+      icon.classList.toggle("fa-chevron-down");
+      icon.classList.toggle("fa-chevron-up");
+    });
+  });
 
-  if (searchInput && searchButton) {
-    // Real-time search
-    searchInput.addEventListener(
-      "input",
-      debounce(async (e) => {
-        const query = e.target.value.trim();
-        if (query) {
-          try {
-            const results = await HomeService.searchInternships(query);
-            displayInternships(results);
-          } catch (error) {
-            console.error("Error searching internships:", error);
-          }
-        } else {
-          await loadInternships();
-        }
-      }, 300)
-    );
+  // Expand all filter sections by default
+  document.querySelectorAll(".filter-section").forEach((section) => {
+    section.classList.add("expanded");
+  });
 
-    // Search button click
-    searchButton.addEventListener("click", async () => {
-      const query = searchInput.value.trim();
-      if (query) {
-        try {
-          const results = await HomeService.searchInternships(query);
-          displayInternships(results);
-        } catch (error) {
-          console.error("Error searching internships:", error);
-        }
+  // Add event listeners to all filter checkboxes
+  filterCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", function () {
+      applyFilters();
+    });
+  });
+
+  // Functions
+  function initializeFilters() {
+    // Set initial salary range
+    updateSalaryDisplay(salaryRange.value);
+
+    // Add any initial applied filters
+    updateAppliedFilters();
+  }
+
+  async function loadInternships() {
+    // Show loading state
+    disableInteractions();
+
+    try {
+      // Get filter values
+      const filters = getFilterValues();
+
+      // Fetch paginated internships from API
+      const result = await fetchPaginatedInternships(
+        currentPage,
+        itemsPerPage,
+        filters
+      );
+
+      // Update UI with results
+      renderInternships(result.internships);
+      updatePagination(result.pagination);
+      updateResultsCount(result.pagination);
+
+      // Store the total filtered internships count
+      filteredInternships = await fetchFilteredInternships(filters);
+
+      // Show no results message if needed
+      if (result.internships.length === 0) {
+        showNoResultsMessage();
+      } else {
+        hideNoResultsMessage();
+      }
+    } catch (error) {
+      console.error("Error loading internships:", error);
+      showErrorMessage("Failed to load internships. Please try again later.");
+    } finally {
+      // Re-enable interactions
+      enableInteractions();
+    }
+  }
+
+  function handleSearch() {
+    currentPage = 1;
+    loadInternships();
+  }
+
+  function handleSort() {
+    loadInternships();
+  }
+
+  function handleSalaryChange() {
+    updateSalaryDisplay(salaryRange.value);
+
+    // Add debounce to avoid too many requests
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => {
+      applyFilters();
+    }, 300);
+  }
+
+  function updateSalaryDisplay(value) {
+    const minSalary = Math.floor(value * 0.7);
+    const maxSalary = Math.floor(value * 1.7);
+    salaryDisplay.textContent = `$${minSalary} - $${maxSalary} /hr`;
+  }
+
+  function resetFilters() {
+    // Reset checkboxes
+    filterCheckboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    // Reset salary range
+    salaryRange.value = 30;
+    updateSalaryDisplay(30);
+
+    // Reset search
+    searchInput.value = "";
+
+    // Reset sort
+    sortSelect.value = "relevant";
+
+    // Apply filters (which will now show all internships)
+    applyFilters();
+  }
+
+  function applyFilters() {
+    currentPage = 1;
+    loadInternships();
+    updateAppliedFilters();
+  }
+
+  function getFilterValues() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    const jobTypes = getSelectedValues(jobTypeCheckboxes);
+    const locations = getSelectedValues(locationCheckboxes);
+    const industries = getSelectedValues(industryCheckboxes);
+    const experienceLevels = getSelectedValues(experienceCheckboxes);
+    const salaryValue = parseInt(salaryRange.value);
+    const minSalary = Math.floor(salaryValue * 0.7);
+    const maxSalary = Math.floor(salaryValue * 1.7);
+    const sortBy = sortSelect.value;
+
+    return {
+      searchTerm,
+      jobTypes,
+      locations,
+      industries,
+      experienceLevels,
+      minSalary,
+      maxSalary,
+      sortBy,
+    };
+  }
+
+  function getSelectedValues(checkboxes) {
+    return Array.from(checkboxes)
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value);
+  }
+
+  function updateAppliedFilters() {
+    if (!appliedFiltersContainer) return;
+
+    // Clear existing filters
+    appliedFiltersContainer.innerHTML = "";
+
+    // Get all selected filters
+    const filters = getFilterValues();
+
+    // Add search term if present
+    if (filters.searchTerm) {
+      addAppliedFilter(filters.searchTerm, "search");
+    }
+
+    // Add job types
+    filters.jobTypes.forEach((type) => {
+      addAppliedFilter(type, "jobType");
+    });
+
+    // Add locations
+    filters.locations.forEach((location) => {
+      addAppliedFilter(location, "location");
+    });
+
+    // Add industries
+    filters.industries.forEach((industry) => {
+      addAppliedFilter(industry, "industry");
+    });
+
+    // Add experience levels
+    filters.experienceLevels.forEach((level) => {
+      addAppliedFilter(level, "experience");
+    });
+
+    // Add salary range
+    if (filters.minSalary > 0 || filters.maxSalary < 100) {
+      addAppliedFilter(
+        `$${filters.minSalary} - $${filters.maxSalary}`,
+        "salary"
+      );
+    }
+  }
+
+  function addAppliedFilter(filterText, filterType) {
+    const filterElement = document.createElement("div");
+    filterElement.className =
+      "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 mr-2 mb-2";
+    filterElement.innerHTML = `
+            ${filterText}
+            <button class="ml-2 text-indigo-600 hover:text-indigo-800" data-filter-type="${filterType}" data-filter-value="${filterText}">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+
+    // Add click handler to remove filter
+    const removeButton = filterElement.querySelector("button");
+    removeButton.addEventListener("click", function () {
+      removeFilter(filterText, filterType);
+    });
+
+    appliedFiltersContainer.appendChild(filterElement);
+  }
+
+  function removeFilter(filterText, filterType) {
+    // Remove the filter from the appropriate checkbox
+    const checkboxes = document.querySelectorAll(`.${filterType}-checkbox`);
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.value === filterText) {
+        checkbox.checked = false;
       }
     });
+
+    // Reapply filters
+    applyFilters();
   }
-}
 
-// Initialize filters
-function initializeFilters() {
-  const filterButtons = document.querySelectorAll(".filter-dropdown");
+  function renderInternships(internships) {
+    if (!internshipCardsContainer) return;
 
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const dropdown = button.nextElementSibling;
-      dropdown.classList.toggle("hidden");
+    // Clear existing content
+    internshipCardsContainer.innerHTML = "";
+
+    // Create and append internship cards
+    internships.forEach((internship) => {
+      const card = createInternshipCard(internship);
+      internshipCardsContainer.appendChild(card);
     });
-  });
+  }
 
-  // Close dropdowns when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".dropdown")) {
-      document.querySelectorAll(".dropdown-content").forEach((dropdown) => {
-        dropdown.classList.add("hidden");
+  function createInternshipCard(internship) {
+    const card = document.createElement("div");
+    card.className =
+      "bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover search-card";
+
+    // Format salary range
+    const salaryRange = internship.salary_range || "Not specified";
+
+    // Format company name for logo
+    const companyName = internship.company || "Company";
+    const logoUrl = `https://logo.clearbit.com/${companyName
+      .toLowerCase()
+      .replace(/\s+/g, "")}.com`;
+
+    // Create a fallback image using initials
+    const initials = companyName
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+
+    const fallbackImage = `data:image/svg+xml,${encodeURIComponent(`
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" fill="#E5E7EB"/>
+                <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#4B5563" text-anchor="middle" dy=".3em">${initials}</text>
+            </svg>
+        `)}`;
+
+    // Format job type
+    const jobType = internship.type || "Not specified";
+
+    // Format category
+    const category = internship.category || "Not specified";
+
+    // Format description
+    const description = internship.description || "No description available";
+
+    // Format location
+    const location = internship.location || "Location not specified";
+
+    // Format date
+    const postedDate = formatDate(
+      internship.created_at || new Date().toISOString()
+    );
+
+    card.innerHTML = `
+            <div class="p-6">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-center">
+                        <img
+                            class="h-12 w-12 rounded-full object-cover"
+                            src="${logoUrl}"
+                            alt="${companyName} logo"
+                            onerror="this.src='${fallbackImage}'"
+                        />
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900 text-search">
+                                ${internship.title || "Untitled Position"}
+                            </h3>
+                            <p class="text-sm text-gray-500">${companyName}</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-gray-500" onclick="handleBookmarkToggle(${
+                      internship.id
+                    }, ${internship.is_bookmarked || false})">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 tag-hover cursor-pointer">
+                        ${jobType}
+                    </span>
+                    <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 tag-hover cursor-pointer">
+                        ${salaryRange}
+                    </span>
+                    <span class="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800 tag-hover cursor-pointer">
+                        ${category}
+                    </span>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm text-gray-600 line-clamp-3">
+                        ${description}
+                    </p>
+                </div>
+                <div class="mt-4 flex items-center text-sm text-gray-500">
+                    <i class="fas fa-map-marker-alt mr-2"></i>
+                    <span>${location}</span>
+                </div>
+                <div class="mt-4 flex items-center justify-between">
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="far fa-clock mr-2"></i>
+                        <span>Posted ${postedDate}</span>
+                    </div>
+                    <a href="${
+                      internship.link || "#"
+                    }" target="_blank" class="apply-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300">
+                        Apply Now
+                    </a>
+                </div>
+            </div>
+        `;
+    return card;
+  }
+
+  function updatePagination(pagination) {
+    if (!paginationNumbers) return;
+
+    // Clear existing pagination numbers
+    paginationNumbers.innerHTML = "";
+
+    // Add previous page button
+    prevPageButton.disabled = pagination.currentPage === 1;
+
+    // Add page numbers
+    for (let i = 1; i <= pagination.totalPages; i++) {
+      const pageButton = document.createElement("button");
+      pageButton.className = `px-3 py-1 rounded-md text-sm font-medium ${
+        i === pagination.currentPage
+          ? "bg-indigo-600 text-white"
+          : "text-gray-700 hover:bg-gray-100"
+      }`;
+      pageButton.textContent = i;
+      pageButton.addEventListener("click", () => {
+        currentPage = i;
+        loadInternships();
       });
+      paginationNumbers.appendChild(pageButton);
     }
-  });
-}
 
-// Initialize chatbot
-function initializeChatbot() {
-  const chatbotButton = document.getElementById("chatbotButton");
-  const chatbotWindow = document.getElementById("chatbotWindow");
-  const closeChatbot = document.getElementById("closeChatbot");
+    // Add next page button
+    nextPageButton.disabled = pagination.currentPage === pagination.totalPages;
+  }
 
-  if (chatbotButton && chatbotWindow && closeChatbot) {
-    chatbotButton.addEventListener("click", () => {
-      chatbotWindow.classList.toggle("active");
-    });
+  function updateResultsCount(pagination) {
+    if (!resultsCountStart || !resultsCountEnd || !resultsCountTotal) return;
 
-    closeChatbot.addEventListener("click", () => {
-      chatbotWindow.classList.remove("active");
+    resultsCountStart.textContent = pagination.startIndex;
+    resultsCountEnd.textContent = pagination.endIndex;
+    resultsCountTotal.textContent = pagination.totalItems;
+  }
+
+  function disableInteractions() {
+    // Disable all interactive elements
+    const interactiveElements = document.querySelectorAll(
+      "button, input, select"
+    );
+    interactiveElements.forEach((element) => {
+      element.disabled = true;
     });
   }
-}
 
-// Utility function for debouncing
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
+  function enableInteractions() {
+    // Re-enable all interactive elements
+    const interactiveElements = document.querySelectorAll(
+      "button, input, select"
+    );
+    interactiveElements.forEach((element) => {
+      element.disabled = false;
+    });
+  }
 
-// Show error message
-function showError(message) {
-  const errorDiv = document.createElement("div");
-  errorDiv.className =
-    "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative";
-  errorDiv.innerHTML = `
-        <strong class="font-bold">Error!</strong>
-        <span class="block sm:inline">${message}</span>
-    `;
+  function showNoResultsMessage() {
+    if (!noResultsMessage) return;
+    noResultsMessage.classList.remove("hidden");
+  }
 
-  const container = document.querySelector(".max-w-7xl");
-  if (container) {
-    container.insertBefore(errorDiv, container.firstChild);
+  function hideNoResultsMessage() {
+    if (!noResultsMessage) return;
+    noResultsMessage.classList.add("hidden");
+  }
 
-    // Remove error message after 5 seconds
+  function showErrorMessage(message) {
+    // Create error message element
+    const errorElement = document.createElement("div");
+    errorElement.className =
+      "fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded";
+    errorElement.innerHTML = `
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">${message}</span>
+        `;
+
+    // Add to document
+    document.body.appendChild(errorElement);
+
+    // Remove after 5 seconds
     setTimeout(() => {
-      errorDiv.remove();
+      errorElement.remove();
     }, 5000);
   }
-}
 
-// Chatbot functionality
-document.addEventListener("DOMContentLoaded", function () {
-  const chatbotButton = document.getElementById("chatbotButton");
-  const chatbotWindow = document.getElementById("chatbotWindow");
-  const closeChatbot = document.getElementById("closeChatbot");
+  // Helper function to format dates
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-  // Toggle chatbot window
-  chatbotButton.addEventListener("click", function () {
-    chatbotWindow.classList.toggle("active");
-  });
-
-  // Close chatbot window
-  closeChatbot.addEventListener("click", function () {
-    chatbotWindow.classList.remove("active");
-  });
-});
-
-// Handle chat input
-function handleChatInput(e) {
-  if (e.key === "Enter") {
-    sendMessage();
-  }
-}
-
-// Send message function
-function sendMessage() {
-  const input = document.getElementById("chatbotInput");
-  const message = input.value.trim();
-
-  if (message) {
-    // Add user message
-    addMessage(message, "user");
-    input.value = "";
-
-    // Show typing indicator
-    showTypingIndicator();
-
-    // Simulate bot response after a delay
-    setTimeout(() => {
-      removeTypingIndicator();
-      const botResponse = generateBotResponse(message);
-      addMessage(botResponse.text, "bot", botResponse.quickReplies);
-    }, 1000 + Math.random() * 2000);
-  }
-}
-
-// Quick reply function
-function sendQuickReply(element) {
-  const message = element.textContent;
-  const messagesContainer = document.getElementById("chatbotMessages");
-
-  // Add user message
-  addMessage(message, "user");
-
-  // Show typing indicator
-  showTypingIndicator();
-
-  // Simulate bot response after a delay
-  setTimeout(() => {
-    removeTypingIndicator();
-    const botResponse = generateBotResponse(message);
-    addMessage(botResponse.text, "bot", botResponse.quickReplies);
-
-    // Scroll to bottom
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  }, 1000 + Math.random() * 2000);
-}
-
-// Add message to chat
-function addMessage(text, sender, quickReplies = null) {
-  const messagesContainer = document.getElementById("chatbotMessages");
-  const messageDiv = document.createElement("div");
-  messageDiv.className = `message ${sender}-message`;
-
-  const messageText = document.createElement("p");
-  messageText.textContent = text;
-  messageDiv.appendChild(messageText);
-
-  if (quickReplies) {
-    const quickRepliesDiv = document.createElement("div");
-    quickRepliesDiv.className = "quick-replies mt-2";
-
-    quickReplies.forEach((reply) => {
-      const replyDiv = document.createElement("div");
-      replyDiv.className = "quick-reply";
-      replyDiv.textContent = reply;
-      replyDiv.onclick = function () {
-        sendQuickReply(this);
-      };
-      quickRepliesDiv.appendChild(replyDiv);
-    });
-
-    messageDiv.appendChild(quickRepliesDiv);
+    if (diffDays === 0) return "today";
+    if (diffDays === 1) return "yesterday";
+    if (diffDays < 7) return `${diffDays} days ago`;
+    if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   }
 
-  messagesContainer.appendChild(messageDiv);
-
-  // Scroll to bottom
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
-
-// Show typing indicator
-function showTypingIndicator() {
-  const messagesContainer = document.getElementById("chatbotMessages");
-  const typingDiv = document.createElement("div");
-  typingDiv.className = "typing-indicator";
-  typingDiv.id = "typingIndicator";
-
-  for (let i = 0; i < 3; i++) {
-    const dot = document.createElement("div");
-    dot.className = "typing-dot";
-    typingDiv.appendChild(dot);
-  }
-
-  messagesContainer.appendChild(typingDiv);
-
-  // Scroll to bottom
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
-
-// Remove typing indicator
-function removeTypingIndicator() {
-  const typingIndicator = document.getElementById("typingIndicator");
-  if (typingIndicator) {
-    typingIndicator.remove();
-  }
-}
-
-// Generate bot response based on user input
-function generateBotResponse(userMessage) {
-  const lowerMessage = userMessage.toLowerCase();
-  let response = {};
-
-  if (
-    lowerMessage.includes("internship") ||
-    lowerMessage.includes("find") ||
-    lowerMessage.includes("search")
-  ) {
-    response.text =
-      "I can help you find great internships! What field are you interested in? You can browse by category or use the search bar at the top of the page.";
-    response.quickReplies = [
-      "Software Engineering",
-      "Marketing",
-      "Finance",
-      "Data Science",
-    ];
-  } else if (
-    lowerMessage.includes("application") ||
-    lowerMessage.includes("apply") ||
-    lowerMessage.includes("tip")
-  ) {
-    response.text =
-      "Here are some application tips:\n1. Tailor your resume for each position\n2. Write a compelling cover letter\n3. Highlight relevant projects and coursework\n4. Follow up after applying\nWould you like more details on any of these?";
-    response.quickReplies = [
-      "Resume tips",
-      "Cover letter help",
-      "Interview prep",
-      "Follow-up advice",
-    ];
-  } else if (lowerMessage.includes("resume") || lowerMessage.includes("cv")) {
-    response.text =
-      "For your resume:\n- Keep it to one page\n- Use action verbs\n- Quantify achievements\n- Include relevant coursework\nWe have a resume builder tool you can use. Would you like me to direct you there?";
-    response.quickReplies = [
-      "Yes, show resume builder",
-      "No thanks",
-      "Cover letter tips",
-      "Examples",
-    ];
-  } else if (
-    lowerMessage.includes("hello") ||
-    lowerMessage.includes("hi") ||
-    lowerMessage.includes("hey")
-  ) {
-    response.text =
-      "Hello! 😊 How can I assist you with your internship search today?";
-    response.quickReplies = [
-      "Find internships",
-      "Application tips",
-      "Resume help",
-      "Interview prep",
-    ];
-  } else {
-    response.text =
-      "I'm here to help with your internship search! You can ask me about finding internships, application tips, resume advice, or interview preparation. What would you like to know?";
-    response.quickReplies = [
-      "Find internships",
-      "Application tips",
-      "Resume help",
-      "Interview prep",
-    ];
-  }
-
-  return response;
-}
-
-// Simple script to handle mobile menu toggle (can be expanded)
-const mobileMenuButton = document.querySelector(".sm\\:hidden button");
-const mobileMenu = document.querySelector(".sm\\:hidden + div");
-
-if (mobileMenuButton) {
-  mobileMenuButton.addEventListener("click", function () {
-    // This would toggle a mobile menu if implemented
-    console.log("Mobile menu clicked");
-  });
-}
-
-// Newsletter form submission
-const newsletterForm = document.querySelector("form");
-if (newsletterForm) {
-  newsletterForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const email = e.target.querySelector('input[type="email"]').value;
-    alert(`Thank you for subscribing with ${email}! We'll keep you updated.`);
-    e.target.reset();
-  });
-}
-
-// serch engine
-document.getElementById("search").addEventListener("input", () => {
-  const searchInput = document.getElementById("search");
-  const searchCard = document.getElementsByClassName("search-card");
-  const query = searchInput.value.trim().toLowerCase();
-
-  const textForSearch = document.getElementsByClassName("text-search");
-
-  for (let i = 0; i < textForSearch.length; i++) {
-    const text = textForSearch[i].textContent.toLowerCase();
-
-    if (!query || text.includes(query)) {
-      searchCard[i].style.display = "";
-    } else {
-      searchCard[i].style.display = "none";
+  // Make functions available globally for onclick handlers
+  window.handleBookmarkToggle = async function (internshipId, isBookmarked) {
+    try {
+      const result = await toggleBookmark(internshipId, isBookmarked);
+      if (result.success) {
+        // Update the bookmark icon
+        const bookmarkButton = document.querySelector(
+          `button[onclick="handleBookmarkToggle(${internshipId}, ${isBookmarked})"]`
+        );
+        if (bookmarkButton) {
+          const icon = bookmarkButton.querySelector("i");
+          icon.classList.toggle("far");
+          icon.classList.toggle("fas");
+        }
+      }
+    } catch (error) {
+      console.error("Error toggling bookmark:", error);
+      showErrorMessage("Failed to update bookmark. Please try again.");
     }
+  };
+
+  window.handleApplyClick = async function (internshipId) {
+    try {
+      const result = await applyForInternship(internshipId, {
+        // Add any application data here
+      });
+      if (result.success) {
+        showSuccessMessage("Application submitted successfully!");
+      }
+    } catch (error) {
+      console.error("Error applying for internship:", error);
+      showErrorMessage("Failed to submit application. Please try again.");
+    }
+  };
+
+  function showSuccessMessage(message) {
+    // Create success message element
+    const successElement = document.createElement("div");
+    successElement.className =
+      "fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded";
+    successElement.innerHTML = `
+            <strong class="font-bold">Success!</strong>
+            <span class="block sm:inline">${message}</span>
+        `;
+
+    // Add to document
+    document.body.appendChild(successElement);
+
+    // Remove after 5 seconds
+    setTimeout(() => {
+      successElement.remove();
+    }, 5000);
   }
 });

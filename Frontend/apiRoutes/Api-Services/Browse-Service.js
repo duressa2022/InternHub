@@ -1,198 +1,22 @@
-// Am using mock data here this will be replaced by data come from backend api
-const internships = [
-    {
-        id: 1,
-        title: "Software Engineering Intern",
-        company: "Google",
-        logo: "https://logo.clearbit.com/google.com",
-        description: "Join Google's engineering team for a 12-week internship. Work on real projects, learn from experts, and contribute to products used by billions worldwide.",
-        location: "United States, CA or Remote",
-        jobType: "Contract",
-        isPaid: true,
-        workMode: "Remote",
-        postedDays: 2,
-        industry: "Technology",
-        salary: 45,
-        experienceLevel: "Intermediate"
-    },
-    {
-        id: 2,
-        title: "Product Design Intern",
-        company: "Meta",
-        logo: "https://logo.clearbit.com/facebook.com",
-        description: "Work with Meta's design team to create intuitive, beautiful user experiences. This internship offers mentorship and hands-on experience with real products.",
-        location: "Menlo Park, CA",
-        jobType: "Full-time",
-        isPaid: true,
-        workMode: "On-site",
-        postedDays: 7,
-        industry: "Technology",
-        salary: 40,
-        experienceLevel: "Intermediate"
-    },
-    {
-        id: 3,
-        title: "Data Science Intern",
-        company: "Amazon",
-        logo: "https://logo.clearbit.com/amazon.com",
-        description: "Analyze large datasets to derive insights that drive business decisions at Amazon. This internship provides exposure to machine learning and big data technologies.",
-        location: "Seattle, WA",
-        jobType: "Full-time",
-        isPaid: true,
-        workMode: "On-site",
-        postedDays: 3,
-        industry: "Technology",
-        salary: 50,
-        experienceLevel: "Advanced"
-    },
-    {
-        id: 4,
-        title: "Cloud Solutions Intern",
-        company: "Microsoft",
-        logo: "https://logo.clearbit.com/microsoft.com",
-        description: "Work with Azure cloud technologies and help customers implement cloud solutions. Gain experience with enterprise cloud architecture and deployment.",
-        location: "Redmond, WA or Remote",
-        jobType: "Full-time",
-        isPaid: true,
-        workMode: "Remote",
-        postedDays: 5,
-        industry: "Technology",
-        salary: 48,
-        experienceLevel: "Intermediate"
-    },
-    {
-        id: 5,
-        title: "iOS Development Intern",
-        company: "Apple",
-        logo: "https://logo.clearbit.com/apple.com",
-        description: "Join Apple's iOS team to work on the next generation of iPhone and iPad apps. Learn SwiftUI and contribute to apps used by millions worldwide.",
-        location: "Cupertino, CA",
-        jobType: "Full-time",
-        isPaid: true,
-        workMode: "On-site",
-        postedDays: 1,
-        industry: "Technology",
-        salary: 55,
-        experienceLevel: "Intermediate"
-    },
-    {
-        id: 6,
-        title: "Content Marketing Intern",
-        company: "Netflix",
-        logo: "https://logo.clearbit.com/netflix.com",
-        description: "Help create engaging content that promotes Netflix shows and movies. Work with social media, blogs, and email campaigns to reach global audiences.",
-        location: "Los Gatos, CA or Remote",
-        jobType: "Part-time",
-        isPaid: true,
-        workMode: "Remote",
-        postedDays: 14,
-        industry: "Marketing",
-        salary: 35,
-        experienceLevel: "Entry Level"
-    },
-    {
-        id: 7,
-        title: "Financial Analyst Intern",
-        company: "JPMorgan Chase",
-        logo: "https://logo.clearbit.com/jpmorganchase.com",
-        description: "Gain hands-on experience in financial analysis, forecasting, and reporting. Work with experienced analysts on real-world financial challenges.",
-        location: "New York, NY",
-        jobType: "Full-time",
-        isPaid: true,
-        workMode: "On-site",
-        postedDays: 4,
-        industry: "Finance",
-        salary: 0,
-        experienceLevel: "Intermediate"
-    },
-    {
-        id: 8,
-        title: "UX Research Intern",
-        company: "Airbnb",
-        logo: "https://logo.clearbit.com/airbnb.com",
-        description: "Conduct user research to inform product decisions. Learn how to design and execute studies, analyze data, and present findings to stakeholders.",
-        location: "San Francisco, CA",
-        jobType: "Part-time",
-        isPaid: true,
-        workMode: "Hybrid",
-        postedDays: 6,
-        industry: "Technology",
-        salary: 38,
-        experienceLevel: "Entry Level"
-    },
-    {
-        id: 9,
-        title: "Machine Learning Intern",
-        company: "Tesla",
-        logo: "https://logo.clearbit.com/tesla.com",
-        description: "Work on cutting-edge machine learning models for autonomous driving. Apply computer vision and deep learning techniques to solve real-world problems.",
-        location: "Germany Palo Alto, CA",
-        jobType: "Full-time",
-        isPaid: true,
-        workMode: "On-site",
-        postedDays: 8,
-        industry: "Engineering",
-        salary: 60,
-        experienceLevel: "Advanced"
-    },
-    {
-        id: 10,
-        title: "Healthcare Data Intern",
-        company: "Johnson & Johnson",
-        logo: "https://logo.clearbit.com/jnj.com",
-        description: "Analyze healthcare data to improve patient outcomes. Work with medical professionals to implement data-driven solutions in healthcare settings.",
-        location: "New Brunswick, NJ",
-        jobType: "Full-time",
-        isPaid: true,
-        workMode: "On-site",
-        postedDays: 10,
-        industry: "Healthcare",
-        salary: 45,
-        experienceLevel: "Intermediate"
-    },
-    {
-        id: 11,
-        title: "Education Technology Intern",
-        company: "Coursera",
-        logo: "https://logo.clearbit.com/coursera.org",
-        description: "Help develop innovative educational technology solutions. Work on improving the learning experience for millions of students worldwide.",
-        location: "Mountain View, CA",
-        jobType: "Part-time",
-        isPaid: true,
-        workMode: "Remote",
-        postedDays: 9,
-        industry: "Education",
-        salary: 32,
-        experienceLevel: "Entry Level"
-    },
-    {
-        id: 12,
-        title: "Blockchain Development Intern",
-        company: "Coinbase",
-        logo: "https://logo.clearbit.com/coinbase.com",
-        description: "Work on cutting-edge blockchain technology. Develop and test smart contracts, decentralized applications, and cryptocurrency solutions.",
-        location: "Remote",
-        jobType: "Full-time",
-        isPaid: true,
-        workMode: "Remote",
-        postedDays: 3,
-        industry: "Technology",
-        salary: 52,
-        experienceLevel: "Advanced"
-    }
-];
+// Browse-Service.js - Handles API communication for the browse page
+const baseUrl = "http://localhost:8000";
 
 /**
  * Fetch all internships
  * @returns {Promise<Array>} Promise that resolves to array of internships
  */
 export async function fetchInternships() {
-    // Simulate API delay
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve([...internships]);
-        }, 300);
-    });
+  try {
+    const response = await fetch(`${baseUrl}/internships`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch internships");
+    }
+    const data = await response.json();
+    return data.data || [];
+  } catch (error) {
+    console.error("Error fetching internships:", error);
+    throw error;
+  }
 }
 
 /**
@@ -201,13 +25,35 @@ export async function fetchInternships() {
  * @returns {Promise<Array>} Promise that resolves to filtered internships
  */
 export async function fetchFilteredInternships(filters) {
-    // Simulate API delay
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const filteredResults = filterInternships(filters);
-            resolve(filteredResults);
-        }, 300);
-    });
+  try {
+    const queryParams = new URLSearchParams();
+
+    // Add filters to query params
+    if (filters.searchTerm) queryParams.append("search", filters.searchTerm);
+    if (filters.jobTypes?.length)
+      queryParams.append("type", filters.jobTypes.join(","));
+    if (filters.locations?.length)
+      queryParams.append("location", filters.locations.join(","));
+    if (filters.industries?.length)
+      queryParams.append("category", filters.industries.join(","));
+    if (filters.experienceLevels?.length)
+      queryParams.append("experience", filters.experienceLevels.join(","));
+    if (filters.minSalary) queryParams.append("min_salary", filters.minSalary);
+    if (filters.maxSalary) queryParams.append("max_salary", filters.maxSalary);
+    if (filters.sortBy) queryParams.append("sort", filters.sortBy);
+
+    const response = await fetch(
+      `${baseUrl}/internships?${queryParams.toString()}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch filtered internships");
+    }
+    const data = await response.json();
+    return data.data || [];
+  } catch (error) {
+    console.error("Error fetching filtered internships:", error);
+    throw error;
+  }
 }
 
 /**
@@ -217,32 +63,59 @@ export async function fetchFilteredInternships(filters) {
  * @param {Object} filters - Filter criteria
  * @returns {Promise<Object>} Promise that resolves to paginated internships
  */
-export async function fetchPaginatedInternships(page, itemsPerPage, filters = {}) {
-    // Simulate API delay
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const filteredResults = filterInternships(filters);
-            const totalItems = filteredResults.length;
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-            
-            const startIndex = (page - 1) * itemsPerPage;
-            const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-            
-            const paginatedItems = filteredResults.slice(startIndex, endIndex);
-            
-            resolve({
-                internships: paginatedItems,
-                pagination: {
-                    currentPage: page,
-                    totalPages,
-                    totalItems,
-                    itemsPerPage,
-                    startIndex: startIndex + 1,
-                    endIndex
-                }
-            });
-        }, 300);
-    });
+export async function fetchPaginatedInternships(
+  page,
+  itemsPerPage,
+  filters = {}
+) {
+  try {
+    const queryParams = new URLSearchParams();
+
+    // Add pagination params
+    queryParams.append("page", page);
+    queryParams.append("per_page", itemsPerPage);
+
+    // Add filters to query params
+    if (filters.searchTerm) queryParams.append("search", filters.searchTerm);
+    if (filters.jobTypes?.length)
+      queryParams.append("type", filters.jobTypes.join(","));
+    if (filters.locations?.length)
+      queryParams.append("location", filters.locations.join(","));
+    if (filters.industries?.length)
+      queryParams.append("category", filters.industries.join(","));
+    if (filters.experienceLevels?.length)
+      queryParams.append("experience", filters.experienceLevels.join(","));
+    if (filters.minSalary) queryParams.append("min_salary", filters.minSalary);
+    if (filters.maxSalary) queryParams.append("max_salary", filters.maxSalary);
+    if (filters.sortBy) queryParams.append("sort", filters.sortBy);
+
+    const response = await fetch(
+      `${baseUrl}/internships?${queryParams.toString()}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch paginated internships");
+    }
+    const data = await response.json();
+
+    // Ensure we have valid data
+    const internships = Array.isArray(data.data) ? data.data : [];
+    const total = parseInt(data.total) || 0;
+
+    return {
+      internships,
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil(total / itemsPerPage),
+        totalItems: total,
+        itemsPerPage,
+        startIndex: total > 0 ? (page - 1) * itemsPerPage + 1 : 0,
+        endIndex: Math.min(page * itemsPerPage, total),
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching paginated internships:", error);
+    throw error;
+  }
 }
 
 /**
@@ -251,137 +124,91 @@ export async function fetchPaginatedInternships(page, itemsPerPage, filters = {}
  * @returns {Promise<Object>} Promise that resolves to subscription result
  */
 export async function submitNewsletterSubscription(email) {
-    // Simulate API delay
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            // Validate email format
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (emailRegex.test(email)) {
-                resolve({ success: true, message: 'Thank you for subscribing!' });
-            } else {
-                reject({ success: false, message: 'Please enter a valid email address.' });
-            }
-        }, 500);
+  try {
+    const response = await fetch(`${baseUrl}/newsletter/subscribe`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
     });
+
+    if (!response.ok) {
+      throw new Error("Failed to subscribe to newsletter");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error subscribing to newsletter:", error);
+    throw error;
+  }
 }
 
 /**
  * Apply for an internship
- * @param {number} internshipId - Internship ID
+ * @param {number} internshipId - ID of the internship
  * @param {Object} applicationData - Application data
  * @returns {Promise<Object>} Promise that resolves to application result
  */
 export async function applyForInternship(internshipId, applicationData) {
-    // Simulate API delay
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({
-                success: true,
-                message: 'Your application has been submitted successfully!',
-                applicationId: Math.floor(Math.random() * 10000) + 1
-            });
-        }, 800);
-    });
+  try {
+    const response = await fetch(
+      `${baseUrl}/internships/${internshipId}/apply`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(applicationData),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to apply for internship");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error applying for internship:", error);
+    throw error;
+  }
 }
 
 /**
- * Save internship to bookmarks
- * @param {number} internshipId - Internship ID
- * @param {boolean} isBookmarked - Whether to bookmark or unbookmark
+ * Toggle bookmark status for an internship
+ * @param {number} internshipId - ID of the internship
+ * @param {boolean} isBookmarked - Current bookmark status
  * @returns {Promise<Object>} Promise that resolves to bookmark result
  */
 export async function toggleBookmark(internshipId, isBookmarked) {
-    // Simulate API delay
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({
-                success: true,
-                isBookmarked,
-                message: isBookmarked ? 'Internship saved to bookmarks' : 'Internship removed from bookmarks'
-            });
-        }, 300);
-    });
-}
-
-// Helper function to filter internships based on criteria
-function filterInternships(filters) {
-    const {
-        searchTerm = '',
-        jobTypes = [],
-        locations = [],
-        industries = [],
-        experienceLevels = [],
-        minSalary = 0,
-        maxSalary = 100,
-        sortBy = 'relevant'
-    } = filters;
-
-    let results = [...internships];
-
-    // Apply search filter
-    if (searchTerm) {
-        const term = searchTerm.toLowerCase();
-        results = results.filter(internship => 
-            internship.title.toLowerCase().includes(term) ||
-            internship.company.toLowerCase().includes(term) ||
-            internship.description.toLowerCase().includes(term) ||
-            internship.location.toLowerCase().includes(term) ||
-            internship.industry.toLowerCase().includes(term)
-        );
-    }
-
-    // Apply job type filter
-    if (jobTypes.length > 0) {
-        results = results.filter(internship => jobTypes.includes(internship.jobType));
-    }
-
-    // Apply location filter
-    if (locations.length > 0) {
-        results = results.filter(internship => {
-            const internshipLocation = internship.location.toLowerCase();
-            return locations.some(location => 
-                internshipLocation.includes(location.toLowerCase())
-            );
-        });
-    }
-
-    // Apply industry filter
-    if (industries.length > 0) {
-        results = results.filter(internship => industries.includes(internship.industry));
-    }
-
-    // Apply experience level filter
-    if (experienceLevels.length > 0) {
-        results = results.filter(internship => experienceLevels.includes(internship.experienceLevel));
-    }
-
-    // Apply salary filter
-    results = results.filter(internship => 
-        internship.salary >= minSalary && internship.salary <= maxSalary
+  try {
+    const response = await fetch(
+      `${baseUrl}/internships/${internshipId}/bookmark`,
+      {
+        method: isBookmarked ? "DELETE" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
 
-    // Apply sorting
-    switch(sortBy) {
-        case 'newest':
-            results.sort((a, b) => a.postedDays - b.postedDays);
-            break;
-        case 'salary':
-            results.sort((a, b) => b.salary - a.salary);
-            break;
-        case 'deadline':
-            // For this demo, we'll just sort by posted days as a proxy for deadline
-            results.sort((a, b) => a.postedDays - b.postedDays);
-            break;
-        default: // 'relevant' or any other value
-            // No specific sorting for "relevant" in this demo
-            break;
+    if (!response.ok) {
+      throw new Error("Failed to toggle bookmark");
     }
 
-    return results;
+    return await response.json();
+  } catch (error) {
+    console.error("Error toggling bookmark:", error);
+    throw error;
+  }
 }
 
-// Utility function to validate email format
+/**
+ * Validate email format
+ * @param {string} email - Email to validate
+ * @returns {boolean} Whether the email is valid
+ */
 export function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
