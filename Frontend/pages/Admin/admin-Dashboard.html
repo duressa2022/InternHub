@@ -78,11 +78,7 @@
                   class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
                   >Add New</a
                 >
-                <a
-                  href="#"
-                  class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
-                  >Pending Approval</a
-                >
+              
               </div>
             </div>
 
@@ -108,16 +104,6 @@
                   class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
                   >Add New</a
                 >
-                <a
-                  href="#"
-                  class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
-                  >Verified</a
-                >
-                <a
-                  href="#"
-                  class="block py-2 px-3 text-sm hover:bg-indigo-700 rounded-lg"
-                  >Pending</a
-                >
               </div>
             </div>
           </nav>
@@ -125,7 +111,7 @@
 
         <div class="absolute bottom-0 w-full p-4 border-t border-indigo-700">
           <a
-            href="signin.html"
+            href="../Login/login.html"
             class="flex items-center py-2 px-3 hover:bg-indigo-700 rounded-lg"
           >
             <i class="fas fa-sign-out-alt mr-3"></i>
@@ -275,28 +261,22 @@
                     />
                   </div>
 
-                  <div>
-                    <label
-                      for="company"
-                      class="block text-sm font-medium text-gray-700 mb-1"
-                      >Company*</label
-                    >
-                    <select
-                      id="company"
-                      name="company"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                      required
-                    >
-                      <option value="">Select Company</option>
-                      <option value="1">ETechStar IT Solutions PLC</option>
-                      <option value="2">IE Networks</option>
-                      <option value="3">INSA</option>
-                      <option value="4">Backos P.L.C</option>
-                      <option value="5">ASTU ICT Center</option>
-                      <option value="6">CNET</option>
-                      <option value="6">Ashewa Technology Solutions</option>
-                    </select>
-                  </div>
+          <div>
+  <label
+    for="company"
+    class="block text-sm font-medium text-gray-700 mb-1"
+    >Company*</label
+  >
+  <select
+    id="company"
+    name="company"
+    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    required
+  >
+    <option value="">Select Company</option> <!-- Placeholder only -->
+    <!-- JavaScript will inject options here -->
+  </select>
+</div>
 
                   <div>
                     <label
@@ -335,28 +315,21 @@
                     </select>
                   </div>
 
-                  <div>
-                    <label
-                      for="category"
-                      class="block text-sm font-medium text-gray-700 mb-1"
-                      >Category*</label
-                    >
-                    <select
-                      id="category"
-                      name="category"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                      required
-                    >
-                      <option value="">Select Category</option>
-                      <option value="software">Software Engineering</option>
-                      <option value="marketing">Marketing</option>
-                      <option value="design">UI/UX Design</option>
-                      <option value="finance">Frontend Development</option>
-                      <option value="hr">Human Resources</option>
-                      <option value="data">Data Science</option>
-                      <option value="product">Product Management</option>
-                    </select>
-                  </div>
+            <div>
+  <label for="category" class="block text-sm font-medium text-gray-700 mb-1">
+    Category*
+  </label>
+  <select
+    id="category"
+    name="category"
+    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    required
+  >
+    <option value="">Select Category</option>
+    <!-- Dynamically populated categories will go here -->
+  </select>
+</div>
+
 
                   <div>
                     <label
@@ -478,49 +451,10 @@
                   </div>
                 </div>
 
-                <div class="mb-6">
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
-                    >Status</label
-                  >
-                  <div class="flex items-center space-x-4">
-                    <label class="inline-flex items-center">
-                      <input
-                        type="radio"
-                        name="status"
-                        value="published"
-                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500"
-                        checked
-                      />
-                      <span class="ml-2">Published</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                      <input
-                        type="radio"
-                        name="status"
-                        value="draft"
-                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500"
-                      />
-                      <span class="ml-2">Draft</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                      <input
-                        type="radio"
-                        name="status"
-                        value="pending"
-                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500"
-                      />
-                      <span class="ml-2">Pending Review</span>
-                    </label>
-                  </div>
-                </div>
+                
 
                 <div class="flex justify-end space-x-4">
-                  <button
-                    type="button"
-                    class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Save as Draft
-                  </button>
+             
                   <button
                     type="submit"
                     class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -577,12 +511,6 @@
                       scope="col"
                       class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      Status
-                    </th>
-                    <th
-                      scope="col"
-                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
                       Actions
                     </th>
                   </tr>
@@ -597,6 +525,12 @@
             </div>
           </div>
         </main>
+
+        <div
+  id="notificationContainer"
+  class="fixed top-5 right-5 w-96 z-50 hidden transition-opacity duration-300"
+></div>
+
         <!-- Footer -->
         <footer class="bg-white border-t border-gray-200 py-4">
           <div class="px-6">
@@ -656,6 +590,7 @@
 
         
     </div>
+    
 
     <!-- admin script file   -->
 

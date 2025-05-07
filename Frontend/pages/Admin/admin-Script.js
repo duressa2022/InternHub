@@ -12,6 +12,8 @@ toggleSidebar.addEventListener("click", function () {
   mainContent.classList.toggle("content-expanded");
 });
 
+let companies = []; // Declare a global variable to store the companies
+
 document.addEventListener("DOMContentLoaded", async () => {
   // DOM Elements
   const dom = {
@@ -58,16 +60,32 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function loadCompanies() {
     try {
       const result = await DashboardApiService.getCompanies();
-      if (result.success) {
-        dom.companySelect.innerHTML =
-          '<option value="">Select Company</option>' +
-          result.data
-            .map(
-              (company) =>
-                `<option value="${company.id}">${company.name}</option>`
-            )
-            .join("");
-      }
+      console.log("Company list Result:", result);
+      companies = result.data.data; // Store the companies in the global variable
+      dom.companySelect.innerHTML =
+        '<option value="">Select Company</option>' +
+        companies
+          .map(
+            (company) =>
+              `<option value="${company.id}">${company.name}</option>`
+          )
+          .join("");
+
+      // Get unique categories
+      const categories = [
+        ...new Set(companies.map((company) => company.category)),
+      ];
+
+      // Populate category select
+      const categorySelect = document.getElementById("category");
+      categorySelect.innerHTML =
+        '<option value="">Select Category</option>' +
+        categories
+          .map(
+            (category) =>
+              `<option value="${category.toLowerCase()}">${category}</option>`
+          )
+          .join("");
     } catch (error) {
       showNotification("Failed to load companies", "error");
     }
@@ -76,8 +94,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function loadInternships() {
     try {
       const result = await DashboardApiService.getInternships();
+
+      console.log("Internships Result:", result);
       if (result.success) {
-        dom.internshipsBody.innerHTML = result.data
+        dom.internshipsBody.innerHTML = result.data.data
           .map(
             (internship) => `
           <tr>
@@ -87,7 +107,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <img src="${
                   internship.company.logo
                 }" class="h-10 w-10 rounded-full">
-                <div class="ml-4">${internship.company.name}</div>
+                <div class="ml-4">${internship.company}</div>
               </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
@@ -99,11 +119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             </td>
             <td class="px-6 py-4 whitespace-nowrap">${internship.location}</td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(
-                internship.status
-              )}">
-                ${internship.status}
-              </span>
+
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <button class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</button>
@@ -142,21 +158,32 @@ document.addEventListener("DOMContentLoaded", async () => {
       e.preventDefault();
       const formData = new FormData(dom.form);
 
+      // Get the company ID from the form data
+      const companyId = formData.get("company");
+
+      // Find the company name based on the selected company_id
+      const company = companies.find(
+        (company) => company.id === parseInt(companyId)
+      );
+
       const internshipData = {
         title: formData.get("title"),
-        companyId: formData.get("company"),
+        company_id: formData.get("company"),
+        company: company ? company.name : "",
         type: formData.get("type"),
         location: formData.get("location"),
-        status: formData.get("status"),
+        category: formData.get("category"),
         description: formData.get("description"),
         requirements: formData.get("requirements"),
         benefits: formData.get("benefits"),
         start_date: formData.get("start_date"),
         end_date: formData.get("end_date"),
-        salary: formData.get("salary"),
-        application_deadline: formData.get("application_deadline"),
-        application_link: formData.get("application_link"),
+        salary_range: formData.get("salary"),
+        deadline: formData.get("application_deadline"),
+        link: formData.get("application_link"),
       };
+
+      console.log("Internship data being sent:", internshipData);
 
       try {
         const result = await DashboardApiService.createInternship(
