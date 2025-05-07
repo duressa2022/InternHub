@@ -216,7 +216,7 @@ class InternshipRepository implements InternshipInterface
     private function mapToInternship(array $data): Internship
     {
         return new Internship(
-              company_id: (int)$data['company_id'],
+            company_id: (int)$data['company_id'],
             title: $data['title'],
             company: $data['company'],
             location: $data['location'],
