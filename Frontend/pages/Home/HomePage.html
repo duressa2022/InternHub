@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InternHub - Find Your Dream Internship</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="index.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -276,205 +275,35 @@
         </div>
       </div>
 
-      <!-- Internship Listings/search results -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Internship Card 1 -->
-        <div
-          class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover search-card"
-        >
-          <div class="p-6">
-            <div class="flex items-start justify-between">
-              <div class="flex items-center">
-                <img
-                  class="h-12 w-12 rounded-full object-cover"
-                  src="https://logo.clearbit.com/google.com"
-                  alt="Google logo"
-                />
-                <div class="ml-4">
-                  <h3 class="text-lg font-semibold text-gray-900 text-search">
-                    Software Engineering Intern
-                  </h3>
-                  <p class="text-sm text-gray-500">Google</p>
-                </div>
-              </div>
-              <button class="text-gray-400 hover:text-gray-500">
-                <i class="far fa-bookmark"></i>
-              </button>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span
-                class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 tag-hover cursor-pointer"
-                >Full-time</span
-              >
-              <span
-                class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 tag-hover cursor-pointer"
-                >Paid</span
-              >
-              <span
-                class="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800 tag-hover cursor-pointer"
-                >Remote</span
-              >
-            </div>
-            <div class="mt-4">
-              <p class="text-sm text-gray-600 line-clamp-3">
-                Join Google's engineering team for a 12-week internship. Work on
-                real projects, learn from experts, and contribute to products
-                used by billions worldwide.
-              </p>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-gray-500">
-              <i class="fas fa-map-marker-alt mr-2"></i>
-              <span>Mountain View, CA or Remote</span>
-            </div>
-            <div class="mt-4 flex items-center justify-between">
-              <div class="flex items-center text-sm text-gray-500">
-                <i class="far fa-clock mr-2"></i>
-                <span>Posted 2 days ago</span>
-              </div>
-              <button
-                class="apply-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300"
-              >
-                Apply Now
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Internship Card 2 -->
-        <div
-          class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover search-card"
-        >
-          <div class="p-6">
-            <div class="flex items-start justify-between">
-              <div class="flex items-center">
-                <img
-                  class="h-12 w-12 rounded-full object-cover"
-                  src="https://logo.clearbit.com/facebook.com"
-                  alt="Facebook logo"
-                />
-                <div class="ml-4">
-                  <h3 class="text-lg font-semibold text-gray-900 text-search">
-                    Product Design Intern
-                  </h3>
-                  <p class="text-sm text-gray-500">Meta</p>
-                </div>
-              </div>
-              <button class="text-gray-4hover:text-gray-500">
-                <i class="far fa-bookmark"></i>
-              </button>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span
-                class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 tag-hover cursor-pointer"
-                >Full-time</span
-              >
-              <span
-                class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 tag-hover cursor-pointer"
-                >Paid</span
-              >
-              <span
-                class="inline-flex items-center rounded-full bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-800 tag-hover cursor-pointer"
-                >On-site</span
-              >
-            </div>
-            <div class="mt-4">
-              <p class="text-sm text-gray-600 line-clamp-3">
-                Work with Meta's design team to create intuitive, beautiful user
-                experiences. This internship offers mentorship and hands-on
-                experience with real products.
-              </p>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-gray-500">
-              <i class="fas fa-map-marker-alt mr-2"></i>
-              <span>Menlo Park, CA</span>
-            </div>
-            <div class="mt-4 flex items-center justify-between">
-              <div class="flex items-center text-sm text-gray-500">
-                <i class="far fa-clock mr-2"></i>
-                <span>Posted 1 week ago</span>
-              </div>
-              <button
-                class="apply-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300"
-              >
-                Apply Now
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Internship Card 3 -->
-        <div
-          class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 card-hover search-card"
-        >
-          <div class="p-6">
-            <div class="flex items-start justify-between">
-              <div class="flex items-center">
-                <img
-                  class="h-12 w-12 rounded-full object-cover"
-                  src="https://logo.clearbit.com/amazon.com"
-                  alt="Amazon logo"
-                />
-                <div class="ml-4">
-                  <h3 class="text-lg font-semibold text-gray-900 text-search">
-                    Data Science Intern
-                  </h3>
-                  <p class="text-sm text-gray-500">Amazon</p>
-                </div>
-              </div>
-              <button class="text-gray-400 hover:text-gray-500">
-                <i class="far fa-bookmark"></i>
-              </button>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span
-                class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 tag-hover cursor-pointer"
-                >Full-time</span
-              >
-              <span
-                class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 tag-hover cursor-pointer"
-                >Paid</span
-              >
-              <span
-                class="inline-flex items-center rounded-full bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-800 tag-hover cursor-pointer"
-                >On-site</span
-              >
-            </div>
-            <div class="mt-4">
-              <p class="text-sm text-gray-600 line-clamp-3">
-                Analyze large datasets to derive insights that drive business
-                decisions at Amazon. This internship provides exposure to
-                machine learning and big data technologies.
-              </p>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-gray-500">
-              <i class="fas fa-map-marker-alt mr-2"></i>
-              <span>Seattle, WA</span>
-            </div>
-            <div class="mt-4 flex items-center justify-between">
-              <div class="flex items-center text-sm text-gray-500">
-                <i class="far fa-clock mr-2"></i>
-                <span>Posted 3 days ago</span>
-              </div>
-              <button
-                class="apply-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300"
-              >
-                Apply Now
-              </button>
-            </div>
-          </div>
-        </div>
+      <!-- Internships Container -->
+      <div id="internships-container" class="grid grid-cols-1 gap-6">
+        <!-- Internship cards will be dynamically inserted here -->
       </div>
 
-      <!-- View More Button -->
-      <div class="mt-12 text-center">
-        <button
-          class="bg-white border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-6 py-3 rounded-md text-sm font-medium transition-colors duration-300"
-        >
-          View More Internships
-        </button>
+      <!-- Loading State -->
+      <div id="loading-state" class="hidden text-center py-8">
+        <div
+          class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-600 border-t-transparent"
+        ></div>
+        <p class="mt-2 text-gray-600">Loading internships...</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="error-state" class="hidden text-center py-8">
+        <i class="fas fa-exclamation-circle text-red-500 text-4xl"></i>
+        <p class="mt-2 text-gray-600">
+          Failed to load internships. Please try again later.
+        </p>
+      </div>
+
+      <!-- No Results State -->
+      <div id="no-results-state" class="hidden text-center py-8">
+        <i class="fas fa-search text-gray-400 text-4xl"></i>
+        <p class="mt-2 text-gray-600">
+          No internships found matching your criteria.
+        </p>
       </div>
     </div>
-    <script src="home-script.js" charset="utf-8"></script>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8">
@@ -643,6 +472,6 @@
       </div>
     </div>
 
-    <script src="./homePage-Script.js"></script>
+    <script type="module" src="./homePage-Script.js"></script>
   </body>
 </html>
