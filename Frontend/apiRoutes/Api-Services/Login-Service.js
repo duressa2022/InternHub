@@ -78,11 +78,8 @@ export async function loginUser(loginData) {
         case "admin":
           redirectUrl = "../../pages/Admin/admin-Dashboard.html";
           break;
-        case "intern":
-          redirectUrl = "../../pages/Intern/intern-Dashboard.html";
-          break;
-        case "employer":
-          redirectUrl = "../../pages/Admin/admin-Dashboard.html";
+        case "student":
+          redirectUrl = "../../pages/Home/HomePage.html";
           break;
         default:
           redirectUrl = "../../pages/Admin/admin-Dashboard.html";
