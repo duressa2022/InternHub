@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InternGojo | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./student-Dashboard-style.css" />
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Dashboard Container -->
+    <div class="flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <div class="sidebar bg-white shadow-md sidebar-expanded" id="sidebar">
+        <div class="flex flex-col h-full">
+          <!-- Logo -->
+          <div class="flex items-center justify-between p-4 border-b">
+            <div class="flex items-center">
+              <i class="fas fa-briefcase text-indigo-600 text-2xl mr-2"></i>
+              <span class="text-xl font-bold">InternGojo</span>
+            </div>
+            <button
+              id="sidebarToggle"
+              class="text-gray-500 hover:text-gray-700"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+
+          <!-- User Profile -->
+          <div class="p-4 border-b flex items-center">
+            <img
+              src="https://randomuser.me/api/portraits/women/44.jpg"
+              alt="User"
+              class="user-avatar h-10 w-10 rounded-full mr-3"
+              data-avatar
+            />
+            <div>
+              <p class="user-name font-medium" data-profile="name">
+                Loading...
+              </p>
+              <p class="user-major text-xs text-gray-500" data-profile="major">
+                Loading...
+              </p>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <nav class="flex-1 overflow-y-auto p-2">
+            <ul>
+              <li>
+                <a
+                  href="#"
+                  class="flex items-center p-3 text-indigo-600 bg-indigo-50 rounded-lg"
+                >
+                  <i class="fas fa-home mr-3"></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/browse"
+                  class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg mt-1"
+                >
+                  <i class="fas fa-search mr-3"></i>
+                  <span>Find Internships</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/intern-dashboard"
+                  class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg mt-1"
+                >
+                  <i class="fas fa-file-alt mr-3"></i>
+                  <span>My Applications</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/user-profile"
+                  class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg mt-1"
+                >
+                  <i class="fas fa-calendar mr-3"></i>
+                  <span>User Profiile</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/review"
+                  class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg mt-1"
+                >
+                  <i class="fas fa-chart-line mr-3"></i>
+                  <span>Create Review</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/resource"
+                  class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg mt-1"
+                >
+                  <i class="fas fa-book mr-3"></i>
+                  <span>Learning Resources</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <!-- Upgrade Banner -->
+          <div class="p-4 border-t">
+            <div class="bg-indigo-50 p-3 rounded-lg">
+              <p class="text-xs font-medium text-indigo-800 mb-1">
+                Upgrade to Pro
+              </p>
+              <p class="text-xs text-gray-600 mb-2">
+                Get access to premium features
+              </p>
+              <button
+                class="w-full bg-indigo-600 text-white text-xs py-1 px-2 rounded hover:bg-indigo-700"
+              >
+                Upgrade Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content flex-1 overflow-y-auto" id="mainContent">
+        <!-- Top Navigation -->
+        <header class="bg-white shadow-sm">
+          <div class="flex justify-between items-center p-4">
+            <h1 class="text-xl font-semibold text-gray-800">Dashboard</h1>
+            <div class="flex items-center space-x-4">
+              <div class="relative">
+                <button class="flex items-center text-gray-700">
+                  <img
+                    src="https://randomuser.me/api/portraits/women/44.jpg"
+                    alt="User"
+                    class="h-8 w-8 rounded-full mr-2"
+                  />
+                  <span class="hidden md:inline">Abebe K.</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <main class="p-4">
+          <!-- Welcome Banner -->
+          <div
+            class="welcome-banner bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl p-6 mb-6"
+          >
+            <div
+              class="flex flex-col md:flex-row justify-between items-start md:items-center"
+            >
+              <div>
+                <h2 class="text-2xl font-bold mb-2" data-welcome-name>
+                  Welcome back!
+                </h2>
+                <p class="mb-4" data-welcome-stats>
+                  Loading your internship stats...
+                </p>
+                <button
+                  class="bg-white text-indigo-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100"
+                >
+                  Continue Your Search
+                </button>
+              </div>
+              <img
+                src="https://illustrations.popsy.co/amber/student.svg"
+                alt="Student"
+                class="h-32 mt-4 md:mt-0"
+              />
+            </div>
+          </div>
+
+          <!-- Stats Cards -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+            id="statsContainer"
+          ></div>
+
+          <!-- Main Content Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Recent Applications -->
+            <div class="lg:col-span-2">
+              <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="p-4 border-b flex justify-between items-center">
+                  <h2 class="font-semibold text-lg">Recent Applications</h2>
+                  <a
+                    href="#"
+                    class="text-sm text-indigo-600 hover:text-indigo-800"
+                    id="viewAllApplications"
+                  >
+                    View All
+                  </a>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <!-- ... table headers ... -->
+                    </thead>
+                    <tbody id="applicationsBody">
+                      <!-- JavaScript will populate -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Application Status -->
+            <div class="space-y-6">
+              <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="p-4 border-b">
+                  <h2 class="font-semibold text-lg">Application Status</h2>
+                </div>
+                <div class="p-4" id="statusBarsContainer">
+                  <!-- JavaScript will populate -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="./student-Dashboard-script.js"></script>
+    <script
+      type="module"
+      src="./../../apiRoutes/Api-Services/StudentDashboard-Service.js"
+    ></script>
+  </body>
+</html>

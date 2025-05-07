@@ -1,0 +1,36 @@
+.sidebar {
+  transition: all 0.3s ease;
+}
+.sidebar-collapsed {
+  width: 5rem;
+}
+.sidebar-expanded {
+  width: 16rem;
+}
+.main-content {
+  transition: margin-left 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.35s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+.application-status-pending {
+  background-color: #f59e0b;
+}
+.application-status-reviewed {
+  background-color: #3b82f6;
+}
+.application-status-interview {
+  background-color: #8b5cf6;
+}
+.application-status-offer {
+  background-color: #10b981;
+}
+.application-status-rejected {
+  background-color: #ef4444;
+}
