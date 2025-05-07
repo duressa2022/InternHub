@@ -36,9 +36,7 @@ class InternshipController {
             updated_at:date('Y-m-d H:i:s')
         );
 
-        echo $request;
         $createdInternship = $this->internshipUsecase->createInternship($internship);
-        echo $createdInternship;
         if ($createdInternship) {
             $this->jsonPresenter->respond_without(201, ['message' => 'Internship created successfully', 'data' => $createdInternship]);
         } else {

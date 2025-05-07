@@ -17,27 +17,28 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 
     $sql = "
-    CREATE TABLE IF NOT EXISTS internships (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        company_id INT NOT NULL,
-        title VARCHAR(255) NOT NULL,
-        company VARCHAR(255) NOT NULL,
-        location VARCHAR(255) NOT NULL,
-        category VARCHAR(100) NOT NULL,
-        type VARCHAR(50) NOT NULL,
-        start_date VARCHAR(50) NOT NULL,
-        end_date VARCHAR(50) NOT NULL,
-        description TEXT NOT NULL,
-        requirements TEXT NOT NULL,
-        salary_range VARCHAR(100),
-        benefits TEXT,
-        deadline VARCHAR(50) NOT NULL,
-        link VARCHAR(255) NOT NULL,
-        created_at DATETIME NOT NULL,
-        updated_at DATETIME NOT NULL
-        FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE,
-    );
-    ";
+        CREATE TABLE IF NOT EXISTS internships (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            company_id INT NOT NULL,
+            title VARCHAR(255) NOT NULL,
+            company VARCHAR(255) NOT NULL,
+            location VARCHAR(255) NOT NULL,
+            category VARCHAR(100) NOT NULL,
+            type VARCHAR(50) NOT NULL,
+            start_date VARCHAR(50) NOT NULL,
+            end_date VARCHAR(50) NOT NULL,
+            description TEXT NOT NULL,
+            requirements TEXT NOT NULL,
+            salary_range VARCHAR(100),
+            benefits TEXT,
+            deadline VARCHAR(50) NOT NULL,
+            link VARCHAR(255) NOT NULL,
+            created_at DATETIME NOT NULL,
+            updated_at DATETIME NOT NULL,
+            FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE
+        );
+        ";
+
 
     $pdo->exec($sql);
     echo "✅ Internships table created successfully.\n";

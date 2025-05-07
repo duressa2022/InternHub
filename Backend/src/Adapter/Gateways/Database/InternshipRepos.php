@@ -15,8 +15,9 @@ class InternshipRepository implements InternshipInterface
         $this->db->beginTransaction();
         try {
             $stmt = $this->db->prepare("INSERT INTO internships 
-                (company_id,title, company, location, type, category, salary_range, start_date, end_date, description, requirements, benefits, deadline, link, created_at, updated_at) 
-                VALUES (:company_id,,:title, :company, :location, :type, :category, :salary_range, :start_date, :end_date, :description, :requirements, :benefits, :deadline, :link, :created_at, :updated_at)");
+                (company_id, title, company, location, type, category, salary_range, start_date, end_date, description, requirements, benefits, deadline, link, created_at, updated_at) 
+                VALUES (:company_id, :title, :company, :location, :type, :category, :salary_range, :start_date, :end_date, :description, :requirements, :benefits, :deadline, :link, :created_at, :updated_at)");
+
             
             $stmt->bindParam(':company_id', $internship->company_id, PDO::PARAM_INT);
             $stmt->bindParam(':title', $internship->title);
@@ -46,6 +47,7 @@ class InternshipRepository implements InternshipInterface
         
             if ($internshipData) {
                 $internship = new Internship(
+                    company_id: (int)$internshipData['company_id'],
                     title: $internshipData['title'],
                     company: $internshipData['company'],
                     location: $internshipData['location'],
