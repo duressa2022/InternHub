@@ -1,382 +1,635 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Browse Internships | InternHub</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="Browse-Style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="Browse-Style.css" />
     <script type="module" src="browse-Script.js" defer></script>
-</head>
-<body class="bg-gray-50 font-sans">
+  </head>
+  <body class="bg-gray-50 font-sans">
     <!-- Navigation -->
     <nav class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <i class="fas fa-briefcase text-indigo-600 text-2xl mr-2"></i>
-                        <a href="../index.html"><span class="text-xl font-bold text-gray-900">InternGojo</span></a>                          
-                    </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8 nav-links">
-                        <a href="../index.html" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
-                        <a href="/browse.html" class="nav-link border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Browse Internships</a>
-                        <a href="../Companies/companies.html" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Companies</a>
-                        <a href="../ResourcePage/resources.html" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Resources</a>
-                    </div>
-                </div>
-                <div class="hidden sm:ml-6 sm:flex sm:items-center">
-                    <button class="post-internship-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Post an Internship</button>
-                    <div class="ml-4 relative flex-shrink-0">
-                        <div>
-                            <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button">
-                                <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                        <span class="sr-only">Open main menu</span>
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <i class="fas fa-briefcase text-indigo-600 text-2xl mr-2"></i>
+              <a href="../index.html"
+                ><span class="text-xl font-bold text-gray-900"
+                  >InternGojo</span
+                ></a
+              >
             </div>
+            <div class="hidden sm:ml-6 sm:flex sm:space-x-8 nav-links">
+              <a
+                href="../Home/HomePage.html"
+                class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Home</a
+              >
+              <a
+                href="/browse.html"
+                class="nav-link border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Browse Internships</a
+              >
+              <a
+                href="../Companies/companies.html"
+                class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Companies</a
+              >
+              <a
+                href="../ResourcePage/resources.html"
+                class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >Resources</a
+              >
+            </div>
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center">
+            <button
+              class="post-internship-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+            >
+              <a href="../Admin/admin-Dashboard.html">Post an Internship</a>
+            </button>
+            <div class="ml-4 relative flex-shrink-0">
+              <div>
+                <button
+                  type="button"
+                  class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  id="user-menu-button"
+                >
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="h-8 w-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="-mr-2 flex items-center sm:hidden">
+            <button
+              type="button"
+              class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+            >
+              <span class="sr-only">Open main menu</span>
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <div class="gradient-bg text-white">
-        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                    Browse Internship Opportunities
-                </h1>
-                <p class="mt-6 max-w-lg mx-auto text-xl">
-                    Find the perfect internship from our curated collection of 1,000+ opportunities
-                </p>
-                <div class="mt-10 relative max-w-md mx-auto">
-                    <div class="relative">
-                        <input type="text" id="search-input" class="search-input block w-full rounded-md border-0 py-4 px-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Search by job title, company, or keyword">
-                        <button id="search-button" class="search-button absolute right-2.5 bottom-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md px-4 py-2 text-sm font-medium">
-                            <i class="fas fa-search mr-2"></i> Search
-                        </button>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1
+            class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+          >
+            Browse Internship Opportunities
+          </h1>
+          <p class="mt-6 max-w-lg mx-auto text-xl">
+            Find the perfect internship from our curated collection of 1,000+
+            opportunities
+          </p>
+          <div class="mt-10 relative max-w-md mx-auto">
+            <div class="relative">
+              <input
+                type="text"
+                id="search-input"
+                class="search-input block w-full rounded-md border-0 py-4 px-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="Search by job title, company, or keyword"
+              />
+              <button
+                id="search-button"
+                class="search-button absolute right-2.5 bottom-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md px-4 py-2 text-sm font-medium"
+              >
+                <i class="fas fa-search mr-2"></i> Search
+              </button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Filters Sidebar -->
-            <div class="w-full lg:w-1/4">
-                <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg font-bold text-gray-900">Filters</h2>
-                        <button id="reset-filters" class="reset-filters-btn text-indigo-600 hover:text-indigo-800 text-sm font-medium">Reset All</button>
-                    </div>
-
-                    <!-- Job Type Filter -->
-                    <div class="mb-6">
-                        <button class="filter-toggle flex justify-between items-center w-full text-left font-medium text-gray-900 mb-3">
-                            <span>Job Type</span>
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                        <div class="filter-section job-type-section">
-                            <div class="space-y-2">
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Full-time" class="filter-checkbox job-type-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" checked>
-                                    <span class="ml-2 text-gray-700">Full-time</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Part-time" class="filter-checkbox job-type-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" checked>
-                                    <span class="ml-2 text-gray-700">Part-time</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Contract" class="filter-checkbox job-type-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Contract</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Freelance" class="filter-checkbox job-type-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Freelance</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Location Filter -->
-                    <div class="mb-6">
-                        <button class="filter-toggle flex justify-between items-center w-full text-left font-medium text-gray-900 mb-3">
-                            <span>Location</span>
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                        <div class="filter-section location-section">
-                            <input type="text" placeholder="Search locations" class="location-search w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm">
-                            <div class="space-y-2 max-h-48 overflow-y-auto">
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Remote" class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Remote</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="United States" class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">United States</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="United Kingdom" class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">United Kingdom</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Canada" class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Canada</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Germany" class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Germany</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="France" class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">France</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Australia" class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Australia</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Industry Filter -->
-                    <div class="mb-6">
-                        <button class="filter-toggle flex justify-between items-center w-full text-left font-medium text-gray-900 mb-3">
-                            <span>Industry</span>
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                        <div class="filter-section industry-section">
-                            <div class="space-y-2 max-h-48 overflow-y-auto">
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Technology" class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Technology</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Finance" class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Finance</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Healthcare" class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Healthcare</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Marketing" class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Marketing</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Education" class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Education</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Engineering" class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Engineering</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Salary Range Filter -->
-                    <div class="mb-6">
-                        <button class="filter-toggle flex justify-between items-center w-full text-left font-medium text-gray-900 mb-3">
-                            <span>Salary Range</span>
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                        <div class="filter-section salary-section">
-                            <div class="mb-4">
-                                <div class="flex justify-between text-sm text-gray-600 mb-2">
-                                    <span>$0</span>
-                                    <span>$100+ /hr</span>
-                                </div>
-                                <input type="range" id="salary-range" min="0" max="100" value="30" class="salary-range">
-                                <div class="text-center mt-2">
-                                    <span id="salary-display" class="text-sm font-medium text-indigo-600">$20 - $50 /hr</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Experience Level Filter -->
-                    <div class="mb-6">
-                        <button class="filter-toggle flex justify-between items-center w-full text-left font-medium text-gray-900 mb-3">
-                            <span>Experience Level</span>
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                        <div class="filter-section experience-section">
-                            <div class="space-y-2">
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Entry Level" class="filter-checkbox experience-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Entry Level</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Intermediate" class="filter-checkbox experience-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" checked>
-                                    <span class="ml-2 text-gray-700">Intermediate</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="checkbox" value="Advanced" class="filter-checkbox experience-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                    <span class="ml-2 text-gray-700">Advanced</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Filters Sidebar -->
+        <div class="w-full lg:w-1/4">
+          <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-lg font-bold text-gray-900">Filters</h2>
+              <button
+                id="reset-filters"
+                class="reset-filters-btn text-indigo-600 hover:text-indigo-800 text-sm font-medium"
+              >
+                Reset All
+              </button>
             </div>
 
-            <!-- Internship Listings -->
-            <div class="w-full lg:w-3/4">
-                <!-- Sorting and Results Count -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 bg-white p-4 rounded-lg shadow-sm">
-                    <div class="mb-4 md:mb-0 results-count">
-                        <span class="text-sm text-gray-600">Showing <span id="results-count-start" class="font-medium">1</span>-<span id="results-count-end" class="font-medium">12</span> of <span id="results-count-total" class="font-medium">248</span> internships</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="text-sm text-gray-600 mr-3">Sort by:</span>
-                        <div class="relative">
-                            <select id="sort-select" class="sort-select block appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                                <option value="relevant">Most Relevant</option>
-                                <option value="newest">Newest</option>
-                                <option value="salary">Highest Salary</option>
-                                <option value="deadline">Application Deadline</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <i class="fas fa-chevron-down text-xs"></i>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Job Type Filter -->
+            <div class="mb-6">
+              <button
+                class="filter-toggle flex justify-between items-center w-full text-left font-medium text-gray-900 mb-3"
+              >
+                <span>Job Type</span>
+                <i class="fas fa-chevron-down text-xs"></i>
+              </button>
+              <div class="filter-section job-type-section">
+                <div class="space-y-2">
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Full-time"
+                      class="filter-checkbox job-type-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                      checked
+                    />
+                    <span class="ml-2 text-gray-700">Full-time</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Part-time"
+                      class="filter-checkbox job-type-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                      checked
+                    />
+                    <span class="ml-2 text-gray-700">Part-time</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Contract"
+                      class="filter-checkbox job-type-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Contract</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Freelance"
+                      class="filter-checkbox job-type-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Freelance</span>
+                  </label>
                 </div>
-
-                <!-- Applied Filters -->
-                <div id="applied-filters" class="applied-filters flex flex-wrap gap-2 mb-6">
-                    <!-- Filter tags will be dynamically inserted here -->
-                </div>
-
-                <!-- Internship Cards -->
-                <div id="internship-cards" class="internship-cards grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Internship cards will be dynamically inserted here -->
-                </div>
-
-                <!-- No Results Message (hidden by default) -->
-                <div id="no-results" class="no-results hidden col-span-2 text-center py-12">
-                    <i class="fas fa-search text-gray-400 text-5xl mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-700">No internships found</h3>
-                    <p class="text-gray-500 mt-2">Try adjusting your filters or search term</p>
-                    <button id="clear-search" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">
-                        Clear all filters
-                    </button>
-                </div>
-
-                <!-- Pagination -->
-                <div class="mt-12 flex justify-center">
-                    <nav class="pagination inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                        <a href="#" id="prev-page" class="prev-page-btn relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                            <span class="sr-only">Previous</span>
-                            <i class="fas fa-chevron-left"></i>
-                        </a>
-                        <div id="pagination-numbers" class="pagination-numbers flex">
-                            <!-- Pagination numbers will be dynamically inserted here -->
-                        </div>
-                        <a href="#" id="next-page" class="next-page-btn relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                            <span class="sr-only">Next</span>
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                    </nav>
-                </div>
+              </div>
             </div>
+
+            <!-- Location Filter -->
+            <div class="mb-6">
+              <button
+                class="filter-toggle flex justify-between items-center w-full text-left font-medium text-gray-900 mb-3"
+              >
+                <span>Location</span>
+                <i class="fas fa-chevron-down text-xs"></i>
+              </button>
+              <div class="filter-section location-section">
+                <input
+                  type="text"
+                  placeholder="Search locations"
+                  class="location-search w-full px-3 py-2 border border-gray-300 rounded-md mb-3 text-sm"
+                />
+                <div class="space-y-2 max-h-48 overflow-y-auto">
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Remote"
+                      class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Remote</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="United States"
+                      class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">United States</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="United Kingdom"
+                      class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">United Kingdom</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Canada"
+                      class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Canada</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Germany"
+                      class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Germany</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="France"
+                      class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">France</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Australia"
+                      class="filter-checkbox location-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Australia</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Industry Filter -->
+            <div class="mb-6">
+              <button
+                class="filter-toggle flex justify-between items-center w-full text-left font-medium text-gray-900 mb-3"
+              >
+                <span>Industry</span>
+                <i class="fas fa-chevron-down text-xs"></i>
+              </button>
+              <div class="filter-section industry-section">
+                <div class="space-y-2 max-h-48 overflow-y-auto">
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Technology"
+                      class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Technology</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Finance"
+                      class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Finance</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Healthcare"
+                      class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Healthcare</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Marketing"
+                      class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Marketing</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Education"
+                      class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Education</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Engineering"
+                      class="filter-checkbox industry-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Engineering</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Salary Range Filter -->
+            <div class="mb-6">
+              <button
+                class="filter-toggle flex justify-between items-center w-full text-left font-medium text-gray-900 mb-3"
+              >
+                <span>Salary Range</span>
+                <i class="fas fa-chevron-down text-xs"></i>
+              </button>
+              <div class="filter-section salary-section">
+                <div class="mb-4">
+                  <div class="flex justify-between text-sm text-gray-600 mb-2">
+                    <span>$0</span>
+                    <span>$100+ /hr</span>
+                  </div>
+                  <input
+                    type="range"
+                    id="salary-range"
+                    min="0"
+                    max="100"
+                    value="30"
+                    class="salary-range"
+                  />
+                  <div class="text-center mt-2">
+                    <span
+                      id="salary-display"
+                      class="text-sm font-medium text-indigo-600"
+                      >$20 - $50 /hr</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Experience Level Filter -->
+            <div class="mb-6">
+              <button
+                class="filter-toggle flex justify-between items-center w-full text-left font-medium text-gray-900 mb-3"
+              >
+                <span>Experience Level</span>
+                <i class="fas fa-chevron-down text-xs"></i>
+              </button>
+              <div class="filter-section experience-section">
+                <div class="space-y-2">
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Entry Level"
+                      class="filter-checkbox experience-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Entry Level</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Intermediate"
+                      class="filter-checkbox experience-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                      checked
+                    />
+                    <span class="ml-2 text-gray-700">Intermediate</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      value="Advanced"
+                      class="filter-checkbox experience-checkbox h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <span class="ml-2 text-gray-700">Advanced</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Internship Listings -->
+        <div class="w-full lg:w-3/4">
+          <!-- Sorting and Results Count -->
+          <div
+            class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 bg-white p-4 rounded-lg shadow-sm"
+          >
+            <div class="mb-4 md:mb-0 results-count">
+              <span class="text-sm text-gray-600"
+                >Showing
+                <span id="results-count-start" class="font-medium">1</span
+                >-<span id="results-count-end" class="font-medium">12</span> of
+                <span id="results-count-total" class="font-medium">248</span>
+                internships</span
+              >
+            </div>
+            <div class="flex items-center">
+              <span class="text-sm text-gray-600 mr-3">Sort by:</span>
+              <div class="relative">
+                <select
+                  id="sort-select"
+                  class="sort-select block appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                >
+                  <option value="relevant">Most Relevant</option>
+                  <option value="newest">Newest</option>
+                  <option value="salary">Highest Salary</option>
+                  <option value="deadline">Application Deadline</option>
+                </select>
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                >
+                  <i class="fas fa-chevron-down text-xs"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Applied Filters -->
+          <div
+            id="applied-filters"
+            class="applied-filters flex flex-wrap gap-2 mb-6"
+          >
+            <!-- Filter tags will be dynamically inserted here -->
+          </div>
+
+          <!-- Internship Cards -->
+          <div
+            id="internship-cards"
+            class="internship-cards grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            <!-- Internship cards will be dynamically inserted here -->
+          </div>
+
+          <!-- No Results Message (hidden by default) -->
+          <div
+            id="no-results"
+            class="no-results hidden col-span-2 text-center py-12"
+          >
+            <i class="fas fa-search text-gray-400 text-5xl mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-700">
+              No internships found
+            </h3>
+            <p class="text-gray-500 mt-2">
+              Try adjusting your filters or search term
+            </p>
+            <button
+              id="clear-search"
+              class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+            >
+              Clear all filters
+            </button>
+          </div>
+
+          <!-- Pagination -->
+          <div class="mt-12 flex justify-center">
+            <nav
+              class="pagination inline-flex rounded-md shadow-sm -space-x-px"
+              aria-label="Pagination"
+            >
+              <a
+                href="#"
+                id="prev-page"
+                class="prev-page-btn relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              >
+                <span class="sr-only">Previous</span>
+                <i class="fas fa-chevron-left"></i>
+              </a>
+              <div id="pagination-numbers" class="pagination-numbers flex">
+                <!-- Pagination numbers will be dynamically inserted here -->
+              </div>
+              <a
+                href="#"
+                id="next-page"
+                class="next-page-btn relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              >
+                <span class="sr-only">Next</span>
+                <i class="fas fa-chevron-right"></i>
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                <!-- About Section -->
-                <div>
-                    <div class="flex items-center mb-6">
-                        <i class="fas fa-briefcase text-indigo-500 text-2xl mr-2"></i>
-                        <span class="text-xl font-bold">InternHub</span>
-                    </div>
-                    <p class="text-gray-400 mb-6">
-                        Connecting students with the best internship opportunities worldwide. Our mission is to help you launch your career.
-                    </p>
-                    <div class="social-links flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
-                    <ul class="footer-links text-gray-400">
-                        <li class="footer-link transition-colors duration-300">Browse Internships</li>
-                        <li class="footer-link transition-colors duration-300">Top Companies</li>
-                        <li class="footer-link transition-colors duration-300">Career Resources</li>
-                        <li class="footer-link transition-colors duration-300">Success Stories</li>
-                        <li class="footer-link transition-colors duration-300">Post an Internship</li>
-                    </ul>
-                </div>
-
-                <!-- Resources -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Resources</h3>
-                    <ul class="footer-links text-gray-400">
-                        <li class="footer-link transition-colors duration-300">Resume Builder</li>
-                        <li class="footer-link transition-colors duration-300">Cover Letter Tips</li>
-                        <li class="footer-link transition-colors duration-300">Interview Prep</li>
-                        <li class="footer-link transition-colors duration-300">Career Blog</li>
-                        <li class="footer-link transition-colors duration-300">FAQ</li>
-                    </ul>
-                </div>
-
-                <!-- Newsletter -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Stay Updated</h3>
-                    <p class="text-gray-400 mb-4">
-                        Subscribe to our newsletter for the latest internship opportunities and career tips.
-                    </p>
-                    <form class="newsletter-form space-y-4">
-                        <input type="email" placeholder="Your email address" class="newsletter-input w-full px-4 py-3 rounded-md bg-gray-800 text-white placeholder-gray-500 focus:outline-none">
-                        <button type="submit" class="newsletter-submit w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md font-medium transition-colors duration-300">
-                            Subscribe
-                        </button>
-                    </form>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <!-- About Section -->
+          <div>
+            <div class="flex items-center mb-6">
+              <i class="fas fa-briefcase text-indigo-500 text-2xl mr-2"></i>
+              <span class="text-xl font-bold">InternHub</span>
             </div>
-
-            <!-- Divider -->
-            <div class="border-t border-gray-800 my-8"></div>
-
-            <!-- Bottom Footer -->
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                    &copy; 2023 InternHub. All rights reserved.
-                </p>
-                <div class="footer-legal flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Cookie Policy</a>
-                </div>
+            <p class="text-gray-400 mb-6">
+              Connecting students with the best internship opportunities
+              worldwide. Our mission is to help you launch your career.
+            </p>
+            <div class="social-links flex space-x-4">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors duration-300"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
             </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+            <ul class="footer-links text-gray-400">
+              <li class="footer-link transition-colors duration-300">
+                Browse Internships
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Top Companies
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Career Resources
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Success Stories
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Post an Internship
+              </li>
+            </ul>
+          </div>
+
+          <!-- Resources -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Resources</h3>
+            <ul class="footer-links text-gray-400">
+              <li class="footer-link transition-colors duration-300">
+                Resume Builder
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Cover Letter Tips
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Interview Prep
+              </li>
+              <li class="footer-link transition-colors duration-300">
+                Career Blog
+              </li>
+              <li class="footer-link transition-colors duration-300">FAQ</li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-lg font-semibold mb-6">Stay Updated</h3>
+            <p class="text-gray-400 mb-4">
+              Subscribe to our newsletter for the latest internship
+              opportunities and career tips.
+            </p>
+            <form class="newsletter-form space-y-4">
+              <input
+                type="email"
+                placeholder="Your email address"
+                class="newsletter-input w-full px-4 py-3 rounded-md bg-gray-800 text-white placeholder-gray-500 focus:outline-none"
+              />
+              <button
+                type="submit"
+                class="newsletter-submit w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-md font-medium transition-colors duration-300"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
         </div>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-800 my-8"></div>
+
+        <!-- Bottom Footer -->
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-400 text-sm mb-4 md:mb-0">
+            &copy; 2023 InternHub. All rights reserved.
+          </p>
+          <div class="footer-legal flex space-x-6">
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+              >Privacy Policy</a
+            >
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+              >Terms of Service</a
+            >
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+              >Cookie Policy</a
+            >
+          </div>
+        </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
