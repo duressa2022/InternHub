@@ -1,4 +1,4 @@
-const API_BASE = "http://api-endpoint/api/v1"; // this is a placeholder, we will replace with actual API endpoint
+const API_BASE = "http://localhost:8000"; // this is a placeholder, we will replace with actual API endpoint
 
 export const DashboardApiService = {
   // Get statistics
