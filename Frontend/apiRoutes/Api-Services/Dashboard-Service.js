@@ -1,5 +1,12 @@
 const API_BASE = "http://localhost:8000";
 
+const token = localStorage.getItem("auth_token");
+const userData = JSON.parse(localStorage.getItem("user_data"));
+if (!userData) throw new Error("User data not found in localStorage");
+
+const { role } = userData; // Access role from user data
+const check = localStorage.getItem("user_data"); // Ensure token is in localStorage
+
 export const DashboardApiService = {
   // Get statistics
   async getStats() {
@@ -31,6 +38,7 @@ export const DashboardApiService = {
   async getInternships() {
     try {
       const response = await fetch(`${API_BASE}/internships`);
+      console.log("Coming Internships Response:", response); // Debugging line
       if (!response.ok)
         throw new Error(`Internships Error: ${response.status}`);
       return { success: true, data: await response.json() };
@@ -39,18 +47,33 @@ export const DashboardApiService = {
       return { success: false, error: error.message };
     }
   },
+  // create a new company
+  async createCompany(companyData) {
+    console.log("Creating company with data:", companyData); // Debugging line
+    const response = await fetch(`${API_BASE}/companies`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(companyData),
+    });
+
+    console.log("Create Company Response :::::::::::", response.status); // Debugging line
+    console.log("Create Company Response :::::::::::", response); // Debugging line
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Unknown error");
+    }
+
+    return response.json();
+  },
 
   // Create new internship
   async createInternship(internshipData) {
     try {
       console.log("Creating internship with data:", internshipData); // Debugging line
-
-      const token = localStorage.getItem("auth_token");
-      const userData = JSON.parse(localStorage.getItem("user_data"));
-      if (!userData) throw new Error("User data not found in localStorage");
-
-      const { role } = userData; // Access role from user data
-      const check = localStorage.getItem("user_data"); // Ensure token is in localStorage
 
       if (!check) throw new Error("No authorization token found");
       if (role !== "admin")
@@ -64,8 +87,8 @@ export const DashboardApiService = {
         },
         body: JSON.stringify(internshipData),
       });
-      const rawText = await response.text();
-      console.log("Raw response:", rawText);
+      // const rawText = await response.text();
+      // console.log("Raw response:", rawText);
       console.log("Creating Responces :::::::::::", response);
       if (!response.ok) throw new Error(`Create Error: ${response.status}`);
       return { success: true, data: await response.json() };

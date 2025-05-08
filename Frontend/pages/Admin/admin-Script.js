@@ -1,4 +1,5 @@
 import { DashboardApiService } from "../../apiRoutes/Api-Services/Dashboard-Service.js";
+import { showNotification } from "../../Alert/showNotification.js";
 
 // Sidebar Toggle
 const toggleSidebar = document.getElementById("toggleSidebar");
@@ -12,10 +13,9 @@ toggleSidebar.addEventListener("click", function () {
   mainContent.classList.toggle("content-expanded");
 });
 
-let companies = []; // Declare a global variable to store the companies
+let companies = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // DOM Elements
   const dom = {
     stats: {
       totalInternships: document.getElementById("totalInternships"),
@@ -27,6 +27,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     internshipsBody: document.getElementById("internshipsBody"),
     form: document.getElementById("internshipForm"),
     notificationContainer: document.getElementById("notificationContainer"),
+
+    modal: {
+      addCompany: document.getElementById("addCompanyModal"),
+    },
+    form: {
+      internship: document.getElementById("internshipForm"),
+      addCompany: document.getElementById("addCompanyForm"),
+    },
+    buttons: {
+      openAddCompany: document.getElementById("openAddCompanyModal"),
+      closeAddCompany: document.getElementById("closeAddCompanyModalBottom"),
+      closeAddCompany: document.getElementById("closeXAddCompanyModal"),
+    },
   };
 
   await init();
@@ -37,7 +50,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       await loadCompanies();
       // await loaduser();
       await loadInternships();
-      setupEventListeners();
+      await loadAddCompanyFeature();
+      await setupEventListeners();
     } catch (error) {
       showNotification(`Initialization failed: ${error.message}`, "error");
     }
@@ -100,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function loadCompanies() {
     try {
       const result = await DashboardApiService.getCompanies();
-      console.log("Company list Result:", result);
+      console.log("Company list Result: ", result);
       companies = result.data.data; // Store the companies in the global variable
       dom.companySelect.innerHTML =
         '<option value="">Select Company</option>' +
@@ -137,6 +151,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       console.log("Internships Result:", result);
       if (result.success) {
+        showNotification("✅ Internships loaded successfully", "success");
         dom.internshipsBody.innerHTML = result.data.data
           .map(
             (internship) => `
@@ -173,11 +188,63 @@ document.addEventListener("DOMContentLoaded", async () => {
           .join("");
       }
     } catch (error) {
-      showNotification("Failed to load internships", "error");
+      showNotification(" ❌ Failed to load internships", "error");
     }
   }
 
-  function setupEventListeners() {
+  async function loadAddCompanyFeature() {
+    // Open modal
+    dom.buttons.openAddCompany.addEventListener("click", (e) => {
+      e.preventDefault();
+      dom.modal.addCompany.classList.remove("hidden");
+      dom.modal.addCompany.classList.add("flex");
+    });
+
+    // Close modal
+    dom.buttons.closeAddCompany.addEventListener("click", () => {
+      dom.modal.addCompany.classList.add("hidden");
+      dom.modal.addCompany.classList.remove("flex");
+    });
+
+    // Handle form submission
+    dom.form.addCompany.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById("companyName").value.trim(),
+        category: document.getElementById("companyCategory").value.trim(),
+        logoUrl: document.getElementById("companyLogo").value.trim(),
+        location: document.getElementById("companyLocation").value.trim(),
+        about: document.getElementById("companyAbout").value.trim(),
+      };
+
+      console.log("Company data being sent before api:", data);
+
+      const internships = document.getElementById("companyInternships").value;
+      const rating = document.getElementById("companyRating").value;
+
+      if (internships) data.currentNumberOfInternships = parseInt(internships);
+      if (rating) data.rating = parseFloat(rating);
+
+      try {
+        const result = await DashboardApiService.createCompany(data);
+        console.log("The Result is ", result.data);
+        console.log("The Result is ", result.message);
+        if (result.data) {
+          showNotification("✅" + result.message, "success");
+          dom.form.addCompany.reset();
+          dom.modal.addCompany.classList.add("hidden");
+          dom.modal.addCompany.classList.remove("flex");
+        } else {
+          throw new Error(result.message || "Unknown error");
+        }
+      } catch (error) {
+        showNotification(`❌ Failed to add company: ${error.message}`, "error");
+      }
+    });
+  }
+
+  async function setupEventListeners() {
     // Dropdown Menus
     document.querySelectorAll('[id$="Dropdown"]').forEach((button) => {
       button.addEventListener("click", () => {
@@ -194,9 +261,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Form Submission
-    dom.form.addEventListener("submit", async (e) => {
+    dom.form.internship.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const formData = new FormData(dom.form);
+      const formData = new FormData(dom.form.internship);
 
       // Get the company ID from the form data
       const companyId = formData.get("company");
@@ -246,12 +313,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const result = await DashboardApiService.deleteInternship(id);
       if (result.success) {
-        showNotification("Internship deleted successfully!", "success");
+        showNotification("✅ Internship deleted successfully!", "success");
         await loadStats();
         await loadInternships();
       }
     } catch (error) {
-      showNotification("Failed to delete internship", "error");
+      showNotification("❌ Failed to delete internship", "error");
     }
   };
 
@@ -266,25 +333,5 @@ document.addEventListener("DOMContentLoaded", async () => {
       hybrid: "bg-orange-100 text-orange-800",
     };
     return statusClasses[type] || "bg-gray-100 text-gray-800";
-  }
-
-  function showNotification(message, type = "success") {
-    if (!dom.notificationContainer) return;
-
-    const notification = document.createElement("div");
-    notification.className = `p-4 rounded-lg mb-2 ${
-      type === "success"
-        ? "bg-green-100 text-green-800"
-        : "bg-red-100 text-red-800"
-    }`;
-    notification.textContent = message;
-
-    dom.notificationContainer.innerHTML = "";
-    dom.notificationContainer.appendChild(notification);
-    dom.notificationContainer.classList.remove("hidden");
-
-    setTimeout(() => {
-      dom.notificationContainer.classList.add("hidden");
-    }, 3000);
   }
 });
