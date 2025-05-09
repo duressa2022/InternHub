@@ -25,7 +25,7 @@ function COMPANY_ROUTES(string $requestMethod, string $requestUri, CompanyContro
 
     if ($requestMethod === 'GET' && $parsedUrl === '/companies') {
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+        $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 15;
         $companyController->getAllCompanies($page, $limit);
     }
 

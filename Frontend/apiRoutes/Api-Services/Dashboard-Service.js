@@ -49,7 +49,11 @@ export const DashboardApiService = {
   },
   // create a new company
   async createCompany(companyData) {
-    console.log("Creating company with data:", companyData); // Debugging line
+    console.log("Creating company with data:", companyData);
+    
+    
+    
+    // Debugging line
     const response = await fetch(`${API_BASE}/companies`, {
       method: "POST",
       headers: {

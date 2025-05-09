@@ -228,8 +228,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       try {
         const result = await DashboardApiService.createCompany(data);
-        console.log("The Result is ", result.data);
-        console.log("The Result is ", result.message);
+        console.log("The Result is ", result);
+        // console.log("The Result is ", result.message);
         if (result.data) {
           showNotification("✅" + result.message, "success");
           dom.form.addCompany.reset();
@@ -296,11 +296,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         const result = await DashboardApiService.createInternship(
           internshipData
         );
+
+        console.log("The Result is ", result);
+        console.log("The Result is ", result.data);
+        console.log("The Result is ", result.message);
         if (result.success) {
           showNotification("Internship created successfully!", "success");
           await loadStats();
           await loadInternships();
-          dom.form.reset();
+          // dom.form.reset();
         }
       } catch (error) {
         showNotification("Failed to create internship", "error");
