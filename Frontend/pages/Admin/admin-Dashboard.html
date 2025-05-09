@@ -37,7 +37,7 @@
           <div class="flex items-center mb-6">
             <img
               id="user-image"
-              src="https://randomuser.me/api/portraits/women/44.jpg"
+              src="https://randomuser.me/api/portraits/women/47.jpg"
               alt="Admin"
               class="h-10 w-10 rounded-full mr-3"
             />
@@ -136,33 +136,18 @@
               Post New Internship
             </h1>
 
-            <div class="flex items-center space-x-4">
-              <!-- <div class="relative">
-                <button class="p-2 rounded-full hover:bg-gray-100">
-                  <i class="fas fa-bell text-gray-600"></i>
-                  <span
-                    class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"
-                  ></span>
-                </button>
-              </div> -->
-
-              <!-- <div class="relative">
-                <button class="p-2 rounded-full hover:bg-gray-100">
-                  <i class="fas fa-envelope text-gray-600"></i>
-                  <span
-                    class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"
-                  ></span>
-                </button>
-              </div> -->
-
-              <div class="flex items-center">
-                <span class="font-medium">Tsegent Eshetu</span>
-                <img
-                  src="https://randomuser.me/api/portraits/women/44.jpg"
-                  alt="Admin"
-                  class="h-10 w-10 rounded-full ml-2"
-                />
-              </div>
+            <div
+              class="flex items-center p-5 cursor-pointer hover:bg-gray-100 rounded-full p-1 transition-all"
+              id="profileTrigger"
+            >
+              <span class="top-right-user-name font-medium"
+                >Tsegent Eshetu</span
+              >
+              <img
+                src="https://randomuser.me/api/portraits/women/44.jpg"
+                alt="Admin"
+                class="top-right-user-image h-10 w-10 rounded-full ml-2"
+              />
             </div>
           </div>
         </header>
@@ -598,135 +583,1215 @@
           </button>
         </div>
       </div>
-      <!-- Add Company Modal -->
+      <!-- Add Company Modal - Wider Premium UI -->
       <div
         id="addCompanyModal"
-        class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 transition duration-300 ease-in-out"
+        class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4 animate-fade-in"
       >
         <div
-          class="bg-white shadow-xl rounded-2xl w-full max-w-lg mx-auto p-6 relative animate-fade-in"
+          class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-auto border border-gray-100 transform transition-all duration-300 scale-95 hover:scale-100"
         >
           <!-- Modal Header -->
-          <div class="flex justify-between items-center border-b pb-4 mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800">
-              ➕ Add New Company
-            </h2>
-            <button
-              id="closeXAddCompanyModal"
-              class="text-gray-500 hover:text-red-500 transition"
-            >
-              <i class="fas fa-times text-lg"></i>
-            </button>
+          <div
+            class="sticky top-0 bg-white/90 backdrop-blur-sm z-10 p-6 border-b border-gray-100"
+          >
+            <div class="flex justify-between items-center">
+              <div>
+                <h2
+                  class="text-2xl font-bold text-gray-800 flex items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-blue-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    />
+                  </svg>
+                  Add New Company
+                </h2>
+                <p class="text-sm text-gray-500 mt-1">
+                  Register a new company profile
+                </p>
+              </div>
+              <button
+                id="closeXAddCompanyModal"
+                class="p-1 rounded-full hover:bg-gray-100 transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-gray-400 hover:text-gray-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          <!-- Form -->
-          <form id="addCompanyForm" class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1"
-                >Company Name *</label
-              >
-              <input
-                type="text"
-                id="companyName"
-                required
-                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                placeholder="Tech Corp"
-              />
+          <!-- Form Content -->
+          <form id="addCompanyForm" class="p-6 space-y-5">
+            <!-- First Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Company Name -->
+              <div class="space-y-1.5">
+                <label
+                  for="companyName"
+                  class="block text-sm font-medium text-gray-700 flex items-center justify-between"
+                >
+                  <span>Company Name*</span>
+                  <span class="text-xs text-gray-400">Required</span>
+                </label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="companyName"
+                    required
+                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    placeholder="Tech Corp Inc."
+                  />
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Category -->
+              <div class="space-y-1.5">
+                <label
+                  for="companyCategory"
+                  class="block text-sm font-medium text-gray-700"
+                  >Category*</label
+                >
+                <div class="relative">
+                  <select
+                    id="companyCategory"
+                    required
+                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all appearance-none bg-white"
+                  >
+                    <option value="" disabled selected>Select industry</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Education">Education</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1"
-                >Category *</label
-              >
-              <input
-                type="text"
-                id="companyCategory"
-                required
-                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                placeholder="Technology"
-              />
+            <!-- Second Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Logo URL -->
+              <div class="space-y-1.5">
+                <label
+                  for="companyLogo"
+                  class="block text-sm font-medium text-gray-700"
+                  >Logo URL*</label
+                >
+                <div class="relative">
+                  <input
+                    type="url"
+                    id="companyLogo"
+                    required
+                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    placeholder="https://example.com/logo.png"
+                  />
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                  Recommended size: 300×300 pixels
+                </p>
+              </div>
+
+              <!-- Location -->
+              <div class="space-y-1.5">
+                <label
+                  for="companyLocation"
+                  class="block text-sm font-medium text-gray-700"
+                  >Location*</label
+                >
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="companyLocation"
+                    required
+                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    placeholder="Addis Abeba, Ethiopia"
+                  />
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1"
-                >Logo URL *</label
+            <!-- About Section -->
+            <div class="space-y-1.5">
+              <label
+                for="companyAbout"
+                class="block text-sm font-medium text-gray-700 flex items-center justify-between"
               >
-              <input
-                type="url"
-                id="companyLogo"
-                required
-                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                placeholder="https://example.com/logo.png"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1"
-                >Location *</label
-              >
-              <input
-                type="text"
-                id="companyLocation"
-                required
-                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                placeholder="San Francisco, CA"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1"
-                >About *</label
-              >
+                <span>About*</span>
+                <span class="text-xs text-gray-400">Max 500 characters</span>
+              </label>
               <textarea
                 id="companyAbout"
                 required
-                class="w-full border border-gray-300 rounded-lg px-4 py-2 min-h-[100px] focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                placeholder="Describe the company..."
+                rows="4"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                placeholder="Brief description of the company..."
               ></textarea>
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1"
-                  >Internships (optional)</label
+            <!-- Stats Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <!-- Internships -->
+              <div class="space-y-1.5">
+                <label
+                  for="companyInternships"
+                  class="block text-sm font-medium text-gray-700"
+                  >Internships</label
                 >
-                <input
-                  type="number"
-                  id="companyInternships"
-                  class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                  placeholder="e.g. 5"
-                />
+                <div class="relative">
+                  <input
+                    type="number"
+                    id="companyInternships"
+                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    placeholder="e.g. 5"
+                  />
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1"
+
+              <!-- Rating -->
+              <div class="space-y-1.5">
+                <label
+                  for="companyRating"
+                  class="block text-sm font-medium text-gray-700"
                   >Rating (0–5)</label
                 >
-                <input
-                  type="number"
-                  id="companyRating"
-                  min="0"
-                  max="5"
-                  step="0.1"
-                  class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                  placeholder="e.g. 4.5"
-                />
+                <div class="relative">
+                  <input
+                    type="number"
+                    id="companyRating"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    placeholder="e.g. 4.5"
+                  />
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Website (New Field) -->
+              <div class="space-y-1.5">
+                <label
+                  for="companyWebsite"
+                  class="block text-sm font-medium text-gray-700"
+                  >Website</label
+                >
+                <div class="relative">
+                  <input
+                    type="url"
+                    id="companyWebsite"
+                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    placeholder="https://company.com"
+                  />
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                      />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Footer -->
-            <div class="flex justify-end pt-4 border-t mt-6 space-x-3">
+            <!-- Form Actions -->
+            <div
+              class="sticky bottom-0 bg-white/90 backdrop-blur-sm z-10 pt-4 border-t border-gray-200 -mx-6 px-6 -mb-6 pb-6"
+            >
+              <div class="flex justify-end gap-3">
+                <button
+                  type="button"
+                  id="closeAddCompanyModalBottom"
+                  class="px-5 py-3 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors font-medium flex items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  class="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  Add Company
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Edit Internship Modal-->
+      <div
+        id="editInternshipModal"
+        class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4 animate-fade-in"
+      >
+        <div
+          class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto border border-gray-100 transform transition-all duration-300 scale-95 hover:scale-100"
+        >
+          <!-- Header -->
+          <div
+            class="sticky top-0 bg-white/90 backdrop-blur-sm z-10 p-6 border-b border-gray-100"
+          >
+            <div class="flex justify-between items-center">
+              <div>
+                <h2
+                  class="text-2xl font-bold text-gray-800 flex items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-blue-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                    />
+                  </svg>
+                  Edit Internship
+                </h2>
+                <p class="text-sm text-gray-500 mt-1">
+                  Update the opportunity details
+                </p>
+              </div>
               <button
-                type="button"
-                id="closeAddCompanyModalBottom"
-                class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition"
+                id="closeEditModal"
+                class="p-1 rounded-full hover:bg-gray-100 transition-colors"
               >
-                Cancel
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-gray-400 hover:text-gray-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
               </button>
+            </div>
+          </div>
+
+          <!-- Form Content -->
+          <form id="editInternshipForm" class="p-6 space-y-8">
+            <input type="hidden" id="editInternshipId" />
+
+            <!-- Basic Information Card -->
+            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-blue-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                  />
+                </svg>
+                Position Details
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Title -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editTitle"
+                    class="block text-sm font-medium text-gray-700 flex items-center justify-between"
+                  >
+                    <span>Job Title*</span>
+                    <span class="text-xs text-gray-400">Required</span>
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="text"
+                      id="editTitle"
+                      required
+                      class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                      placeholder="Frontend Developer"
+                    />
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Company -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editCompany"
+                    class="block text-sm font-medium text-gray-700"
+                    >Company*</label
+                  >
+                  <div class="relative">
+                    <input
+                      type="text"
+                      id="editCompany"
+                      required
+                      class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                      placeholder="Tech Corp Inc."
+                    />
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Location -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editLocation"
+                    class="block text-sm font-medium text-gray-700"
+                    >Location*</label
+                  >
+                  <div class="relative">
+                    <input
+                      type="text"
+                      id="editLocation"
+                      required
+                      class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                      placeholder="New York, NY"
+                    />
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Category -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editCategory"
+                    class="block text-sm font-medium text-gray-700"
+                    >Category*</label
+                  >
+                  <div class="relative">
+                    <select
+                      id="editCategory"
+                      required
+                      class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all appearance-none bg-white"
+                    >
+                      <option value="" disabled selected>
+                        Select category
+                      </option>
+                      <option value="Software Engineering">
+                        Software Engineering
+                      </option>
+                      <option value="Marketing">Marketing</option>
+                      <option value="Design">Design</option>
+                      <option value="Finance">Finance</option>
+                      <option value="Data Science">Data Science</option>
+                    </select>
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                        />
+                      </svg>
+                    </div>
+                    <div
+                      class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Type -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editType"
+                    class="block text-sm font-medium text-gray-700"
+                    >Job Type*</label
+                  >
+                  <div class="relative">
+                    <select
+                      id="editType"
+                      required
+                      class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all appearance-none bg-white"
+                    >
+                      <option value="Full-time">Full-time</option>
+                      <option value="Part-time">Part-time</option>
+                      <option value="Contract">Contract</option>
+                      <option value="Remote">Remote</option>
+                      <option value="Hybrid">Hybrid</option>
+                    </select>
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div
+                      class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Salary -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editSalary"
+                    class="block text-sm font-medium text-gray-700"
+                    >Salary Range</label
+                  >
+                  <div class="relative">
+                    <input
+                      type="text"
+                      id="editSalary"
+                      class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                      placeholder="$2,000 - $3,000/month"
+                    />
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dates Card -->
+            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-blue-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                Timeline
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Start Date -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editStartDate"
+                    class="block text-sm font-medium text-gray-700"
+                    >Start Date*</label
+                  >
+                  <div class="relative">
+                    <input
+                      type="date"
+                      id="editStartDate"
+                      required
+                      class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    />
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- End Date -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editEndDate"
+                    class="block text-sm font-medium text-gray-700"
+                    >End Date</label
+                  >
+                  <div class="relative">
+                    <input
+                      type="date"
+                      id="editEndDate"
+                      class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    />
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Deadline -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editDeadline"
+                    class="block text-sm font-medium text-gray-700"
+                    >Application Deadline</label
+                  >
+                  <div class="relative">
+                    <input
+                      type="date"
+                      id="editDeadline"
+                      class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    />
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Application Link -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editLink"
+                    class="block text-sm font-medium text-gray-700"
+                    >Application Link</label
+                  >
+                  <div class="relative">
+                    <input
+                      type="url"
+                      id="editLink"
+                      class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                      placeholder="https://apply.example.com"
+                    />
+                    <div
+                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Card -->
+            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-blue-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                Content
+              </h3>
+              <div class="space-y-5">
+                <!-- Description -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editDescription"
+                    class="block text-sm font-medium text-gray-700 flex items-center justify-between"
+                  >
+                    <span>Description*</span>
+                    <span class="text-xs text-gray-400"
+                      >Markdown supported</span
+                    >
+                  </label>
+                  <textarea
+                    id="editDescription"
+                    required
+                    rows="5"
+                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    placeholder="Detailed description of responsibilities and expectations..."
+                  ></textarea>
+                </div>
+
+                <!-- Requirements -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editRequirements"
+                    class="block text-sm font-medium text-gray-700"
+                    >Requirements*</label
+                  >
+                  <textarea
+                    id="editRequirements"
+                    required
+                    rows="5"
+                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    placeholder="List of required skills, qualifications, and experience..."
+                  ></textarea>
+                </div>
+
+                <!-- Benefits -->
+                <div class="space-y-1.5">
+                  <label
+                    for="editBenefits"
+                    class="block text-sm font-medium text-gray-700"
+                    >Benefits</label
+                  >
+                  <textarea
+                    id="editBenefits"
+                    rows="3"
+                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
+                    placeholder="List of perks and benefits (optional)..."
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div
+              class="sticky bottom-0 bg-white/90 backdrop-blur-sm z-10 pt-4 border-t border-gray-200 -mx-6 px-6 -mb-6 pb-6"
+            >
+              <div class="flex justify-end gap-3">
+                <button
+                  type="button"
+                  id="closeEditModal"
+                  class="px-5 py-3 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors font-medium flex items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  class="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  Update Internship
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div
+      id="profileModal"
+      class="hidden fixed inset-0 bg-gray-900/80 z-50 flex items-center justify-center p-4"
+    >
+      <div class="bg-white rounded-xl shadow-2xl w-full max-w-md">
+        <!-- Modal Header -->
+        <div class="border-b p-4 flex justify-between items-center">
+          <h3 class="text-xl font-bold">Your Profile</h3>
+          <button
+            id="closeProfileModal"
+            class="text-gray-500 hover:text-gray-700"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="border-b flex">
+          <button
+            class="profile-tab active px-4 py-2 font-medium"
+            data-tab="profile"
+          >
+            Profile
+          </button>
+          <button class="profile-tab px-4 py-2 font-medium" data-tab="password">
+            Password
+          </button>
+        </div>
+
+        <!-- Profile Tab Content -->
+        <div id="profileTab" class="tab-content p-6 space-y-4">
+          <div class="flex justify-center">
+            <img
+              id="modalProfileImage"
+              src=""
+              class="h-24 w-24 rounded-full object-cover"
+            />
+          </div>
+          <form id="profileForm">
+            <input type="hidden" id="userId" />
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1">First Name</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  class="w-full px-3 py-2 border rounded-md"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Last Name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  class="w-full px-3 py-2 border rounded-md"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full px-3 py-2 border rounded-md"
+                  readonly
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1"
+                  >Profile Image URL</label
+                >
+                <input
+                  type="url"
+                  id="avatarUrl"
+                  class="w-full px-3 py-2 border rounded-md"
+                />
+              </div>
+            </div>
+            <div class="mt-6 flex justify-end space-x-3">
               <button
                 type="submit"
-                class="bg-indigo-600 text-white px-5 py-2 rounded-md hover:bg-indigo-700 transition font-medium shadow-sm"
+                class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
               >
-                Submit
+                Update Profile
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Password Tab Content -->
+        <div id="passwordTab" class="tab-content hidden p-6 space-y-4">
+          <form id="passwordForm">
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1"
+                  >Current Password</label
+                >
+                <input
+                  type="password"
+                  id="currentPassword"
+                  class="w-full px-3 py-2 border rounded-md"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1"
+                  >New Password</label
+                >
+                <input
+                  type="password"
+                  id="newPassword"
+                  class="w-full px-3 py-2 border rounded-md"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1"
+                  >Confirm New Password</label
+                >
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  class="w-full px-3 py-2 border rounded-md"
+                  required
+                />
+              </div>
+            </div>
+            <div class="mt-6 flex justify-end space-x-3">
+              <button
+                type="submit"
+                class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+              >
+                Change Password
               </button>
             </div>
           </form>
@@ -737,7 +1802,7 @@
     <!-- Notification Container -->
     <div
       id="notificationContainer"
-      class="fixed top-5 right-5 w-96 z-50 flex flex-col gap-2"
+      class="fixed top-20 right-5 w-96 z-50 flex flex-col gap-2"
     ></div>
 
     <script type="module" src="./admin-Script.js"></script>

@@ -51,3 +51,103 @@
 .content-section.active {
   display: block;
 }
+.input-style {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-style:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.profile-tab.active {
+  border-bottom: 2px solid #4f46e5;
+  color: #4f46e5;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Dropdown Styles */
+#profileDropdown {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+#profileDropdown.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.dropdown-item {
+  @apply flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors;
+}
+
+.dropdown-icon {
+  @apply h-5 w-5 text-gray-400 mr-3;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-modal-enter {
+  animation: modalEnter 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes modalEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.peer:focus ~ label {
+  color: #6366f1;
+}
