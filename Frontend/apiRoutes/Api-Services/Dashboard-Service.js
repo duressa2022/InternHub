@@ -50,9 +50,7 @@ export const DashboardApiService = {
   // create a new company
   async createCompany(companyData) {
     console.log("Creating company with data:", companyData);
-    
-    
-    
+
     // Debugging line
     const response = await fetch(`${API_BASE}/companies`, {
       method: "POST",
@@ -125,6 +123,10 @@ export const DashboardApiService = {
     try {
       const response = await fetch(`${API_BASE}/internships/${internshipId}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Include token here
+        },
       });
       if (!response.ok) throw new Error(`Delete Error: ${response.status}`);
       return { success: true };
