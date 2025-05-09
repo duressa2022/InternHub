@@ -118,6 +118,94 @@ export const DashboardApiService = {
     }
   },
 
+  // Get a single internship by ID
+  async getInternshipById(id) {
+    try {
+      const response = await fetch(`${API_BASE}/internships/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Single Internship Fetch Response:", response); // Debug
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to fetch internship");
+      }
+
+      return await response.json(); // { data: { ... } }
+    } catch (error) {
+      console.error("Failed to get internship by ID:", error);
+      throw error;
+    }
+  },
+
+  // Update an internship by ID
+  async updateInternship(id, updatedData) {
+    try {
+      if (!token) throw new Error("No authorization token found");
+      if (role !== "admin")
+        throw new Error("Only admin can update internships");
+
+      const response = await fetch(`${API_BASE}/internships/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      console.log("Update Internship Response:", response); // Debug
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to update internship");
+      }
+
+      return await response.json(); // { message: "...", data: {...} }
+    } catch (error) {
+      console.error("Failed to update internship:", error);
+      throw error;
+    }
+  },
+
+  async updateUser(userId, data) {
+    const response = await fetch(`/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    console.log("Update User Response:", response); // Debugging line
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Update failed");
+    }
+    return await response.json();
+  },
+  async resetPassword(data) {
+    const response = await fetch("/users/reset-password", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userData.email}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    console.log("Reset Password Response:", response); // Debugging line
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Password change failed");
+    }
+    return await response.json();
+  },
+
   // Delete an internship
   async deleteInternship(internshipId) {
     try {

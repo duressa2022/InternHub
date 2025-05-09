@@ -48,9 +48,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       await loadStats();
       await loadCompanies();
-      // await loaduser();
+      await loaduser();
       await loadInternships();
       await loadAddCompanyFeature();
+      await setupEditButtons();
       await setupEventListeners();
     } catch (error) {
       showNotification(`Initialization failed: ${error.message}`, "error");
@@ -58,41 +59,31 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function loaduser() {
-    // Retrieve the entire user data object from localStorage
-    const userData = JSON.parse(localStorage.getItem("user_data"));
+    try {
+      const userData = JSON.parse(localStorage.getItem("user_data"));
+      if (!userData?.id) return;
 
-    // Check if the userData exists and has an id
-    if (userData && userData.id) {
-      const userId = userData.id; // Get the userId from the stored user data
+      const user = await DashboardApiService.getUserById(userData.id);
 
-      try {
-        // Fetch the user data by ID from the backend API
-        const user = await DashboardApiService.getUserById(userId);
+      // Prepare data
+      const fullName = `${user.first_name} ${user.last_name}`;
+      const role = user.role || "Super Admin";
+      const avatar =
+        user.avater_url || "https://randomuser.me/api/portraits/women/47.jpg";
 
-        // Assuming the user object is inside 'data' from the API response
-        const userDataFromAPI = user; // This is the 'data' object returned by the API
-
-        // Extract user details from the API response
-        const firstName = userDataFromAPI.first_name;
-        const lastName = userDataFromAPI.last_name;
-
-        console.log("user datatarar", firstName, lastName, userDataFromAPI);
-        const role = userDataFromAPI.role || "Super Admin"; // Default to 'Super Admin' if no role is provided
-        const imageUrl =
-          userDataFromAPI.avater_url ||
-          "https://randomuser.me/api/portraits/women/44.jpg"; // Default image if not provided
-
-        // Insert the user data into the HTML
-        document.querySelector(
-          ".user-name"
-        ).textContent = `${firstName} ${lastName}`;
-        document.querySelector(".user-role").textContent = role;
-        document.querySelector(".user-image").src = imageUrl;
-      } catch (error) {
-        console.error("Failed to load user data:", error);
-      }
-    } else {
-      console.error("User ID not found in localStorage");
+      // Atomic updates
+      document
+        .querySelectorAll(".user-name, .top-right-user-name")
+        .forEach((el) => (el.textContent = fullName));
+      document
+        .querySelectorAll(".user-role")
+        .forEach((el) => (el.textContent = role));
+      document
+        .querySelectorAll(".user-image, .top-right-user-image")
+        .forEach((el) => (el.src = avatar));
+    } catch (error) {
+      console.error("User load failed:", error);
+      // Optional: Set default values everywhere if API fails
     }
   }
 
@@ -177,7 +168,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <button class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</button>
+              <button class="text-indigo-600 hover:text-indigo-900 mr-3 edit-btn" data-id="${
+                internship.id
+              }">Edit</button>
               <button class="text-red-600 hover:text-red-900" onclick="deleteInternship(${
                 internship.id
               })">Delete</button>
@@ -325,6 +318,227 @@ document.addEventListener("DOMContentLoaded", async () => {
       showNotification("❌ Failed to delete internship", "error");
     }
   };
+
+  async function setupEditButtons() {
+    document.querySelectorAll(".edit-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const id = btn.dataset.id;
+        try {
+          const res = await DashboardApiService.getInternshipById(id);
+          const data = res.data;
+
+          document.getElementById("editInternshipId").value = data.id;
+          document.getElementById("editTitle").value = data.title;
+          document.getElementById("editCompany").value = data.company;
+          document.getElementById("editLocation").value = data.location;
+          document.getElementById("editCategory").value = data.category;
+          document.getElementById("editType").value = data.type;
+          document.getElementById("editSalary").value = data.salary_range || "";
+          document.getElementById("editStartDate").value = data.start_date;
+          document.getElementById("editEndDate").value = data.end_date || "";
+          document.getElementById("editDescription").value = data.description;
+          document.getElementById("editRequirements").value = data.requirements;
+          document.getElementById("editBenefits").value = data.benefits || "";
+          document.getElementById("editDeadline").value = data.deadline || "";
+          document.getElementById("editLink").value = data.link || "";
+
+          document
+            .getElementById("editInternshipModal")
+            .classList.remove("hidden");
+        } catch (err) {
+          showNotification("❌ Failed to fetch internship details", "error");
+        }
+      });
+    });
+
+    // Close modal
+    document.getElementById("closeEditModal").addEventListener("click", () => {
+      document.getElementById("editInternshipModal").classList.add("hidden");
+    });
+
+    // Form submit
+    document
+      .getElementById("editInternshipForm")
+      .addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const id = document.getElementById("editInternshipId").value;
+
+        const updatedData = {
+          title: document.getElementById("editTitle").value,
+          company: document.getElementById("editCompany").value,
+          location: document.getElementById("editLocation").value,
+          category: document.getElementById("editCategory").value,
+          type: document.getElementById("editType").value,
+          salary_range: document.getElementById("editSalary").value,
+          start_date: document.getElementById("editStartDate").value,
+          end_date: document.getElementById("editEndDate").value,
+          description: document.getElementById("editDescription").value,
+          requirements: document.getElementById("editRequirements").value,
+          benefits: document.getElementById("editBenefits").value,
+          deadline: document.getElementById("editDeadline").value,
+          link: document.getElementById("editLink").value,
+        };
+
+        try {
+          const res = await DashboardApiService.updateInternship(
+            id,
+            updatedData
+          );
+          if (res.message === "Internship updated successfully") {
+            showNotification("✅ Internship updated", "success");
+            document
+              .getElementById("editInternshipModal")
+              .classList.add("hidden");
+            await loadInternships();
+            setupEditButtons(); // Rebind
+          } else {
+            throw new Error(res.message);
+          }
+        } catch (error) {
+          showNotification("❌ Update failed: " + error.message, "error");
+        }
+      });
+  }
+
+  // ======================
+  // PROFILE MODAL FUNCTIONS
+  // ======================
+
+  // DOM Elements
+  const profileTrigger = document.getElementById("profileTrigger");
+  const profileModal = document.getElementById("profileModal");
+  const closeProfileModalBtn = document.getElementById("closeProfileModal");
+  const profileTabs = document.querySelectorAll(".profile-tab");
+  const tabContents = document.querySelectorAll(".tab-content");
+
+  // Open Modal
+  function openProfileModal() {
+    profileModal.classList.remove("hidden");
+    loadProfileData();
+    document.body.style.overflow = "hidden"; // Prevent scrolling
+  }
+
+  // Close Modal
+  function closeProfileModal() {
+    profileModal.classList.add("hidden");
+    document.body.style.overflow = ""; // Re-enable scrolling
+  }
+
+  // Tab Switching
+  function switchTab(tabName) {
+    profileTabs.forEach((tab) => {
+      tab.classList.toggle("active", tab.dataset.tab === tabName);
+    });
+    tabContents.forEach((content) => {
+      content.classList.toggle("active", content.id === `${tabName}Tab`);
+    });
+  }
+
+  // ======================
+  // EVENT LISTENERS
+  // ======================
+
+  // Profile Trigger
+  profileTrigger.addEventListener("click", openProfileModal);
+
+  // Close Modal
+  closeProfileModalBtn.addEventListener("click", closeProfileModal);
+
+  // Tab Click Handlers
+  profileTabs.forEach((tab) => {
+    tab.addEventListener("click", () => switchTab(tab.dataset.tab));
+  });
+
+  // Close when clicking outside modal
+  profileModal.addEventListener("click", (e) => {
+    if (e.target === profileModal) closeProfileModal();
+  });
+
+  // ======================
+  // PROFILE DATA FUNCTIONS
+  // ======================
+
+  async function loadProfileData() {
+    try {
+      const userData = JSON.parse(localStorage.getItem("user_data"));
+      const user = await DashboardApiService.getUserById(userData.id);
+
+      // Set form values
+      document.getElementById("userId").value = user.id;
+      document.getElementById("firstName").value = user.first_name;
+      document.getElementById("lastName").value = user.last_name;
+      document.getElementById("email").value = user.email;
+      document.getElementById("avatarUrl").value = user.avater_url || "";
+
+      // Update modal image
+      const modalImg = document.getElementById("modalProfileImage");
+      modalImg.src =
+        user.avater_url || "https://randomuser.me/api/portraits/women/44.jpg";
+
+      // Update avatar preview on URL change
+      document.getElementById("avatarUrl").addEventListener("input", (e) => {
+        modalImg.src = e.target.value || modalImg.src;
+      });
+    } catch (error) {
+      showNotification("Failed to load profile data", "error");
+    }
+  }
+
+  // ======================
+  // FORM HANDLERS
+  // ======================
+
+  // Profile Update Form
+  document
+    .getElementById("profileForm")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = {
+        first_name: document.getElementById("firstName").value.trim(),
+        last_name: document.getElementById("lastName").value.trim(),
+        avater_url: document.getElementById("avatarUrl").value.trim(),
+      };
+
+      try {
+        const userId = document.getElementById("userId").value;
+        await DashboardApiService.updateUser(userId, formData);
+
+        showNotification("Profile updated successfully", "success");
+        closeProfileModal();
+        loaduser();
+      } catch (error) {
+        showNotification(error.message || "Failed to update profile", "error");
+      }
+    });
+
+  // Password Change Form
+  document
+    .getElementById("passwordForm")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const currentPassword = document.getElementById("currentPassword").value;
+      const newPassword = document.getElementById("newPassword").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (newPassword !== confirmPassword) {
+        showNotification("New passwords do not match", "error");
+        return;
+      }
+
+      try {
+        await DashboardApiService.resetPassword({
+          old_password: currentPassword,
+          new_password: newPassword,
+        });
+
+        showNotification("Password changed successfully", "success");
+        document.getElementById("passwordForm").reset();
+      } catch (error) {
+        showNotification(error.message || "Failed to change password", "error");
+      }
+    });
 
   function getStatusClass(type) {
     const statusClasses = {
