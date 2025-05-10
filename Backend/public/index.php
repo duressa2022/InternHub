@@ -63,7 +63,7 @@ $reviewController = new ReviewController($reviewUsecase, $jsonPresenter);
 
 
 header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Methods: GET, POST, PUT,PATCH , DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, Accept");
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");
