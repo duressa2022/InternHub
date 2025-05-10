@@ -1,4 +1,3 @@
-// browse-Script.js - Handles UI rendering and interactions
 import {
   fetchInternships,
   fetchFilteredInternships,
@@ -356,77 +355,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Format job type
     const jobType = internship.type || "Not specified";
-
-    // Format category
-    const category = internship.category || "Not specified";
-
-    // Format description
+    const location = internship.location || "Remote";
+    const category = internship.category || "General";
     const description = internship.description || "No description available";
-
-    // Format location
-    const location = internship.location || "Location not specified";
-
-    // Format date
-    const postedDate = formatDate(
-      internship.created_at || new Date().toISOString()
-    );
+    const postedDate = formatDate(internship.created_at);
 
     card.innerHTML = `
-            <div class="p-6">
-                <div class="flex items-start justify-between">
-                    <div class="flex items-center">
-                        <img
-                            class="h-12 w-12 rounded-full object-cover"
-                            src="${logoUrl}"
-                            alt="${companyName} logo"
-                            onerror="this.src='${fallbackImage}'"
-                        />
-                        <div class="ml-4">
-                            <h3 class="text-lg font-semibold text-gray-900 text-search">
-                                ${internship.title || "Untitled Position"}
-                            </h3>
-                            <p class="text-sm text-gray-500">${companyName}</p>
-                        </div>
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <img src="${logoUrl}" alt="${companyName}" class="w-12 h-12 rounded-lg object-cover" onerror="this.src='${fallbackImage}'">
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900">${internship.title}</h3>
+                        <p class="text-sm text-gray-600">${companyName}</p>
                     </div>
-                    <button class="text-gray-400 hover:text-gray-500" onclick="handleBookmarkToggle(${
-                      internship.id
-                    }, ${internship.is_bookmarked || false})">
-                        <i class="far fa-bookmark"></i>
-                    </button>
                 </div>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <span class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 tag-hover cursor-pointer">
-                        ${jobType}
-                    </span>
-                    <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 tag-hover cursor-pointer">
-                        ${salaryRange}
-                    </span>
-                    <span class="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800 tag-hover cursor-pointer">
-                        ${category}
-                    </span>
-                </div>
-                <div class="mt-4">
-                    <p class="text-sm text-gray-600 line-clamp-3">
-                        ${description}
-                    </p>
-                </div>
-                <div class="mt-4 flex items-center text-sm text-gray-500">
-                    <i class="fas fa-map-marker-alt mr-2"></i>
-                    <span>${location}</span>
-                </div>
-                <div class="mt-4 flex items-center justify-between">
-                    <div class="flex items-center text-sm text-gray-500">
-                        <i class="far fa-clock mr-2"></i>
-                        <span>Posted ${postedDate}</span>
-                    </div>
-                    <a href="${
-                      internship.link || "#"
-                    }" target="_blank" class="apply-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300">
-                        Apply Now
-                    </a>
-                </div>
+                <button onclick="handleBookmarkToggle(${internship.id}, false)" class="text-gray-400 hover:text-yellow-500">
+                    <i class="far fa-bookmark"></i>
+                </button>
             </div>
-        `;
+            <div class="flex flex-wrap gap-2">
+                <span class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 tag-hover cursor-pointer">
+                    ${jobType}
+                </span>
+                <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 tag-hover cursor-pointer">
+                    ${salaryRange}
+                </span>
+                <span class="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800 tag-hover cursor-pointer">
+                    ${category}
+                </span>
+            </div>
+            <div class="mt-4">
+                <p class="text-sm text-gray-600 line-clamp-3">
+                    ${description}
+                </p>
+            </div>
+            <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="fas fa-map-marker-alt mr-2"></i>
+                <span>${location}</span>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center text-sm text-gray-500">
+                    <i class="far fa-clock mr-2"></i>
+                    <span>Posted ${postedDate}</span>
+                </div>
+                <button onclick="handleApplyClick(${internship.id}, '${companyName}', '${internship.title}')" class="apply-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300">
+                    Apply Now
+                </button>
+            </div>
+        </div>
+    `;
     return card;
   }
 
@@ -551,17 +529,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  window.handleApplyClick = async function (internshipId) {
+  window.handleApplyClick = async function (
+    internshipId,
+    companyName,
+    internshipTitle
+  ) {
     try {
-      const result = await applyForInternship(internshipId, {
-        // Add any application data here
-      });
-      if (result.success) {
-        showSuccessMessage("Application submitted successfully!");
-      }
+      // Store the internship data in localStorage
+      const internshipData = {
+        id: internshipId,
+        company: companyName,
+        title: internshipTitle,
+      };
+      localStorage.setItem(
+        "selectedInternship",
+        JSON.stringify(internshipData)
+      );
+
+      // Redirect to the application page
+      window.location.href =
+        "../InternDashboard/Intern-Dashboard.html#my-applications";
     } catch (error) {
-      console.error("Error applying for internship:", error);
-      showErrorMessage("Failed to submit application. Please try again.");
+      console.error("Error handling apply click:", error);
+      showErrorMessage("Failed to process application. Please try again.");
     }
   };
 

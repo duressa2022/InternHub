@@ -38,7 +38,7 @@ function APPLICATION_ROUTES(string $requestMethod, string $requestUri, Applicati
 
     elseif ($requestMethod === 'POST' && $parsedUrl === '/applications') {
         $object = $middleware->authenticateRequest();
-        if ($object->role !== 'admin') {
+        if ($object->role !== 'student') {
             http_response_code(403);
             echo json_encode(['message' => 'Access denied']);
             exit;
