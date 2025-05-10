@@ -37,12 +37,12 @@ function APPLICATION_ROUTES(string $requestMethod, string $requestUri, Applicati
     }
 
     elseif ($requestMethod === 'POST' && $parsedUrl === '/applications') {
-        $object = $middleware->authenticateRequest();
-        if ($object->role !== 'student') {
-            http_response_code(403);
-            echo json_encode(['message' => 'Access denied']);
-            exit;
-        }
+        // $object = $middleware->authenticateRequest();
+        // if ($object->role !== 'student') {
+        //     http_response_code(403);
+        //     echo json_encode(['message' => 'Access denied']);
+        //     exit;
+        // }
         $data = json_decode(file_get_contents('php://input'), true);
         $applicationController->createApplication($data);
     }

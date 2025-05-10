@@ -45,7 +45,7 @@ function USER_ROUTES(string $requestMethod, string $requestUri, UserController $
         $userController->getUserById($id);
 
 
-    } elseif ($requestMethod === 'PUT' && preg_match('#^/users/(\d+)$#', $parsedUrl, $matches)) {
+    } elseif ($requestMethod === 'PATCH' && preg_match('#^/users/(\d+)$#', $parsedUrl, $matches)) {
         $token = $jwtService->getTokenFromHeader();;
         $object = $jwtService->validate($token);
         $_id=$jwtService->getUserIdFromToken($token);

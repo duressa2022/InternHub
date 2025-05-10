@@ -32,6 +32,9 @@ class ApplicationController
             updated_at: date('Y-m-d H:i:s')
         );
 
+
+
+
         $createdApplication = $this->applicationUsecase->createApplication($application);
         if ($createdApplication) {
             $this->jsonPresenter->respond_without(201, ['message' => 'Application created successfully', 'data' => (array)$createdApplication]);

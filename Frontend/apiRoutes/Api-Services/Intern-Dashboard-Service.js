@@ -67,6 +67,7 @@ export const InternDashboardService = {
   async createApplication(applicationData) {
     try {
       console.log("Creating application with data:", applicationData);
+
       const response = await fetch(`${API_BASE}/applications`, {
         method: "POST",
         headers: {
@@ -350,6 +351,9 @@ export const InternDashboardService = {
 
   async updateUser(userId, data) {
     const token = localStorage.getItem("auth_token");
+
+    console.log("Updating user with ID:", userId);
+    console.log("Data to update:", data);
     const response = await fetch(`${API_BASE}/users/${userId}`, {
       method: "PATCH",
       headers: {

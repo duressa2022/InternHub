@@ -218,7 +218,7 @@ public function createUser(User $user): ?User
         $stmt = $this->db->prepare($sql);
         
         if ($stmt->execute($params)) {
-            $stmt = $this->db->prepare("SELECT id, first_name, last_name, email, field, avatar_url, gender, phone_number, address, city, state, country, postal_code, date_of_birth, website, social_links, role, created_at, updated_at FROM users WHERE id = :id");
+            $stmt = $this->db->prepare("SELECT id, first_name, last_name, email,password, field, avatar_url, gender, phone_number, address, city, state, country, postal_code, date_of_birth, website, social_links, role, created_at, updated_at FROM users WHERE id = :id");
             $stmt->execute([':id' => $id]);
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
     
@@ -229,6 +229,7 @@ public function createUser(User $user): ?User
                     $userData['email'],
                     $userData['password'], 
                     $userData['field'] ?? null,
+                    $userData['role'],
                     $userData['avatar_url'] ?? null,
                     $userData['gender'] ?? null,
                     $userData['phone_number'] ?? null,
@@ -240,7 +241,6 @@ public function createUser(User $user): ?User
                     $userData['date_of_birth'] ?? null,
                     $userData['website'] ?? null,
                     $userData['social_links'] ?? null,
-                    $userData['role'],
                     $userData['created_at'],
                     $userData['updated_at'],
                     $userData['id']
